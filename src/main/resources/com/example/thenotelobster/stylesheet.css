@@ -9,7 +9,7 @@ and the text color to white */
 
 /* Set color of button when mouse hovers over it */
 .button:hover {
-    -fx-background-color: #2e2e2e;
+    -fx-background-color: #FFFFF;
 }
 
 /* Set color of node with fx:id="confirmBtn" */
