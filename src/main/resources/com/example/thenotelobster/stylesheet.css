@@ -14,7 +14,7 @@ and the text color to white */
 
 /* Set color of node with fx:id="confirmBtn" */
 #confirmBtn {
-    -fx-background-color: ##2386ad;
+    -fx-background-color: #2386ad;
 }
 
 .text-field {
