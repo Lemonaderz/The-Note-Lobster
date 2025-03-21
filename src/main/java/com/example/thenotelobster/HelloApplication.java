@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    public static final String TITLE = "Address Book";
+    public static final String TITLE = "The Note Lobster";
     public static final int WIDTH = 640;
     public static final int HEIGHT = 360;
 
