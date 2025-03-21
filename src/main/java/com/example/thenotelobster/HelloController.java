@@ -11,10 +11,7 @@ import java.io.IOException;
 public class HelloController {
     @FXML
     private Label welcomeText;
-    @FXML
-    protected void onButton1Click() {
-        welcomeText.setText("Button 1 was clicked!");
-    }
+
 
     @FXML
     private CheckBox agreeCheckBox;
@@ -27,7 +24,6 @@ public class HelloController {
 
     @FXML
     public void initialize() {
-        welcomeText.setText("Ready to take some notes, the Shrimple Way?");
         termsAndConditions.setText("""
 Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
