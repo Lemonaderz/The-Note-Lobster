@@ -25,6 +25,7 @@ public class HelloController {
     @FXML
     public void initialize() {
         termsAndConditions.setText("""
+Harrison was here
 Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Eget dolor morbi non arcu risus. Quis lectus nulla at volutpat diam
