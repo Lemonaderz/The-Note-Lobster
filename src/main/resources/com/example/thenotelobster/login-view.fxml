@@ -12,9 +12,11 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
-
+<!--TITLE-->
     <Label text="Read to take notes? Log back in!"
            wrapText="true"/>
+
+<!--USER DETIALS BOXES-->
     <TextArea fx:id="emailText"
               wrapText="true" editable="true"
               prefHeight="40" maxWidth="400"/>
@@ -22,9 +24,14 @@
               wrapText="true" editable="true"
               prefHeight="40" maxWidth="400"/>
 
-    <HBox alignment="BOTTOM_CENTER" spacing="10.0">
-        <Button fx:id="loginButton" text="Log in" disable="false"
-                prefWidth="300.0" prefHeight="35"/>
-    </HBox>
+<!--LOG IN BUTTON-->
+    <Button fx:id="loginButton" text="Log in" disable="false"
+            prefWidth="300.0" prefHeight="35.0"/>
+
+    <Label text="Don't have an account?"/>
+    <Button fx:id="createAccButton" text="Create Account" disable="false"
+            prefWidth="250.0" prefHeight="25.0"/>
+
+
 
 </VBox>
