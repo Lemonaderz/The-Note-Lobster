@@ -18,11 +18,13 @@
 
 <!--USER DETIALS BOXES-->
     <TextArea fx:id="emailText"
-              wrapText="true" editable="true"
-              prefHeight="40" maxWidth="400"/>
-    <TextArea fx:id="usernameText"
-              wrapText="true" editable="true"
-              prefHeight="40" maxWidth="400"/>
+              editable="true"
+              prefHeight="40" maxWidth="400"
+              promptText="Email"/>
+    <PasswordField fx:id="passwordText"
+              editable="true"
+              prefHeight="40" maxWidth="400"
+              promptText="Password"/>
 
 <!--LOG IN BUTTON-->
     <Button fx:id="loginButton" text="Log in" disable="false"
