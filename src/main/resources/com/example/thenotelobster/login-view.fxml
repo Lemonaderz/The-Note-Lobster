@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
 
-<VBox alignment="TOP_CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.thenotelobster.LoginController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
@@ -17,7 +17,7 @@
            wrapText="true"/>
 
 <!--USER DETIALS BOXES-->
-    <TextArea fx:id="emailText"
+    <TextField fx:id="emailText"
               editable="true"
               prefHeight="40" maxWidth="400"
               promptText="Email"/>
@@ -30,10 +30,13 @@
     <Button fx:id="loginButton" text="Log in" disable="false"
             prefWidth="300.0" prefHeight="35.0"/>
 
-    <Label text="Don't have an account?"/>
-    <Button fx:id="createAccButton" text="Create Account" disable="false"
-            prefWidth="250.0" prefHeight="25.0"/>
-
-
+<!--SIGN UP BUTTON-->
+    <VBox alignment="TOP_CENTER" spacing="5.0">
+<!--    Used a seperate VBox in order to change the spacing in between the Label and Button.-->
+        <Label text="Don't have an account?"/>
+        <Button fx:id="createAccButton" text="Create Account" disable="false"
+                prefWidth="250.0" prefHeight="25.0"
+                onAction="#onCreateAccButtonClick"/>
+    </VBox>
 
 </VBox>
