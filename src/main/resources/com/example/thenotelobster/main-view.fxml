@@ -14,8 +14,8 @@
     <!-- Top BorderPane, contains header with title and navigation bar -->
     <top>
         <VBox style="-fx-background-color: #d8d8d8;">
-            <Label text="NOTE LOBSTER" style="-fx-font-size: 40px" alignment="TOP_CENTER"/>
-            <Button text="Notes" alignment="BOTTOM_LEFT"/>
+            <Label text="Note Lobster" style="-fx-font-size: 40px" alignment="TOP_CENTER"/>
+            <Button text="Notes" alignment="BOTTOM_LEFT" fx:id="NotesButton"/>
         </VBox>
     </top>
 
@@ -42,7 +42,8 @@
         <VBox prefWidth="250" style="-fx-background-color: #e5e5e5;" alignment="CENTER">
             <Label text="Additional Prompting.." style="-fx-font-size: 15px"
                    alignment="TOP_CENTER"/>
-            <Button text="Summarize" fx:id="SummarizeNotes" alignment="BOTTOM_CENTER"/>
+            <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"
+                    alignment="BOTTOM_CENTER"/>
         </VBox>
     </right>
 
