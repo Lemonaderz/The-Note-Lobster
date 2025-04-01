@@ -12,7 +12,6 @@ public class HelloController {
     @FXML
     private Label welcomeText;
 
-
     @FXML
     private CheckBox agreeCheckBox;
     @FXML
