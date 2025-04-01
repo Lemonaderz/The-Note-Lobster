@@ -21,7 +21,7 @@
 
     <!-- Center BorderPane, contains text fields/areas for notes and links -->
     <center>
-        <VBox alignment="CENTER">
+        <VBox spacing="10" alignment="CENTER">
             <padding>
                 <Insets top="10"  bottom="10" left="10" right="10"/>
             </padding>
@@ -39,7 +39,7 @@
 
     <!-- Right BorderPane, contains extra prompting along with summarize button -->
     <right>
-        <VBox prefWidth="250" style="-fx-background-color: #e5e5e5;" alignment="CENTER">
+        <VBox spacing="20" prefWidth="250" style="-fx-background-color: #e5e5e5;" alignment="CENTER">
             <Label text="Additional Prompting.." style="-fx-font-size: 15px"
                    alignment="TOP_CENTER"/>
             <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"

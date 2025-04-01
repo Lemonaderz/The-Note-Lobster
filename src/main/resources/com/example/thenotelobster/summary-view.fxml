@@ -33,7 +33,7 @@
 
     <right>
         <HBox prefWidth="150" spacing="20" alignment="CENTER">
-            <Button fx:id="BackButton" text="Back" alignment="BOTTOM_CENTER"/>
+            <Button fx:id="BackButton" onAction="#onBackClick" text="Back" alignment="BOTTOM_CENTER"/>
             <Button fx:id="SaveButton" text="Save" alignment="BOTTOM_CENTER"/>
         </HBox>
     </right>
