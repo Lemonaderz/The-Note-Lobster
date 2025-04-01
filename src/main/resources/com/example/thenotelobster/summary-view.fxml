@@ -5,10 +5,37 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.thenotelobster.SummaryController"
             prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+    <top>
+       <VBox style="-fx-background-color: #d8d8d8;">
+           <padding>
+               <Insets top="10" bottom="10" left="10" right="10"/>
+           </padding>
+           <Label text="Summary" style="-fx-font-size: 30px"/>
+       </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" bottom="10" left="10" right="10"/>
+            </padding>
+            <Label text="Subject" style="-fx-font-size: 20px"/>
+            <TextArea fx:id="SummaryText" editable="false" wrapText="true" promptText="AI output summary here.."/>
+        </VBox>
+    </center>
+
+    <right>
+        <HBox prefWidth="150" spacing="20" alignment="CENTER">
+            <Button fx:id="BackButton" text="Back" alignment="BOTTOM_CENTER"/>
+            <Button fx:id="SaveButton" text="Save" alignment="BOTTOM_CENTER"/>
+        </HBox>
+    </right>
+
+</BorderPane>
