@@ -14,7 +14,7 @@
     <!-- Top BorderPane, contains header with title and navigation bar -->
     <top>
         <VBox style="-fx-background-color: #d8d8d8;">
-            <Label text="Note Lobster" style="-fx-font-size: 40px" alignment="TOP_CENTER"/>
+            <Label text="Note Lobster" style="-fx-font-size: 40px"/>
             <!-- HBox Used to contain navigation bar buttons -->
             <HBox spacing="10">
                 <padding>
