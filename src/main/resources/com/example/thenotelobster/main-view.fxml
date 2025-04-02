@@ -15,7 +15,15 @@
     <top>
         <VBox style="-fx-background-color: #d8d8d8;">
             <Label text="Note Lobster" style="-fx-font-size: 40px" alignment="TOP_CENTER"/>
-            <Button text="Notes" alignment="BOTTOM_LEFT" fx:id="NotesButton"/>
+            <!-- HBox Used to contain navigation bar buttons -->
+            <HBox spacing="10">
+                <padding>
+                    <Insets left="10" right="10"/>
+                </padding>
+                <Button text="Notes" fx:id="NotesButton"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Sign Out"/>
+            </HBox>
         </VBox>
     </top>
 
