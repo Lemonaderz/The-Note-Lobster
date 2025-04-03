@@ -7,6 +7,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import java.io.IOException;
+import java.sql.Connection;
 
 public class HelloApplication extends Application {
 
@@ -27,5 +28,6 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+        Connection connection = DatabaseConnection.getInstance();
     }
 }
