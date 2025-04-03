@@ -16,7 +16,13 @@ public class MainController {
 
     @FXML private Button SummarizeButton;
 
-    @FXML private Button NotesButton;
+    @FXML private Menu NotesButton;
+
+    @FXML private Menu SignOutButton;
+
+    //@FXML private Button NotesButton;
+
+    //@FXML private Button SignOutButton;
 
     @FXML private TextField NotesSubject;
 
@@ -33,5 +39,10 @@ public class MainController {
     @FXML
     protected void onNotesClick() {
         // Implement connection to notes page/ view
+    }
+
+    @FXML
+    protected void onSignOut() {
+        // Implement sign out
     }
 }
