@@ -17,12 +17,21 @@ public class AIManager {
     // This is the url we are using, its local.
     private HttpClient client = HttpClient.newHttpClient();
     public String Url = "http://localhost:11434/api/generate";
-    public String fetchPromptResponse(String message)
+    public String messageHistory = "\"messages\": [";
+    public boolean chatActive = false;
+
+    public String fetchPromptResponse(String message, String length, int complexity)
+    {
+
+        return fetchPromptResponse(message, length, complexity, Url);
+    }
+    public String fetchPromptResponse(String prompt, String length, int complexity, String url)
     {
         // This is the request here, pretty much building the template
-        String prompt = "{\"model\": \"gemma3\", \"prompt\": \"" + "Please summarize the following lecture in as short as possible:" + message + "\",\"stream\": false }";
+
+
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(Url))
+                .uri(URI.create(url))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(prompt))
                 .build();
@@ -30,10 +39,9 @@ public class AIManager {
             String totalResponse = "";
             //Send a "question" with our prompt
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            System.out.println("Response Status Code: " + response.statusCode());
-            System.out.println("Response Body: " + response.body());
             return response.body();
+
+
 
 
 
@@ -43,6 +51,60 @@ public class AIManager {
         }
 
 
+    }
+    public String fetchSingleResponse(String message, String length, int complexity)
+    {
+        String prompt = "{\"model\": \"gemma3\", \"prompt\": \"" +
+                "Please summarize the following text, with a maximum of"
+                + length + "words. You MUST Adhere to this word limit and if  and with a complexity of"
+                + complexity + "out of 10:"
+                + message
+                + "\",\"stream\": false }";
+        String response = fetchChatResponse(prompt, length, complexity);
+        JsonObject jsonResponse = JsonParser.parseString(response).getAsJsonObject();
+
+        String stringResponse = jsonResponse.get("response").getAsString();  // Get a field named "answer"
+
+        System.out.println(stringResponse);
+        return stringResponse;
+    }
+    public String fetchChatResponse(String message, String length, int complexity)
+    {
+        if (!chatActive) {
+            // on the first time through, summarize your
+            messageHistory += " { \"role\": \"user\", \"content\": \"" + "Please summarize the following text, with a maximum of "
+                    + length + " words. You MUST Adhere to this word limit and if  and with a complexity of "
+                    + complexity + " out of 10:"
+                    + message + "\" },";
+            chatActive = true;
+        }
+        else {
+            messageHistory += "{\"role\": \"user\", \"content\": \"" +message + "\" },";
+        }
+
+        String formattedMessage = messageHistory.substring(0,messageHistory.length()-1) +"]";
+        //formats out message into json
+
+        String prompt = "{\"model\": \"gemma3\","
+                + formattedMessage
+                + ",\"stream\": false }";
+        String response = fetchPromptResponse(prompt, length,complexity,"http://localhost:11434/api/chat");
+
+        //Turn the response into raw text
+        JsonObject jsonResponse = JsonParser.parseString(response).getAsJsonObject();
+        String stringResponse = (jsonResponse.get("message").getAsJsonObject()).get("content").getAsString();  // Get a field named "answer"
+        //Put that raw text into the message history
+        //replace the new lines with spaces so it doesnt cause json issues
+        messageHistory += " { \"role\": \"assistant\", \"content\": \""+ stringResponse.replace("\n", " ") + "\" },";
+
+        System.out.println(stringResponse);
+        return response;
+    }
+
+    public void clearChat()
+    {
+        chatActive = false;
+        messageHistory = "\"messages\": [";
     }
 
 
