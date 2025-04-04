@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.thenotelobster.SummaryController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <top>
+       <VBox style="-fx-background-color: #d8d8d8;">
+           <Label text="Note Lobster" style="-fx-font-size: 40px"/>
+       </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="5">
+            <padding>
+                <Insets bottom="10" left="10" right="10"/>
+            </padding>
+            <Label text="Summary" style="-fx-font-size: 30px"/>
+            <Label text="Subject" style="-fx-font-size: 20px"/>
+            <TextArea fx:id="SummaryText" editable="false" wrapText="true" promptText="AI output summary here.."/>
+        </VBox>
+    </center>
+
+    <right>
+        <HBox prefWidth="150" spacing="20" alignment="BOTTOM_CENTER">
+            <padding>
+                <Insets bottom="15"/>
+            </padding>
+            <Button fx:id="BackButton" onAction="#onBackClick" text="Back"/>
+            <Button fx:id="SaveButton" text="Save" />
+        </HBox>
+    </right>
+
+</BorderPane>
