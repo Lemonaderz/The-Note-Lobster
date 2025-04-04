@@ -36,7 +36,7 @@
                    promptText="Confirm Password"/>
 
     <!--CREATE ACCOUNT BUTTON-->
-    <Button fx:id="contuineButton" text="Create your account" disable="false"
+    <Button fx:id="contuineButton" text="Create your account" disable="true"
             prefWidth="300.0" prefHeight="35.0"
             onAction="#onContuineButtonClick"/>
 

@@ -16,7 +16,8 @@ public class UserAccountDAO {
             Statement createTable = connection.createStatement();
             createTable.execute(
                     "CREATE TABLE IF NOT EXISTS userAccounts ("
-                            + "userName VARCHAR PRIMARY KEY NOT NULL, "
+                            + "email VARCHAR PRIMARY KEY NOT NULL, "
+                            + "userName VARCHAR NOT NULL, "
                             + "password VARCHAR NOT NULL "
                             + ")"
             );
@@ -28,10 +29,11 @@ public class UserAccountDAO {
     public void insert(UserAccount userAccount) {
         try {
             PreparedStatement insertAccount = connection.prepareStatement(
-                    "INSERT INTO userAccounts (userName, password) VALUES (?, ?)"
+                    "INSERT INTO userAccounts (email, userName, password) VALUES (?, ?, ?)"
             );
-            insertAccount.setString(1, userAccount.getUserName());
-            insertAccount.setString(2, userAccount.getPassword());
+            insertAccount.setString(1, userAccount.getEmail());
+            insertAccount.setString(2, userAccount.getUserName());
+            insertAccount.setString(3, userAccount.getPassword());
             insertAccount.execute();
         } catch (SQLException ex) {
             System.err.println(ex);
@@ -42,23 +44,24 @@ public class UserAccountDAO {
         // Todo Later: Create a PreparedStatement to run the UPDATE query
     }
 
-    public void delete(String userName) {
+    public void delete(String email) {
         try {
-            PreparedStatement deleteAccount = connection.prepareStatement("DELETE FROM userAccounts WHERE userName = ?");
-            deleteAccount.setString(1, userName);
+            PreparedStatement deleteAccount = connection.prepareStatement("DELETE FROM userAccounts WHERE email = ?");
+            deleteAccount.setString(1, email);
             deleteAccount.execute();
         } catch (SQLException ex) {
             System.err.println(ex);
         }
     }
 
-    public UserAccount getByUsername(String userName) {
+    public UserAccount getByUsername(String email) {
         try {
-            PreparedStatement getAccount = connection.prepareStatement("SELECT * FROM userAccounts WHERE userName = ?");
-            getAccount.setString(1, userName);
+            PreparedStatement getAccount = connection.prepareStatement("SELECT * FROM userAccounts WHERE email = ?");
+            getAccount.setString(1, email);
             ResultSet rs = getAccount.executeQuery();
             if (rs.next()) {
                 return new UserAccount(
+                        rs.getString("email"),
                         rs.getString("userName"),
                         rs.getString("password")
                 );

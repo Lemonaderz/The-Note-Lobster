@@ -15,6 +15,8 @@ public class CreateAccController {
 
     @FXML
     protected void onContuineButtonClick() throws IOException {
+        UserAccountDAO userAccountDAO = new UserAccountDAO();
+
         Stage stage = (Stage) contuineButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
