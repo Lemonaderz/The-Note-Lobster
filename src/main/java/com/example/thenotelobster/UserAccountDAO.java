@@ -12,7 +12,18 @@ public class UserAccountDAO {
     }
 
     public void createTable() {
-        // Todo Later: Create a Statement to run the CREATE TABLE query
+        try {
+            Statement createTable = connection.createStatement();
+            createTable.execute(
+                    "CREATE TABLE IF NOT EXISTS userAccounts ("
+                            + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                            + "userName VARCHAR NOT NULL, "
+                            + "password VARCHAR NOT NULL "
+                            + ")"
+            );
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
     }
 
     public void insert(UserAccount userAccount) {
