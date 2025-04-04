@@ -16,6 +16,8 @@
     <Label text="Read to take notes? Log back in!"
            wrapText="true"/>
 
+    <Label fx:id="errorLabel"/>
+
 <!--USER DETIALS BOXES-->
     <TextField fx:id="emailText"
               editable="true"
@@ -28,7 +30,8 @@
 
 <!--LOG IN BUTTON-->
     <Button fx:id="loginButton" text="Log in" disable="false"
-            prefWidth="300.0" prefHeight="35.0"/>
+            prefWidth="300.0" prefHeight="35.0"
+            onAction="#onLoginButtonClick"/>
 
 <!--SIGN UP BUTTON-->
     <VBox alignment="TOP_CENTER" spacing="5.0">

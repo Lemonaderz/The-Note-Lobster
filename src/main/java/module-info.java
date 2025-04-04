@@ -4,6 +4,9 @@ module com.example.thenotelobster {
     requires java.net.http;
     requires com.google.gson;
 
+    requires java.sql;
+
+
 
     opens com.example.thenotelobster to javafx.fxml;
     exports com.example.thenotelobster;

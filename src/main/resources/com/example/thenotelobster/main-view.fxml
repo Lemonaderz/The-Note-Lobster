@@ -9,7 +9,9 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.thenotelobster.MainController"
-            prefHeight="550" prefWidth="400">
+
+            prefHeight="Infinity" prefWidth="Infinity">
+
 
     <!-- Top BorderPane, contains header with title and navigation bar -->
     <top>

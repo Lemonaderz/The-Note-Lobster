@@ -7,6 +7,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import java.io.IOException;
+import java.sql.*;
 
 public class HelloApplication extends Application {
 
@@ -28,6 +29,7 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
+
         AIManager manager = new AIManager();
 
         // EXAMPLE HOW TO USE AIManager
@@ -44,6 +46,21 @@ public class HelloApplication extends Application {
 //        manager.fetchChatResponse("Did I just tell you anything?", "100", 10);
 //        System.out.println("Message 4");
 
+        Connection connection = DatabaseConnection.getInstance();
+        UserAccountDAO userAccountDAO = new UserAccountDAO();
+        userAccountDAO.createTable();
+
+//        userAccountDAO.insert(new UserAccount("hudson@email.com", "Hudson", "Password1"));
+//        userAccountDAO.insert(new UserAccount("lucas@email.com", "Lucas", "Password2"));
+//        userAccountDAO.insert(new UserAccount("harrison@email.com", "Harrison", "Password3"));
+//        userAccountDAO.insert(new UserAccount("alvin@email.com", "Alvin", "Password4"));
+
+//        UserAccount account = userAccountDAO.getByEmail("hudson@email.com");
+//        System.out.println(account.getUserName());
+
         launch();
+
+        userAccountDAO.close();
+
     }
 }
