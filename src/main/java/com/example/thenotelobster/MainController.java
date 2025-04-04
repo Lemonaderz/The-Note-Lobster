@@ -16,9 +16,9 @@ public class MainController {
 
     @FXML private Button SummarizeButton;
 
-    @FXML private Menu NotesButton;
+    @FXML private Button NotesButton;
 
-    @FXML private Menu SignOutButton;
+    @FXML private Button SignOutButton;
 
     //@FXML private Button NotesButton;
 
@@ -37,8 +37,13 @@ public class MainController {
     }
 
     @FXML
-    protected void onNotesClick() {
-        // Implement connection to notes page/ view
+    protected void onNotesClick() throws IOException {
+        Stage stage = (Stage) NotesButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NotePage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
     }
 
     @FXML
