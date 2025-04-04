@@ -43,7 +43,13 @@ public class UserAccountDAO {
     }
 
     public void delete(String userName) {
-        // Todo Later: Create a PreparedStatement to run the DELETE query
+        try {
+            PreparedStatement deleteAccount = connection.prepareStatement("DELETE FROM userAccounts WHERE userName = ?");
+            deleteAccount.setString(1, userName);
+            deleteAccount.execute();
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
     }
 
     public UserAccount getByUsername(String userName) {
