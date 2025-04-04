@@ -53,7 +53,7 @@ public class HelloApplication extends Application {
 //        userAccountDAO.insert(new UserAccount("hudson@email.com", "Hudson", "Password1"));
 //        userAccountDAO.insert(new UserAccount("lucas@email.com", "Lucas", "Password2"));
 //        userAccountDAO.insert(new UserAccount("harrison@email.com", "Harrison", "Password3"));
-        userAccountDAO.insert(new UserAccount("1", "testUser", "1"));
+//        userAccountDAO.insert(new UserAccount("1", "testUser", "1"));
 
 //        UserAccount account = userAccountDAO.getByEmail("hudson@email.com");
 //        System.out.println(account.getUserName());
