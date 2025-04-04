@@ -31,12 +31,12 @@ public class HelloApplication extends Application {
         UserAccountDAO userAccountDAO = new UserAccountDAO();
         userAccountDAO.createTable();
 
-        userAccountDAO.insert(new UserAccount("hudson@email.com", "Hudson", "Password1"));
-        userAccountDAO.insert(new UserAccount("lucas@email.com", "Lucas", "Password2"));
-        userAccountDAO.insert(new UserAccount("harrison@email.com", "Harrison", "Password3"));
-        userAccountDAO.insert(new UserAccount("alvin@email.com", "Alvin", "Password4"));
+//        userAccountDAO.insert(new UserAccount("hudson@email.com", "Hudson", "Password1"));
+//        userAccountDAO.insert(new UserAccount("lucas@email.com", "Lucas", "Password2"));
+//        userAccountDAO.insert(new UserAccount("harrison@email.com", "Harrison", "Password3"));
+//        userAccountDAO.insert(new UserAccount("alvin@email.com", "Alvin", "Password4"));
 
-//        UserAccount account = userAccountDAO.getByUsername("Hudson");
+//        UserAccount account = userAccountDAO.getByEmail("hudson@email.com");
 //        System.out.println(account.getUserName());
 
         launch();

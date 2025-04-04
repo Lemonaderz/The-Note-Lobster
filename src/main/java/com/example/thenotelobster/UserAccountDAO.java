@@ -54,7 +54,7 @@ public class UserAccountDAO {
         }
     }
 
-    public UserAccount getByUsername(String email) {
+    public UserAccount getByEmail(String email) {
         try {
             PreparedStatement getAccount = connection.prepareStatement("SELECT * FROM userAccounts WHERE email = ?");
             getAccount.setString(1, email);
