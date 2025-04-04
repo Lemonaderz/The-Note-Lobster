@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class LoginController {
 
@@ -42,8 +43,7 @@ public class LoginController {
         try {
             UserAccount account = userAccountDAO.getByEmail(emailText.getText());
 
-
-            if (account.getPassword() == passwordText.getText())
+            if (Objects.equals(account.getPassword(), passwordText.getText()))
             {
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
@@ -52,11 +52,11 @@ public class LoginController {
                 scene.getStylesheets().add(stylesheet);
                 stage.setScene(scene);
             } else {
-                errorLabel.setText("Incorrect Username or Password! Please try again.");
+                errorLabel.setText("Incorrect username or Password! Please try again.");
             }
         }
         catch(Exception e){
-            errorLabel.setText("Incorrect Username or Password! Please try again");
+            errorLabel.setText("Invalid Username! Please try again");
         }
 
     }
