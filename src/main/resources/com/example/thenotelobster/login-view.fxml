@@ -16,6 +16,8 @@
     <Label text="Read to take notes? Log back in!"
            wrapText="true"/>
 
+    <Label fx:id="errorLabel"/>
+
 <!--USER DETIALS BOXES-->
     <TextField fx:id="emailText"
               editable="true"
