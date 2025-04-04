@@ -31,6 +31,14 @@ public class HelloApplication extends Application {
         UserAccountDAO userAccountDAO = new UserAccountDAO();
         userAccountDAO.createTable();
 
+//        userAccountDAO.insert(new UserAccount("Hudson", "Password1"));
+//        userAccountDAO.insert(new UserAccount("Lucas", "Password2"));
+//        userAccountDAO.insert(new UserAccount("Harrison", "Password3"));
+//        userAccountDAO.insert(new UserAccount("Alvin", "Password4"));
+
+//        UserAccount account = userAccountDAO.getByUsername("Hudson");
+//        System.out.println(account.getUserName());
+
         launch();
 
         userAccountDAO.close();

@@ -16,8 +16,7 @@ public class UserAccountDAO {
             Statement createTable = connection.createStatement();
             createTable.execute(
                     "CREATE TABLE IF NOT EXISTS userAccounts ("
-                            + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                            + "userName VARCHAR NOT NULL, "
+                            + "userName VARCHAR PRIMARY KEY NOT NULL, "
                             + "password VARCHAR NOT NULL "
                             + ")"
             );
@@ -27,26 +26,40 @@ public class UserAccountDAO {
     }
 
     public void insert(UserAccount userAccount) {
-        // Todo Later: Create a PreparedStatement to run the INSERT query
+        try {
+            PreparedStatement insertAccount = connection.prepareStatement(
+                    "INSERT INTO userAccounts (userName, password) VALUES (?, ?)"
+            );
+            insertAccount.setString(1, userAccount.getUserName());
+            insertAccount.setString(2, userAccount.getPassword());
+            insertAccount.execute();
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
     }
 
     public void update(UserAccount userAccount) {
         // Todo Later: Create a PreparedStatement to run the UPDATE query
     }
 
-    public void delete(int id) {
+    public void delete(String userName) {
         // Todo Later: Create a PreparedStatement to run the DELETE query
     }
 
-    public List<UserAccount> getAll() {
-        List<UserAccount> accounts = new ArrayList<>();
-        // Todo Later: Create a Statement to run the SELECT * query
-        // and populate the accounts list above
-        return accounts;
-    }
-
-    public UserAccount getById(int id) {
-        // Todo Later: Create a PreparedStatement to run the conditional SELECT query
+    public UserAccount getByUsername(String userName) {
+        try {
+            PreparedStatement getAccount = connection.prepareStatement("SELECT * FROM userAccounts WHERE userName = ?");
+            getAccount.setString(1, userName);
+            ResultSet rs = getAccount.executeQuery();
+            if (rs.next()) {
+                return new UserAccount(
+                        rs.getString("userName"),
+                        rs.getString("password")
+                );
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
         return null;
     }
 
