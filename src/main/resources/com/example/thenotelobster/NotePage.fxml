@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.thenotelobster.NotePageController"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.thenotelobster.NotePage.TheNotePageController">
+    <left>
+        <VBox fx:id="leftVBox" spacing="10">
+            <!-- Blue lobster icon at the top of the sidebar -->
+            <ImageView fx:id="icon" fitHeight="50" fitWidth="50" />
 
-</AnchorPane>
+            <!-- chat history -->
+            <TreeView fx:id="chatHistory" prefWidth="200" />
+
+            <!-- Buttons -->
+            <HBox fx:id="buttonBox" spacing="10">
+                <Button onAction="#backbutton" text="Back" />
+                <Button onAction="#createNewChat" text="Create New Chat" />
+                <Button onAction="#createNewFolder" text="Create Folder" />
+                <Button onAction="#saveNotes" text="Save" />
+                <Button onAction="#deleteSelectedItem" text="Delete Chat" />
+            </HBox>
+
+
+
+        </VBox>
+    </left>
+
+    <center>
+        <VBox fx:id="centerVBox" prefHeight="562.0" prefWidth="565.0" spacing="10">
+            <Label fx:id="titleLabel" style="-fx-font-size: 18px;" />
+            <TextArea fx:id="notesContent" prefHeight="599.0" prefWidth="566.0" promptText="Your notes will appear here..." wrapText="true" />
+        </VBox>
+    </center>
+</BorderPane>

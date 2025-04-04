@@ -5,4 +5,6 @@ module com.example.thenotelobster {
 
     opens com.example.thenotelobster to javafx.fxml;
     exports com.example.thenotelobster;
+    exports com.example.thenotelobster.NotePage;
+    opens com.example.thenotelobster.NotePage to javafx.fxml;
 }

@@ -12,7 +12,6 @@ import javafx.geometry.Insets;
 public class TheNotePageController {
     @FXML private ImageView icon;
     @FXML private TreeView<String> chatHistory;
-    @FXML private Label titleLabel;
     @FXML private VBox leftVBox;
     @FXML private HBox buttonBox;
     @FXML private VBox centerVBox;
@@ -28,13 +27,9 @@ public class TheNotePageController {
         chatHistory.setCellFactory(tv -> new TextFieldTreeCellImpl());
 
         // Load icon using the correct path
+        /*
         icon.setImage(new Image(getClass().getResource("/com/example/refactorsummary/test.png").toExternalForm()));
-
-
-        // Update note title on selection
-        chatHistory.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null) titleLabel.setText(newVal.getValue());
-        });
+         */
 
         // Set padding programmatically
         leftVBox.setPadding(new Insets(10));
@@ -88,56 +83,7 @@ public class TheNotePageController {
             });
         }
 
-        @Override
-        public void startEdit() {
-            super.startEdit();
-            if (textField == null) {
-                textField = new TextField(getText());
-                textField.setOnAction(e -> commitEdit(textField.getText()));
-                textField.focusedProperty().addListener((obs, oldVal, newVal) -> {
-                    if (!newVal) commitEdit(textField.getText());
-                });
-            }
-            textField.setText(getItem());
-            setText(null);
-            setGraphic(textField);
-            textField.selectAll();
-            textField.requestFocus();
-        }
 
-        @Override
-        public void cancelEdit() {
-            super.cancelEdit();
-            setText(getItem());
-            setGraphic(null);
-        }
 
-        @Override
-        public void commitEdit(String newName) {
-            if (newName.trim().isEmpty()) cancelEdit();
-            else {
-                super.commitEdit(newName);
-                setText(newName);
-                setGraphic(null);
-            }
-        }
-
-        @Override
-        public void updateItem(String item, boolean empty) {
-            super.updateItem(item, empty);
-            if (empty) {
-                setText(null);
-                setGraphic(null);
-            } else {
-                if (isEditing()) {
-                    textField.setText(getItem());
-                    setText(null);
-                    setGraphic(textField);
-                } else {
-                    setText(getItem());
-                    setGraphic(null);
-                }
-            }
-        }
     }
 }
