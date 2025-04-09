@@ -25,7 +25,8 @@
             </padding>
             <Label text="Summary" style="-fx-font-size: 30px"/>
             <Label text="Subject" style="-fx-font-size: 20px"/>
-            <TextArea fx:id="SummaryText" editable="false" wrapText="true" promptText="AI output summary here.."/>
+            <TextArea fx:id="SummaryText" editable="false" wrapText="true" prefHeight="500"
+                      promptText="AI output summary here.."/>
         </VBox>
     </center>
 

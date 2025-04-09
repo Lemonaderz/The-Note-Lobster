@@ -18,7 +18,7 @@
     <top>
         <VBox style="-fx-background-color: #d8d8d8;">
             <Label text="Note Lobster" style="-fx-font-size: 40px"/>
-
+            <!-- ButtonBar contains navigation bar buttons -->
             <ButtonBar>
                 <padding>
                     <Insets left="10" right="10"/>
@@ -50,21 +50,38 @@
             <TextField fx:id="NotesSubject" promptText="Enter subject here."
                        alignment="TOP_CENTER"/>
 
-            <TextArea fx:id="AddNotes" wrapText="true"
+            <TextArea fx:id="AddNotes" wrapText="true" prefHeight="500"
                       promptText='To create a note summary, enter or paste notes/information here and press "Summarize".'/>
 
-            <TextArea fx:id="SourceLinks" wrapText="true"
+            <TextArea fx:id="SourceLinks" wrapText="true" prefHeight="20"
                       promptText="Insert any additional source links here."/>
         </VBox>
     </center>
 
-    <!-- Right BorderPane, contains extra prompting along with summarize button -->
+    <!-- Right BorderPane, contains extra prompting (complexity and length options),
+    along with summarize button -->
     <right>
         <VBox spacing="20" prefWidth="250" style="-fx-background-color: #e5e5e5;" alignment="CENTER">
-            <Label text="Additional Prompting.." style="-fx-font-size: 15px"
-                   alignment="TOP_CENTER"/>
-            <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"
-                    alignment="BOTTOM_CENTER"/>
+            <padding>
+                <Insets left="5" right="5"/>
+            </padding>
+            <Label text="Complexity" style="-fx-font-size: 15px"/>
+            <Slider min="1" max="10"/>
+            <Label text="Length" style="-fx-font-size: 15px"/>
+            <ButtonBar>
+                <buttons>
+                    <ToggleButton text="Short"/>
+                    <ToggleButton text="Medium"/>
+                    <ToggleButton text="Long"/>
+                </buttons>
+            </ButtonBar>
+            <!--
+            <RadioButton text="Short"/>
+            <RadioButton text="Medium"/>
+            <RadioButton text="Long"/>
+            -->
+            <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"/>
+<!--                    alignment=""/>-->
         </VBox>
     </right>
 
