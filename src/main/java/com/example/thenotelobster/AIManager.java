@@ -70,12 +70,14 @@ public class AIManager {
     }
     public String fetchChatResponse(String message, String length, int complexity)
     {
+
         if (!chatActive) {
             // on the first time through, summarize your
             messageHistory += " { \"role\": \"user\", \"content\": \"" + "Please summarize the following text, with a maximum of "
                     + length + " words. You MUST Adhere to this word limit and if  and with a complexity of "
                     + complexity + " out of 10:"
-                    + message + "\" },";
+                    + message.replace("\n"," ") + "\" },";
+
             chatActive = true;
         }
         else {
@@ -89,13 +91,13 @@ public class AIManager {
                 + formattedMessage
                 + ",\"stream\": false }";
         String response = fetchPromptResponse(prompt, length,complexity,"http://localhost:11434/api/chat");
-
+        System.out.println(response);
         //Turn the response into raw text
         JsonObject jsonResponse = JsonParser.parseString(response).getAsJsonObject();
         String stringResponse = (jsonResponse.get("message").getAsJsonObject()).get("content").getAsString();  // Get a field named "answer"
         //Put that raw text into the message history
         //replace the new lines with spaces so it doesnt cause json issues
-        messageHistory += " { \"role\": \"assistant\", \"content\": \""+ stringResponse.replace("\n", " ") + "\" },";
+        messageHistory += " { \"role\": \"assistant\", \"content\": \""+ (stringResponse.replace("\n", " ")).replace("\"", "'") + "\" },";
 
         System.out.println(stringResponse);
         return response;
