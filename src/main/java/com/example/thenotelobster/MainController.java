@@ -26,6 +26,14 @@ public class MainController {
 
     @FXML private TextField NotesSubject;
 
+    @FXML private RadioButton ShortOption;
+
+    @FXML private RadioButton MediumOption;
+
+    @FXML private RadioButton LongOption;
+
+    @FXML private ToggleGroup LengthOption;
+
     @FXML
     protected void onSummarizeClick() throws IOException {
         Stage stage = (Stage) SummarizeButton.getScene().getWindow();

@@ -25,18 +25,10 @@
                 </padding>
                 <buttons>
                     <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
-                    <Button text="test" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Quizzes" ButtonBar.buttonData="LEFT"/>
                     <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
                 </buttons>
             </ButtonBar>
-<!--            <HBox>-->
-<!--                <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick"/>-->
-<!--                <padding>-->
-<!--                    <Insets left="10" right="10"/>-->
-<!--                </padding>-->
-<!--                <Region HBox.hgrow="ALWAYS"/>-->
-<!--                <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut"/>-->
-<!--            </HBox>-->
         </VBox>
     </top>
 
@@ -68,18 +60,16 @@
             <Label text="Complexity" style="-fx-font-size: 15px"/>
             <Slider min="1" max="10"/>
             <Label text="Length" style="-fx-font-size: 15px"/>
-            <ButtonBar>
-                <buttons>
-                    <ToggleButton text="Short"/>
-                    <ToggleButton text="Medium"/>
-                    <ToggleButton text="Long"/>
-                </buttons>
-            </ButtonBar>
-            <!--
-            <RadioButton text="Short"/>
-            <RadioButton text="Medium"/>
-            <RadioButton text="Long"/>
-            -->
+
+
+            <fx:define>
+                <ToggleGroup fx:id="LengthOption"/>
+            </fx:define>
+
+            <RadioButton text="Short" fx:id="ShortOption" toggleGroup="$LengthOption"/>
+            <RadioButton text="Medium" fx:id="MediumOption" toggleGroup="$LengthOption"/>
+            <RadioButton text="Long" fx:id="LongOption" toggleGroup="$LengthOption"/>
+
             <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"/>
 <!--                    alignment=""/>-->
         </VBox>
