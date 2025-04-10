@@ -58,6 +58,8 @@ public class HelloApplication extends Application {
 //        UserAccount account = userAccountDAO.getByEmail("hudson@email.com");
 //        System.out.println(account.getUserName());
 
+        userAccountDAO.delete("");
+
         launch();
 
         userAccountDAO.close();
