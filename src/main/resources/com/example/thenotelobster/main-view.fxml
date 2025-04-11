@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
+<?import com.sun.javafx.scene.control.WebColorField?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.thenotelobster.MainController"
 
@@ -17,11 +18,17 @@
     <top>
         <VBox style="-fx-background-color: #d8d8d8;">
             <Label text="Note Lobster" style="-fx-font-size: 40px"/>
-
-            <MenuBar style="-fx-background-color: #d8d8d8;">
-                <Menu text="Notes" fx:id="NotesButton"/>
-                <Menu text="Sign out" fx:id="SignOutButton"/>
-            </MenuBar>
+            <!-- ButtonBar contains navigation bar buttons -->
+            <ButtonBar>
+                <padding>
+                    <Insets left="10" right="10"/>
+                </padding>
+                <buttons>
+                    <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Quizzes" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
+                </buttons>
+            </ButtonBar>
         </VBox>
     </top>
 
@@ -35,21 +42,31 @@
             <TextField fx:id="NotesSubject" promptText="Enter subject here."
                        alignment="TOP_CENTER"/>
 
-            <TextArea fx:id="AddNotes" wrapText="true"
+            <TextArea fx:id="AddNotes" wrapText="true" prefHeight="500"
                       promptText='To create a note summary, enter or paste notes/information here and press "Summarize".'/>
 
-            <TextArea fx:id="SourceLinks" wrapText="true"
+            <TextArea fx:id="SourceLinks" wrapText="true" prefHeight="20"
                       promptText="Insert any additional source links here."/>
         </VBox>
     </center>
 
-    <!-- Right BorderPane, contains extra prompting along with summarize button -->
+    <!-- Right BorderPane, contains extra prompting (complexity and length options),
+    along with summarize button -->
     <right>
         <VBox spacing="20" prefWidth="250" style="-fx-background-color: #e5e5e5;" alignment="CENTER">
-            <Label text="Additional Prompting.." style="-fx-font-size: 15px"
-                   alignment="TOP_CENTER"/>
-            <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"
-                    alignment="BOTTOM_CENTER"/>
+            <padding>
+                <Insets left="5" right="5"/>
+            </padding>
+            <Label text="Complexity" style="-fx-font-size: 15px"/>
+            <Slider min="1" max="10"/>
+            <Label text="Length" style="-fx-font-size: 15px"/>
+
+            <RadioButton text="Short" fx:id="ShortOption" toggleGroup="$LengthOption"/>
+            <RadioButton text="Medium" fx:id="MediumOption" toggleGroup="$LengthOption"/>
+            <RadioButton text="Long" fx:id="LongOption" toggleGroup="$LengthOption"/>
+
+            <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"/>
+<!--                    alignment=""/>-->
         </VBox>
     </right>
 

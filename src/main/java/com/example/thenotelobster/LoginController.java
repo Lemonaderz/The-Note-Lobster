@@ -40,6 +40,7 @@ public class LoginController {
     @FXML
     protected void onLoginButtonClick() throws IOException {
         UserAccountDAO userAccountDAO = new UserAccountDAO();
+        userAccountDAO.delete("");
         try {
             UserAccount account = userAccountDAO.getByEmail(emailText.getText());
 
