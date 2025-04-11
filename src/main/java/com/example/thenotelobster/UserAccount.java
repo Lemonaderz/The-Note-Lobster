@@ -52,7 +52,7 @@ public final class UserAccount {
         this.userName = userName;
     }
 
-    public void setLastName(String Password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

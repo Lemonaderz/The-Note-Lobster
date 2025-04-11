@@ -17,7 +17,10 @@
     <!-- Top BorderPane, contains header with title and navigation bar -->
     <top>
         <VBox style="-fx-background-color: #d8d8d8;">
-            <Label text="Note Lobster" style="-fx-font-size: 40px"/>
+            <HBox style="-fx-background-color: #d8d8d8;">
+                <Label text="Note Lobster" style="-fx-font-size: 40px"/>
+<!--                <Label text="" fx:id="NameLabel" alignment="TOP_RIGHT"/>-->
+            </HBox>
             <!-- ButtonBar contains navigation bar buttons -->
             <ButtonBar>
                 <padding>
@@ -46,27 +49,24 @@
 <!--            Page Break-->
 
             <Label text="Change your user details here." />
-            <TextField fx:id="nameText"
+            <TextField fx:id="NewNameText"
                        editable="true"
                        prefHeight="40" maxWidth="400"
                        promptText="Name"/>
-            <TextField fx:id="emailText"
-                       editable="true"
-                       prefHeight="40" maxWidth="400"
-                       promptText="Email"/>
             <Label/>
 <!--            Page Break-->
-            <PasswordField fx:id="passwordText"
+            <PasswordField fx:id="NewPasswordText"
                            editable="true"
                            prefHeight="40" maxWidth="400"
                            promptText="Password"/>
-            <PasswordField fx:id="confirmPasswordText"
+            <PasswordField fx:id="NewConfirmPasswordText"
                            editable="true"
                            prefHeight="40" maxWidth="400"
                            promptText="Confirm Password"/>
             <Label/>
 <!--            Page Break-->
-            <Button text="Save" />
+            <Button text="Save" fx:id="SaveButton" onAction="#onSaveButtonClick"/>
+            <Label text="" fx:id="ChangeLabel"/>
         </VBox>
     </center>
 
