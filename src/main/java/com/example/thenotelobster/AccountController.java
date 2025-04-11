@@ -14,6 +14,8 @@ public class AccountController {
 
     @FXML private Button SignOutButton;
 
+    @FXML private Button MainButton;
+
     @FXML
     protected void onNotesClick() throws IOException {
         Stage stage = (Stage) NotesButton.getScene().getWindow();
@@ -33,6 +35,16 @@ public class AccountController {
         scene.getStylesheets().add(stylesheet);
         stage.setScene(scene);
         // Implement sign out
+    }
+
+    @FXML
+    protected void onMainClick() throws IOException {
+        Stage stage = (Stage) MainButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
     }
 
 }
