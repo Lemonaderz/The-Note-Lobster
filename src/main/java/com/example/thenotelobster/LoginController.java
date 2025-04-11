@@ -47,7 +47,7 @@ public class LoginController {
             if (account.getPassword().equals(passwordText.getText()))
             {
                 Stage stage = (Stage) loginButton.getScene().getWindow();
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
                 String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
                 scene.getStylesheets().add(stylesheet);

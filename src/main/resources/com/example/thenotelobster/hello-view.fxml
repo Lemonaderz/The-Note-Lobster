@@ -25,7 +25,7 @@
               onAction="#onAgreeCheckBoxClick"
     />
     <HBox alignment="BOTTOM_RIGHT" spacing="10.0">
-        <Button text="Cancel" onAction="#onCancelButtonClick"/>
+        <Button text="Cancel" fx:id="CancelButton" onAction="#onCancelButtonClick"/>
         <Button fx:id="nextButton" text="Next" onAction="#onNextButtonClick" disable="true"/>
     </HBox>
 
