@@ -40,12 +40,15 @@ public class LoginController {
     @FXML
     protected void onLoginButtonClick() throws IOException {
         UserAccountDAO userAccountDAO = new UserAccountDAO();
+        UserAccount currentAccount = UserAccount.getInstance();
+
         userAccountDAO.delete("");
         try {
-            UserAccount account = userAccountDAO.getByEmail(emailText.getText());
+            userAccountDAO.getByEmail(emailText.getText());
 
-            if (account.getPassword().equals(passwordText.getText()))
+            if (currentAccount.getPassword().equals(passwordText.getText()))
             {
+                currentAccount.setEmail(emailText.getText());
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);

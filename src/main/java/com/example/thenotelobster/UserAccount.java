@@ -1,11 +1,31 @@
 package com.example.thenotelobster;
 
-public class UserAccount {
+public final class UserAccount {
+
+    private UserAccount currentUser;
+    private final static UserAccount INSTANCE = new UserAccount();
     private String email;
     private String userName;
     private String password;
 
-    public UserAccount(String email, String userName, String password) {
+    private UserAccount() {}
+
+
+    public static UserAccount getInstance() {
+        return INSTANCE;
+    }
+
+    public void setUser(UserAccount currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public UserAccount getUser() {
+        return this.currentUser;
+    }
+
+
+
+    public void  setUser(String email, String userName, String password) {
         // Since the id is auto-incremented, it is nice to have a constructor without it
         this.email = email;
         this.userName = userName;
@@ -35,4 +55,6 @@ public class UserAccount {
     public void setLastName(String Password) {
         this.password = password;
     }
+
+
 }

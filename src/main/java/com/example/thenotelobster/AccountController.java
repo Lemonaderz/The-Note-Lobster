@@ -4,11 +4,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class AccountController {
+
+    @FXML private TextField CurrentNameText;
+
+    @FXML private TextField CurrentEmailText;
 
     @FXML private Button NotesButton;
 
@@ -47,4 +52,10 @@ public class AccountController {
         stage.setScene(scene);
     }
 
+    @FXML
+    protected void initialize() {
+        UserAccount currentAccount = UserAccount.getInstance();
+//        CurrentEmailText.setText(userAccount.getEmail());
+//        CurrentNameText.setText(userAccount.getUserName());
+    }
 }

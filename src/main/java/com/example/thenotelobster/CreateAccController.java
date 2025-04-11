@@ -26,7 +26,9 @@ public class CreateAccController {
     protected void onContuineButtonClick() throws IOException {
         UserAccountDAO userAccountDAO = new UserAccountDAO();
         if (emailText.getText() != "") {
-            userAccountDAO.insert(new UserAccount(emailText.getText(), nameText.getText(), passwordText.getText()));
+            UserAccount currentUser = UserAccount.getInstance();
+            currentUser.setUser(emailText.getText(), nameText.getText(), passwordText.getText());
+            userAccountDAO.insert(currentUser);
 
 
             Stage stage = (Stage) contuineButton.getScene().getWindow();

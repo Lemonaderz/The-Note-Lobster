@@ -54,13 +54,14 @@ public class UserAccountDAO {
         }
     }
 
-    public UserAccount getByEmail(String email) {
+    public void getByEmail(String email) {
         try {
+            UserAccount userAccount = UserAccount.getInstance();
             PreparedStatement getAccount = connection.prepareStatement("SELECT * FROM userAccounts WHERE email = ?");
             getAccount.setString(1, email);
             ResultSet rs = getAccount.executeQuery();
             if (rs.next()) {
-                return new UserAccount(
+                userAccount.setUser(
                         rs.getString("email"),
                         rs.getString("userName"),
                         rs.getString("password")
@@ -69,7 +70,7 @@ public class UserAccountDAO {
         } catch (SQLException ex) {
             System.err.println(ex);
         }
-        return null;
+
     }
 
     public void close() {
