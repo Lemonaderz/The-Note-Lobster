@@ -43,10 +43,11 @@ public class UserAccountDAO {
     public void update(UserAccount userAccount) {
         try {
             PreparedStatement updateAccount = connection.prepareStatement(
-                    "UPDATE userAccounts SET userName = ?, password = ?"
+                    "UPDATE userAccounts SET userName = ?, password = ? WHERE email = ?"
             );
             updateAccount.setString(1, userAccount.getUserName());
             updateAccount.setString(2, userAccount.getPassword());
+            updateAccount.setString(3, userAccount.getEmail());
             updateAccount.execute();
         } catch (SQLException ex) {
             System.err.println(ex);
