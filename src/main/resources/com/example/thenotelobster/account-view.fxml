@@ -37,9 +37,9 @@
     <center>
         <VBox spacing="10" alignment="CENTER">
             <Label text="Current User Details"/>
-            <TextField editable="false" prefHeight="40" maxWidth="400" fx:id="CurrentNameText"
+            <TextField editable="false" prefHeight="40" maxWidth="400" fx:id="CurrentNameText" text=""
             />
-            <TextField editable="false" prefHeight="40" maxWidth="400" fx:id="CurrentEmailtext"
+            <TextField editable="false" prefHeight="40" maxWidth="400" fx:id="CurrentEmailText" text=""
             />
 
             <Label/>

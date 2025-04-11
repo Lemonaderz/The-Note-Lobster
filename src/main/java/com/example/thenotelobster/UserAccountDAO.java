@@ -65,7 +65,10 @@ public class UserAccountDAO {
                         rs.getString("email"),
                         rs.getString("userName"),
                         rs.getString("password")
+
                 );
+                System.out.println(userAccount.getEmail());
+                System.out.println(userAccount.getPassword());
             }
         } catch (SQLException ex) {
             System.err.println(ex);

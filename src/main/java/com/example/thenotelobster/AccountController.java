@@ -55,7 +55,7 @@ public class AccountController {
     @FXML
     protected void initialize() {
         UserAccount currentAccount = UserAccount.getInstance();
-//        CurrentEmailText.setText(userAccount.getEmail());
-//        CurrentNameText.setText(userAccount.getUserName());
+        CurrentEmailText.setText(currentAccount.getEmail());
+        CurrentNameText.setText(currentAccount.getUserName());
     }
 }
