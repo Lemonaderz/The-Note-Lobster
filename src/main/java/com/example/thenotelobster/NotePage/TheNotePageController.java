@@ -1,12 +1,18 @@
 package com.example.thenotelobster.NotePage;
 
+import com.example.thenotelobster.HelloApplication;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class TheNotePageController {
@@ -68,7 +74,13 @@ public class TheNotePageController {
     }
 
     @FXML
-    private void backbutton() {
+    private void backbutton()  throws IOException  {
+        Stage stage = (Stage) buttonBox.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/thenotelobster/main-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
 
     }
 
