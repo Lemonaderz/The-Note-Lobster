@@ -19,8 +19,23 @@
         -fx-text-fill: #f2f2f2;
 }
 
+/* Set text color for text-area */
+.text-area {
+    -fx-text-fill: #f2f2f2;
+}
+
+/* Set style options for text-field and text-area */
 .text-field, .text-area .content {
     -fx-text-fill: #f2f2f2;
     -fx-background-color: #333333;
+    -fx-border-radius: 5;
 }
+
+/* Set style options for radio-button */
+.radio-button {
+    -fx-text-fill: f2f2f2;
+}
+
+
+
 

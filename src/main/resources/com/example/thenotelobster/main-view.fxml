@@ -8,7 +8,8 @@
 <?import javafx.geometry.Insets?>
 
 <?import com.sun.javafx.scene.control.WebColorField?>
-<BorderPane xmlns:fx="http://javafx.com/fxml"
+<BorderPane fx:id="parent"
+            xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.thenotelobster.MainController"
             prefHeight="Infinity" prefWidth="Infinity">
 
@@ -25,6 +26,7 @@
                 <buttons>
                     <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
                     <Button text="Quizzes" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Mode" fx:id="modeButton" onAction="#onChangeModeClick" ButtonBar.buttonData="RIGHT"/>
                     <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
                 </buttons>
             </ButtonBar>
