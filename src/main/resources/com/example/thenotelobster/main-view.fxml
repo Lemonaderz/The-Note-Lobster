@@ -10,13 +10,12 @@
 <?import com.sun.javafx.scene.control.WebColorField?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.thenotelobster.MainController"
-
             prefHeight="Infinity" prefWidth="Infinity">
 
 
     <!-- Top BorderPane, contains header with title and navigation bar -->
     <top>
-        <VBox style="-fx-background-color: #d8d8d8;">
+        <VBox fx:id="header" style="-fx-background-color: #d8d8d8;">
             <Label text="Note Lobster" style="-fx-font-size: 40px"/>
             <!-- ButtonBar contains navigation bar buttons -->
             <ButtonBar>
@@ -61,9 +60,12 @@
             <Slider min="1" max="10"/>
             <Label text="Length" style="-fx-font-size: 15px"/>
 
+            <fx:define>
+                <ToggleGroup fx:id="LengthOption"/>
+            </fx:define>
             <RadioButton text="Short" fx:id="ShortOption" toggleGroup="$LengthOption"/>
-            <RadioButton text="Medium" fx:id="MediumOption" toggleGroup="$LengthOption"/>
-            <RadioButton text="Long" fx:id="LongOption" toggleGroup="$LengthOption"/>
+            <RadioButton text="Medium" fx:id="MediumOption" toggleGroup="$LengthOption" />
+            <RadioButton text="Long" fx:id="LongOption" toggleGroup="$LengthOption" />
 
             <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"/>
 <!--                    alignment=""/>-->
