@@ -1,0 +1,26 @@
+/* Set the root style options */
+.root {
+    -fx-background-color: #292929;
+    -fx-text-fill: #f2f2f2;
+}
+
+/* Set style options of fx:id="header" */
+#header {
+    -fx-background-color: #474747;
+}
+
+/* Set style options of fx:id="secondary" */
+#secondary {
+    -fx-background-color: #5c5c5c;
+}
+
+/* Set style options for label */
+.label {
+        -fx-text-fill: #f2f2f2;
+}
+
+.text-field, .text-area .content {
+    -fx-text-fill: #f2f2f2;
+    -fx-background-color: #333333;
+}
+

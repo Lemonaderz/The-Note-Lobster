@@ -28,5 +28,4 @@
         <Button text="Cancel" onAction="#onCancelButtonClick"/>
         <Button fx:id="nextButton" text="Next" onAction="#onNextButtonClick" disable="true"/>
     </HBox>
-
 </VBox>

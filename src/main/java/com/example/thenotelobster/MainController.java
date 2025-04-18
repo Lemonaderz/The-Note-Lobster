@@ -13,6 +13,8 @@ public class MainController {
 
     @FXML private VBox header;
 
+    @FXML private VBox secondary;
+
     @FXML private TextArea AddNotes;
 
     @FXML private TextArea SourceLinks;

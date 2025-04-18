@@ -1,3 +1,19 @@
+/* Set the root style options */
+.root {
+    -fx-background-color: #f2f2f2;
+    -fx-text-fill: #212121;
+}
+
+/* Set style options of fx:id="header" */
+#header {
+    -fx-background-color: #d8d8d8;
+}
+
+/* Set style options of fx:id="secondary" */
+#secondary {
+    -fx-background-color: #e5e5e5;
+}
+
 /* Select all buttons and set the background color to red
 and the text color to white */
 .button {
@@ -25,11 +41,5 @@ and the text color to white */
 }
 
 .label, .check-box {
-    -fx-text-fill: black;
-}
-
-/* Set the root's color to grey */
-.root {
-    -fx-background-color: #f2f2f2;
     -fx-text-fill: black;
 }

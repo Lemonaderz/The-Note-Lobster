@@ -15,7 +15,7 @@
 
     <!-- Top BorderPane, contains header with title and navigation bar -->
     <top>
-        <VBox fx:id="header" style="-fx-background-color: #d8d8d8;">
+        <VBox fx:id="header">
             <Label text="Note Lobster" style="-fx-font-size: 40px"/>
             <!-- ButtonBar contains navigation bar buttons -->
             <ButtonBar>
@@ -52,7 +52,7 @@
     <!-- Right BorderPane, contains extra prompting (complexity and length options),
     along with summarize button -->
     <right>
-        <VBox spacing="20" prefWidth="250" style="-fx-background-color: #e5e5e5;" alignment="CENTER">
+        <VBox fx:id="secondary" spacing="20" prefWidth="250" alignment="CENTER">
             <padding>
                 <Insets left="5" right="5"/>
             </padding>
