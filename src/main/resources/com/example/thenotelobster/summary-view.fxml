@@ -12,32 +12,47 @@
             fx:controller="com.example.thenotelobster.SummaryController"
             prefHeight="400.0" prefWidth="600.0">
 
+    <!-- Top BorderPane, contains header with title and navigation bar -->
     <top>
-       <VBox style="-fx-background-color: #d8d8d8;">
+       <VBox fx:id="header">
            <Label text="Note Lobster" style="-fx-font-size: 40px"/>
        </VBox>
     </top>
 
+    <!-- Center BorderPane, contains text field for subject and text area for AI summary output -->
     <center>
         <VBox spacing="5">
             <padding>
                 <Insets bottom="10" left="10" right="10"/>
             </padding>
             <Label text="Summary" style="-fx-font-size: 30px"/>
-            <Label text="Subject" style="-fx-font-size: 20px"/>
+            <HBox spacing="5">
+                <Label text="Subject:" style="-fx-font-size: 20px"/>
+                <TextField editable="false" prefWidth="150" promptText="Subject title here.."/>
+            </HBox>
             <TextArea fx:id="SummaryText" editable="false" wrapText="true" prefHeight="500"
-                      promptText="AI output summary here.."/>
+                      promptText="AI output summary here.." VBox.vgrow="ALWAYS"/>
         </VBox>
     </center>
 
     <right>
-        <HBox prefWidth="150" spacing="20" alignment="BOTTOM_CENTER">
+        <VBox fx:id="secondary" prefWidth="150" spacing="20" alignment="CENTER">
             <padding>
-                <Insets bottom="15"/>
+                <Insets top="85" bottom="10" left="10" right="10"/>
             </padding>
-            <Button fx:id="BackButton" onAction="#onBackClick" text="Back"/>
-            <Button fx:id="SaveButton" text="Save" />
-        </HBox>
+            <TextArea fx:id="ResummarizeNotes" wrapText="true" prefHeight="300"
+                      promptText='To add additional notes to the note summary, enter or paste notes/information here and press "Resummarize"'/>
+            <Button fx:id="ResummarizeButton" text="Resummarize" onAction="#onResummarise"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <ButtonBar>
+                <buttons>
+                    <Button fx:id="BackButton" onAction="#onBackClick" text="Back"
+                            ButtonBar.buttonData="LEFT"/>
+                    <Button fx:id="SaveButton" text="Save"
+                            ButtonBar.buttonData="RIGHT"/>
+                </buttons>
+            </ButtonBar>
+        </VBox>
     </right>
 
 </BorderPane>

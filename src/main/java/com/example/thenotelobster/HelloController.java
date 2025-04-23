@@ -96,7 +96,7 @@ By using NoteLobster, you acknowledge that you have read, understood, and agreed
         Stage stage = (Stage) nextButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("dark_mode.css").toExternalForm();
+        String stylesheet = HelloApplication.class.getResource("style/dark_mode.css").toExternalForm();
         scene.getStylesheets().add(stylesheet);
         stage.setScene(scene);
     }

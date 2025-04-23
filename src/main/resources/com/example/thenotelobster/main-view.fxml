@@ -43,10 +43,10 @@
             <TextField fx:id="NotesSubject" promptText="Enter subject here."
                        alignment="TOP_CENTER"/>
 
-            <TextArea fx:id="AddNotes" wrapText="true" prefHeight="500"
+            <TextArea fx:id="AddNotes" wrapText="true" prefHeight="450" VBox.vgrow="ALWAYS"
                       promptText='To create a note summary, enter or paste notes/information here and press "Summarize".'/>
 
-            <TextArea fx:id="SourceLinks" wrapText="true" prefHeight="20"
+            <TextArea fx:id="SourceLinks" wrapText="true" prefHeight="50"
                       promptText="Insert any additional source links here."/>
         </VBox>
     </center>

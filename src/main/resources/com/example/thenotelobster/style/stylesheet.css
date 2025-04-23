@@ -40,6 +40,8 @@ and the text color to white */
     -fx-border-radius: 5;
 }
 
+
+
 .label, .check-box {
     -fx-text-fill: black;
 }

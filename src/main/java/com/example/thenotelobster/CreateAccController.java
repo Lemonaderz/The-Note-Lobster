@@ -32,7 +32,7 @@ public class CreateAccController {
             Stage stage = (Stage) contuineButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-            String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
+            String stylesheet = HelloApplication.class.getResource("style/stylesheet.css").toExternalForm();
             scene.getStylesheets().add(stylesheet);
             stage.setScene(scene);
         }
