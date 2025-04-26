@@ -7,10 +7,10 @@
 <BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.thenotelobster.NotePage.TheNotePageController">
     <left>
         <VBox fx:id="leftVBox" spacing="10">
-            <!-- Blue lobster icon at the top of the sidebar -->
-            <ImageView fx:id="icon" fitHeight="50" fitWidth="50" />
 
             <!-- chat history -->
+            <Label text="Subjects" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+            <TextField fx:id="searchField" promptText="Search notes..." />
             <TreeView fx:id="chatHistory" prefWidth="200" />
 
             <!-- Buttons -->
@@ -20,12 +20,30 @@
                 <Button onAction="#createNewFolder" text="Create Folder" />
                 <Button onAction="#saveNotes" text="Save" />
                 <Button onAction="#deleteSelectedItem" text="Delete Chat" />
+                <Button onAction="#expandNotes" text="Expand on my notes" />
             </HBox>
-
-
 
         </VBox>
     </left>
+
+    <top>
+        <VBox style="-fx-background-color: #d8d8d8;">
+            <Label text="Note Lobster" style="-fx-font-size: 40px"/>
+            <ButtonBar>
+                <padding>
+                    <javafx.geometry.Insets left="10" right="10"/>
+                </padding>
+                <buttons>
+                    <Button text="Account" fx:id="AccountButton" onAction="#onAccountButtonClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Main" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Quizzes" fx:id="QuizzesButton" onAction="#onQuizzesClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
+                </buttons>
+            </ButtonBar>
+        </VBox>
+    </top>
+
 
     <center>
         <VBox fx:id="centerVBox" prefHeight="562.0" prefWidth="565.0" spacing="10">
@@ -33,4 +51,6 @@
             <TextArea fx:id="notesContent" prefHeight="599.0" prefWidth="566.0" promptText="Your notes will appear here..." wrapText="true" />
         </VBox>
     </center>
+
+
 </BorderPane>
