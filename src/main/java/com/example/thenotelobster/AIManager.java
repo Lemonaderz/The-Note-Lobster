@@ -12,14 +12,23 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 
-public class AIManager {
+public final class AIManager {
 
     // This is the url we are using, its local.
     private HttpClient client = HttpClient.newHttpClient();
     public String Url = "http://localhost:11434/api/generate";
     public String messageHistory = "\"messages\": [";
     public boolean chatActive = false;
+    public String singleMessage;
+    private final static AIManager INSTANCE = new AIManager();
 
+    private AIManager()
+    {
+    }
+
+    public static AIManager getInstance() {
+        return INSTANCE;
+    }
     public String fetchPromptResponse(String message, String length, int complexity)
     {
 
@@ -39,6 +48,7 @@ public class AIManager {
             String totalResponse = "";
             //Send a "question" with our prompt
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
             return response.body();
 
 
@@ -66,6 +76,8 @@ public class AIManager {
         String stringResponse = jsonResponse.get("response").getAsString();  // Get a field named "answer"
 
         System.out.println(stringResponse);
+        singleMessage = stringResponse;
+        System.out.println("FInished");
         return stringResponse;
     }
     public String fetchChatResponse(String message, String length, int complexity)
@@ -99,7 +111,7 @@ public class AIManager {
         //replace the new lines with spaces so it doesnt cause json issues
         messageHistory += " { \"role\": \"assistant\", \"content\": \""+ (stringResponse.replace("\n", " ")).replace("\"", "'") + "\" },";
 
-        System.out.println(stringResponse);
+        singleMessage = stringResponse;
         return response;
     }
 

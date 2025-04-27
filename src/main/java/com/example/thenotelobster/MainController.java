@@ -2,6 +2,7 @@ package com.example.thenotelobster;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -34,12 +35,24 @@ public class MainController {
 
     @FXML private ToggleGroup LengthOption;
 
+    @FXML private Slider ComplexitySlider;
+
     @FXML
     protected void onSummarizeClick() throws IOException {
+
+        String summary = AddNotes.getText();
+        AIManager aiManager = AIManager.getInstance();
+        System.out.println(ComplexitySlider.getValue());
+        System.out.println(LengthOption.getSelectedToggle().getProperties().get());
+//        aiManager.fetchChatResponse(summary,"1000", ComplexitySlider.getValue());
+        System.out.println("Summary made");
         Stage stage = (Stage) SummarizeButton.getScene().getWindow();
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("summary-view.fxml"));
+
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
+
         scene.getStylesheets().add(stylesheet);
         stage.setScene(scene);
     }
@@ -58,4 +71,6 @@ public class MainController {
     protected void onSignOut() {
         // Implement sign out
     }
+
+
 }
