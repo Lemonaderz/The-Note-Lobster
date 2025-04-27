@@ -5,7 +5,7 @@ module com.example.thenotelobster {
     requires com.google.gson;
 
     requires java.sql;
-
+    requires java.desktop;
 
 
     opens com.example.thenotelobster to javafx.fxml;

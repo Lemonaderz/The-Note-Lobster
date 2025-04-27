@@ -39,6 +39,7 @@ public class AccountController {
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
         scene.getStylesheets().add(stylesheet);
+        stage.setMaximized(true);
         stage.setScene(scene);
     }
 
