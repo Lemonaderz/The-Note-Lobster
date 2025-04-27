@@ -18,6 +18,7 @@ public class AccountController extends NavigationUI {
     @FXML private TextField NewNameText;
     @FXML private PasswordField NewPasswordText;
     @FXML private PasswordField NewConfirmPasswordText;
+    @FXML private Button QuizButton;
 
     @FXML
     protected void initialize() {

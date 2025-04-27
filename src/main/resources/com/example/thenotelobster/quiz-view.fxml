@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.thenotelobster.QuizController"
+
+            prefHeight="Infinity" prefWidth="Infinity">
+
+
+    <!-- Top BorderPane, contains header with title and navigation bar -->
+    <top>
+        <VBox style="-fx-background-color: #d8d8d8;">
+            <HBox style="-fx-background-color: #d8d8d8;">
+                <Label text="Note Lobster" style="-fx-font-size: 40px"/>
+                <!--                <Label text="" fx:id="NameLabel" alignment="TOP_RIGHT"/>-->
+            </HBox>
+            <!-- ButtonBar contains navigation bar buttons -->
+            <ButtonBar>
+                <padding>
+                    <Insets left="10" right="10"/>
+                </padding>
+                <buttons>
+                    <Button text="Home" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Quizzes" fx:id="QuizButton" onAction="#onQuizClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Account" fx:id="AccountButton" onAction="#onAccountClick" ButtonBar.buttonData="LEFT" />
+                    <Button text="Mode" fx:id="modeButton" onAction="#onChangeModeClick" ButtonBar.buttonData="RIGHT">
+                        <!--                        <graphic>-->
+                        <!--                        <ImageView fx:id="ModeIcon" fitWidth="18.0" fitHeight="18.0"/>-->
+                        <!--                        </graphic>-->
+                    </Button>
+                    <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
+                </buttons>
+
+            </ButtonBar>
+        </VBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.25" mouseTransparent="true">
+
+    <!--        Left Side-->
+            <VBox spacing="20" style="-fx-background-color: #e5e5e5;">
+                <padding>
+                    <Insets left="10" right="10" top="10"/>
+                </padding>
+                <Label text="Quiz Menu" style="-fx-font-size: 20px"/>
+                <TreeView fx:id="QuizMenu" prefWidth="200"/>
+                <HBox alignment="CENTER">
+                    <Button text="Delete"/>
+                </HBox>
+            </VBox>
+
+    <!--        Right side-->
+            <ScrollPane>
+                <VBox spacing="10" fx:id="quizBox">
+        <!--            Headings-->
+                    <VBox>
+                        <padding>
+                            <Insets left="10" right="10" top="10"/>
+                        </padding>
+                        <Label text="[Title]" style="-fx-font-size: 25px"/>
+                        <Label wrapText="true"
+                               text="[Description... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique lectus erat, a placerat tellus. "/>
+        <!--                page break-->
+                        <Label/>
+                        <Label wrapText="true"
+                                text="For multiple choice questions select the best answer.  For numeric answer questions give your final answer only.  Points for each question are as marked.  Answer all questions."/>
+                    </VBox>
+    <!--                Multiplie Choice Quiz-->
+                    <VBox spacing="10" style="-fx-border-color: d8d8d8; -fx-padding: 10;">
+                        <Label text="Question 1"/>
+                        <Label text="[Question]"/>
+                        <RadioButton text="A"/>
+                        <RadioButton text="B"/>
+                        <RadioButton text="C"/>
+                        <RadioButton text="D"/>
+                    </VBox>
+                    <VBox spacing="10" style="-fx-border-color: d8d8d8; -fx-padding: 10;">
+                        <Label text="Question 2"/>
+                        <Label text="[Question]"/>
+                        <RadioButton text="A"/>
+                        <RadioButton text="B"/>
+                        <RadioButton text="C"/>
+                        <RadioButton text="D"/>
+                    </VBox>
+                </VBox>
+
+            </ScrollPane>
+        </SplitPane>
+    </center>
+
+</BorderPane>

@@ -35,6 +35,8 @@ public class MainController extends NavigationUI {
     @FXML
     private Slider ComplexitySlider;
 
+    @FXML private Button QuizButton;
+
     @FXML
     private ProgressIndicator LoadingIndicator;
 
@@ -87,9 +89,5 @@ public class MainController extends NavigationUI {
         scene.getStylesheets().add(checkCurrentMode());
         stage.setScene(scene);
 
-
-
     }
 }
-
-

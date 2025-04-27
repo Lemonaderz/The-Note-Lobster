@@ -91,6 +91,16 @@ public abstract class NavigationUI {
         stage.setScene(scene);
     }
 
+    @FXML
+    protected void onQuizClick() throws IOException {
+        Stage stage = (Stage) AccountButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("quiz-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        scene.getStylesheets().add(checkCurrentMode());
+        stage.setScene(scene);
+
+    }
+
     // Method used to check which theme the application is currently in, e.g Dark Mode or Light Mode.
     protected String checkCurrentMode() {
         if (mode == 0) { // IF LIGHT MODE:
