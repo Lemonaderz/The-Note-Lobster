@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.thenotelobster.NotePage.TheNotePageController">
     <left>
@@ -26,24 +27,30 @@
         </VBox>
     </left>
 
+    <!-- Top BorderPane, contains header with title and navigation bar -->
     <top>
-        <VBox style="-fx-background-color: #d8d8d8;">
+        <VBox fx:id="header">
             <Label text="Note Lobster" style="-fx-font-size: 40px"/>
+            <!-- ButtonBar contains navigation bar buttons -->
             <ButtonBar>
                 <padding>
-                    <javafx.geometry.Insets left="10" right="10"/>
+                    <Insets left="10" right="10"/>
                 </padding>
                 <buttons>
-                    <Button text="Account" fx:id="AccountButton" onAction="#onAccountButtonClick" ButtonBar.buttonData="LEFT"/>
-                    <Button text="Main" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Home" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>
                     <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
-                    <Button text="Quizzes" fx:id="QuizzesButton" onAction="#onQuizzesClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Quizzes" fx:id="QuizButton" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Account" fx:id="AccountButton" onAction="#onAccountClick" ButtonBar.buttonData="LEFT" />
+                    <Button text="Mode" fx:id="modeButton" onAction="#onChangeModeClick" ButtonBar.buttonData="RIGHT">
+                        <!--                        <graphic>-->
+                        <!--                        <ImageView fx:id="ModeIcon" fitWidth="18.0" fitHeight="18.0"/>-->
+                        <!--                        </graphic>-->
+                    </Button>
                     <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
                 </buttons>
             </ButtonBar>
         </VBox>
     </top>
-
 
     <center>
         <VBox fx:id="centerVBox" prefHeight="562.0" prefWidth="565.0" spacing="10">
