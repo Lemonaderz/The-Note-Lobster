@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.thenotelobster.QuizController"
+
+            prefHeight="Infinity" prefWidth="Infinity">
+
+
+    <!-- Top BorderPane, contains header with title and navigation bar -->
+    <top>
+        <VBox style="-fx-background-color: #d8d8d8;">
+            <HBox style="-fx-background-color: #d8d8d8;">
+                <Label text="Note Lobster" style="-fx-font-size: 40px"/>
+                <!--                <Label text="" fx:id="NameLabel" alignment="TOP_RIGHT"/>-->
+            </HBox>
+            <!-- ButtonBar contains navigation bar buttons -->
+            <ButtonBar>
+                <padding>
+                    <Insets left="10" right="10"/>
+                </padding>
+                <buttons>
+                    <Button text="Account" fx:id="AccountButton" onAction="#onAccountClick" ButtonBar.buttonData="LEFT" />
+                    <Button text="Main" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Quizzes" ButtonBar.buttonData="LEFT" disable="true"/>
+                    <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
+                </buttons>
+            </ButtonBar>
+        </VBox>
+    </top>
+
+</BorderPane>

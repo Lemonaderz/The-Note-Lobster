@@ -3,50 +3,24 @@ package com.example.thenotelobster;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
-public class MainController {
-
-    @FXML private TextArea AddNotes;
-
-    @FXML private TextArea SourceLinks;
-
-    @FXML private Button SummarizeButton;
+public class QuizController {
 
     @FXML private Button NotesButton;
 
     @FXML private Button SignOutButton;
 
+    @FXML private Button MainButton;
+
     @FXML private Button AccountButton;
 
-    @FXML private Button QuizButton;
-
-    //@FXML private Button NotesButton;
-
-    //@FXML private Button SignOutButton;
-
-    @FXML private TextField NotesSubject;
-
-    @FXML private RadioButton ShortOption;
-
-    @FXML private RadioButton MediumOption;
-
-    @FXML private RadioButton LongOption;
-
-    @FXML private ToggleGroup LengthOption;
-
-    @FXML
-    protected void onSummarizeClick() throws IOException {
-        Stage stage = (Stage) SummarizeButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("summary-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(stylesheet);
-        stage.setScene(scene);
-    }
 
     @FXML
     protected void onNotesClick() throws IOException {
@@ -70,20 +44,24 @@ public class MainController {
     }
 
     @FXML
-    protected void onAccountButtonClick() throws IOException {
-        Stage stage = (Stage) AccountButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("account-view.fxml"));
+    protected void onMainClick() throws IOException {
+        Stage stage = (Stage) MainButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
         scene.getStylesheets().add(stylesheet);
         stage.setScene(scene);
-
     }
 
     @FXML
-    protected void onQuizClick() throws IOException {
-        Stage stage = (Stage) QuizButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("quiz-view.fxml"));
+    protected void initialize() {
+        UserAccount currentAccount = UserAccount.getInstance();
+    }
+
+    @FXML
+    protected void onAccountClick() throws IOException {
+        Stage stage = (Stage) AccountButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("account-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
         scene.getStylesheets().add(stylesheet);

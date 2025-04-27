@@ -36,7 +36,7 @@
                 <buttons>
                     <Button text="Account" fx:id="AccountButton" onAction="#onAccountButtonClick" ButtonBar.buttonData="LEFT"/>
                     <Button text="Main" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>
-                    <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT" disable="true"/>
                     <Button text="Quizzes" fx:id="QuizzesButton" onAction="#onQuizzesClick" ButtonBar.buttonData="LEFT"/>
                     <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
                 </buttons>

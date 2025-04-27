@@ -21,6 +21,8 @@ public class AccountController {
 
     @FXML private Button MainButton;
 
+    @FXML private Button QuizButton;
+
     @FXML private Button SaveButton;
 
     @FXML private Label ChangeLabel;
@@ -85,5 +87,16 @@ public class AccountController {
         userAccountDAO.update(currentAccount);
 
         ChangeLabel.setText("Changes were Saved");
+    }
+
+    @FXML
+    protected void onQuizClick() throws IOException {
+        Stage stage = (Stage) QuizButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("quiz-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
+
     }
 }

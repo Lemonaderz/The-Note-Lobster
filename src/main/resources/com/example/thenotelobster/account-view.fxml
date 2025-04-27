@@ -30,7 +30,7 @@
                     <Button text="Account" ButtonBar.buttonData="LEFT" disable="true"/>
                     <Button text="Main" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>
                     <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
-                    <Button text="Quizzes" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Quizzes" fx:id="QuizButton" onAction="#onQuizClick" ButtonBar.buttonData="LEFT"/>
                     <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
                 </buttons>
             </ButtonBar>
