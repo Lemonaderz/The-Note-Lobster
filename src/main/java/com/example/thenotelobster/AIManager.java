@@ -118,8 +118,6 @@ public final class AIManager {
     }
 
 
-    public QuizResponse
-
 
 
 
