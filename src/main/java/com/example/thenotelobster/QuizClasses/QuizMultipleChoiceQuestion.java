@@ -1,4 +1,10 @@
 package com.example.thenotelobster.QuizClasses;
 
-public class QuizMultipleChoiceQuestion {
+import java.util.List;
+
+public class QuizMultipleChoiceQuestion extends QuizQuestion{
+    List<String> choices;
+
+    public QuizMultipleChoiceQuestion() {
+    }
 }

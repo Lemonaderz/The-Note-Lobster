@@ -1,4 +1,4 @@
-package com.example.thenotelobster.NotePage;
+package com.example.thenotelobster.QuizClasses;
 
-public class QuizShortResponseQuestion {
+public class QuizShortResponseQuestion extends QuizQuestion{
 }

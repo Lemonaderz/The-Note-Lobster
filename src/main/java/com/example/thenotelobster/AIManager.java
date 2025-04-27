@@ -1,17 +1,11 @@
 package com.example.thenotelobster;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.net.URI;
 import java.net.http.*;
-import com.google.gson.Gson;
+
+import com.example.thenotelobster.QuizClasses.QuizResponse;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
-import javafx.concurrent.Task;
 
 public final class AIManager {
 
@@ -122,6 +116,9 @@ public final class AIManager {
         chatActive = false;
         messageHistory = "\"messages\": [";
     }
+
+
+    public QuizResponse
 
 
 
