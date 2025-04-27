@@ -2,6 +2,7 @@ package com.example.thenotelobster;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -19,9 +20,7 @@ public class QuizController {
 
     @FXML private Button AccountButton;
 
-    @FXML private VBox question1;
-
-    @FXML private VBox question2;
+    @FXML private VBox quizBox;
 
 
     @FXML
@@ -68,13 +67,17 @@ public class QuizController {
 
     @FXML
     public void initialize() {
-        setupToggleGroup(question1);
-        setupToggleGroup(question2);
+        // Go through all direct children of quizBox
+        for (Node node : quizBox.getChildren()) {
+            if (node instanceof VBox questionVBox) {
+                setupToggleGroup(questionVBox);
+            }
+        }
     }
 
     private void setupToggleGroup(VBox questionBox) {
         ToggleGroup group = new ToggleGroup();
-        for (var node : questionBox.getChildren()) {
+        for (Node node : questionBox.getChildren()) {
             if (node instanceof RadioButton radioButton) {
                 radioButton.setToggleGroup(group);
             }

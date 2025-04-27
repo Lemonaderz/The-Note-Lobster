@@ -51,7 +51,7 @@
 
     <right>
         <ScrollPane>
-            <VBox spacing="10">
+            <VBox spacing="10" fx:id="quizBox">
     <!--            Headings-->
                 <VBox prefWidth="440">
                     <padding>
@@ -66,7 +66,7 @@
                             text="For multiple choice questions select the best answer.  For numeric answer questions give your final answer only.  Points for each question are as marked.  Answer all questions."/>
                 </VBox>
 <!--                Multiplie Choice Quiz-->
-                <VBox fx:id="question1" spacing="10" style="-fx-border-color: d8d8d8; -fx-padding: 10;">
+                <VBox spacing="10" style="-fx-border-color: d8d8d8; -fx-padding: 10;">
                     <Label text="Question 1"/>
                     <Label text="[Question]"/>
                     <RadioButton text="A"/>
@@ -74,7 +74,7 @@
                     <RadioButton text="C"/>
                     <RadioButton text="D"/>
                 </VBox>
-                <VBox fx:id="question2" spacing="10" style="-fx-border-color: d8d8d8; -fx-padding: 10;">
+                <VBox spacing="10" style="-fx-border-color: d8d8d8; -fx-padding: 10;">
                     <Label text="Question 2"/>
                     <Label text="[Question]"/>
                     <RadioButton text="A"/>
