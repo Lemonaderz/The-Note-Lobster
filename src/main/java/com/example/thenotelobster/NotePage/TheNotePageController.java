@@ -151,6 +151,12 @@ public class TheNotePageController {
     @FXML
     protected void onQuizzesClick() throws IOException {
 
+        Stage stage = (Stage) buttonBox.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/thenotelobster/quiz-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
     }
 
     @FXML
