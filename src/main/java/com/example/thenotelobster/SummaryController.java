@@ -27,8 +27,7 @@ public class SummaryController extends NavigationUI {
         Stage stage = (Stage) BackButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
-        scene.getStylesheets().add(stylesheet);
+        scene.getStylesheets().add(checkCurrentMode());
         stage.setScene(scene);
     }
 

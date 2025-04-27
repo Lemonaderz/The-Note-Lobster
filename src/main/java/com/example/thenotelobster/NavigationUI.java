@@ -12,22 +12,17 @@ import java.io.IOException;
 
 abstract class NavigationUI {
 
-    @FXML
-    private BorderPane SceneTheme;
-    @FXML
-    private VBox header;
-    @FXML
-    private VBox secondary;
-    @FXML
-    private Button modeButton;
-    @FXML
-    private Button NotesButton;
+    @FXML private BorderPane SceneTheme;
+    @FXML private VBox header;
+    @FXML private VBox secondary;
+    @FXML private Button modeButton;
+    @FXML private Button NotesButton;
 
     String lightmode = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
     String darkmode = HelloApplication.class.getResource("style/dark_mode.css").toExternalForm();
 
     // Double value used to determine which mode the application is in, e.g. 0 = light mode and 1 = dark mode.
-    private double mode = 0;
+    private static double mode;
     private String CurrentTheme;
 
     @FXML

@@ -48,6 +48,7 @@
         </VBox>
     </center>
 
+    <!-- Right BorderPane, contains text area for re-summarize notes and button, as well as back and save buttons -->
     <right>
         <VBox fx:id="secondary" prefWidth="150" spacing="20" alignment="CENTER">
             <padding>
@@ -61,7 +62,7 @@
                 <buttons>
                     <Button fx:id="BackButton" onAction="#onBackClick" text="Back"
                             ButtonBar.buttonData="LEFT"/>
-                    <Button fx:id="SaveButton" text="Save"
+                    <Button fx:id="SaveButton" onAction="#onSaveClick" text="Save"
                             ButtonBar.buttonData="RIGHT"/>
                 </buttons>
             </ButtonBar>
