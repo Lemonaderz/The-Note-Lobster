@@ -26,8 +26,10 @@
                     <Insets left="10" right="10"/>
                 </padding>
                 <buttons>
+                    <Button text="Home" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>
                     <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
                     <Button text="Quizzes" fx:id="QuizButton" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Account" fx:id="AccountButton" onAction="#onAccountClick" ButtonBar.buttonData="LEFT" />
                     <Button text="Mode" fx:id="modeButton" onAction="#onChangeModeClick" ButtonBar.buttonData="RIGHT">
 <!--                        <graphic>-->
 <!--                        <ImageView fx:id="ModeIcon" fitWidth="18.0" fitHeight="18.0"/>-->

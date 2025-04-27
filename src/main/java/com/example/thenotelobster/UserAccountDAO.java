@@ -41,7 +41,17 @@ public class UserAccountDAO {
     }
 
     public void update(UserAccount userAccount) {
-        // Todo Later: Create a PreparedStatement to run the UPDATE query
+        try {
+            PreparedStatement updateAccount = connection.prepareStatement(
+                    "UPDATE userAccounts SET userName = ?, password = ? WHERE email = ?"
+            );
+            updateAccount.setString(1, userAccount.getUserName());
+            updateAccount.setString(2, userAccount.getPassword());
+            updateAccount.setString(3, userAccount.getEmail());
+            updateAccount.execute();
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
     }
 
     public void delete(String email) {
@@ -54,22 +64,24 @@ public class UserAccountDAO {
         }
     }
 
-    public UserAccount getByEmail(String email) {
+    public void getByEmail(String email) {
         try {
+            UserAccount userAccount = UserAccount.getInstance();
             PreparedStatement getAccount = connection.prepareStatement("SELECT * FROM userAccounts WHERE email = ?");
             getAccount.setString(1, email);
             ResultSet rs = getAccount.executeQuery();
             if (rs.next()) {
-                return new UserAccount(
+                userAccount.setUser(
                         rs.getString("email"),
                         rs.getString("userName"),
                         rs.getString("password")
+
                 );
             }
         } catch (SQLException ex) {
             System.err.println(ex);
         }
-        return null;
+
     }
 
     public void close() {

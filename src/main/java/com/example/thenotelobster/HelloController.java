@@ -18,6 +18,9 @@ public class HelloController {
     private Button nextButton;
 
     @FXML
+    private Button CancelButton;
+
+    @FXML
     private TextArea termsAndConditions;
 
 
@@ -94,7 +97,7 @@ By using NoteLobster, you acknowledge that you have read, understood, and agreed
     @FXML
     protected void onNextButtonClick() throws IOException {
         Stage stage = (Stage) nextButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         String stylesheet = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
         scene.getStylesheets().add(stylesheet);
@@ -102,8 +105,12 @@ By using NoteLobster, you acknowledge that you have read, understood, and agreed
     }
 
     @FXML
-    protected void onCancelButtonClick() {
-        Stage stage = (Stage) nextButton.getScene().getWindow();
-        stage.close();
+    protected void onCancelButtonClick() throws IOException {
+        Stage stage = (Stage) CancelButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        String stylesheet = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
+        scene.getStylesheets().add(stylesheet);
+        stage.setScene(scene);
     }
 }

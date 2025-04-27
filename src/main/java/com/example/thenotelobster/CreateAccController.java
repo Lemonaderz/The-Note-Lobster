@@ -26,11 +26,13 @@ public class CreateAccController {
     protected void onContuineButtonClick() throws IOException {
         UserAccountDAO userAccountDAO = new UserAccountDAO();
         if (emailText.getText() != "") {
-            userAccountDAO.insert(new UserAccount(emailText.getText(), nameText.getText(), passwordText.getText()));
+            UserAccount currentUser = UserAccount.getInstance();
+            currentUser.setUser(emailText.getText(), nameText.getText(), passwordText.getText());
+            userAccountDAO.insert(currentUser);
 
 
             Stage stage = (Stage) contuineButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
             String stylesheet = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
             scene.getStylesheets().add(stylesheet);

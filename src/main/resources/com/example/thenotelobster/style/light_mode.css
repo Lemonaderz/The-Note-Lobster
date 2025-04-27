@@ -36,7 +36,7 @@
 }
 
 /* Set style of navigation bar buttons */
-#NotesButton, #SignOutButton, #QuizButton, #modeButton {
+#NotesButton, #SignOutButton, #QuizButton, #modeButton, #AccountButton, #MainButton {
     -fx-background-color: #d8d8d8;
     -fx-text-fill: black;
     -fx-background-radius: 5,5,4;
