@@ -67,7 +67,7 @@
                 <Insets left="5" right="5"/>
             </padding>
             <Label text="Complexity" style="-fx-font-size: 15px"/>
-            <Slider fx:id="ComplexitySlider" min="1" max="10"/>
+            <Slider fx:id="ComplexitySlider" min="1" max="10" value="1"/>
             <Label text="Length" style="-fx-font-size: 15px"/>
 
             <ProgressIndicator visible="false" fx:id="LoadingIndicator"/>
@@ -75,7 +75,7 @@
                 <ToggleGroup fx:id="LengthOption" />
             </fx:define>
 <!--            User data is the length-->
-            <RadioButton text="Short" fx:id="ShortOption" toggleGroup="$LengthOption" userData="100"/>
+            <RadioButton text="Short" fx:id="ShortOption" toggleGroup="$LengthOption" userData="100" selected="true"/>
             <RadioButton text="Medium" fx:id="MediumOption" toggleGroup="$LengthOption" userData="200"/>
             <RadioButton text="Long" fx:id="LongOption" toggleGroup="$LengthOption" userData="300"/>
 
