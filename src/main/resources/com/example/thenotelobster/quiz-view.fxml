@@ -36,4 +36,55 @@
         </VBox>
     </top>
 
+    <left>
+        <VBox spacing="20" prefWidth="200" style="-fx-background-color: #e5e5e5;">
+            <padding>
+                <Insets left="10" right="10" top="10"/>
+            </padding>
+            <Label text="Quiz Menu" style="-fx-font-size: 20px"/>
+            <TreeView fx:id="QuizMenu" prefWidth="200"/>
+            <HBox alignment="CENTER">
+                <Button text="Delete"/>
+            </HBox>
+        </VBox>
+    </left>
+
+    <right>
+        <ScrollPane>
+            <VBox spacing="10">
+    <!--            Headings-->
+                <VBox prefWidth="440">
+                    <padding>
+                        <Insets left="10" right="10" top="10"/>
+                    </padding>
+                    <Label text="[Title]" style="-fx-font-size: 25px"/>
+                    <Label wrapText="true"
+                           text="[Description... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique lectus erat, a placerat tellus. "/>
+    <!--                page break-->
+                    <Label/>
+                    <Label wrapText="true"
+                            text="For multiple choice questions select the best answer.  For numeric answer questions give your final answer only.  Points for each question are as marked.  Answer all questions."/>
+                </VBox>
+<!--                Multiplie Choice Quiz-->
+                <VBox fx:id="question1" spacing="10" style="-fx-border-color: d8d8d8; -fx-padding: 10;">
+                    <Label text="Question 1"/>
+                    <Label text="[Question]"/>
+                    <RadioButton text="A"/>
+                    <RadioButton text="B"/>
+                    <RadioButton text="C"/>
+                    <RadioButton text="D"/>
+                </VBox>
+                <VBox fx:id="question2" spacing="10" style="-fx-border-color: d8d8d8; -fx-padding: 10;">
+                    <Label text="Question 2"/>
+                    <Label text="[Question]"/>
+                    <RadioButton text="A"/>
+                    <RadioButton text="B"/>
+                    <RadioButton text="C"/>
+                    <RadioButton text="D"/>
+                </VBox>
+            </VBox>
+
+        </ScrollPane>
+    </right>
+
 </BorderPane>
