@@ -67,15 +67,18 @@
                 <Insets left="5" right="5"/>
             </padding>
             <Label text="Complexity" style="-fx-font-size: 15px"/>
-            <Slider min="1" max="10"/>
+            <Slider fx:id="ComplexitySlider" min="1" max="10"/>
             <Label text="Length" style="-fx-font-size: 15px"/>
 
+            <ProgressIndicator visible="false" fx:id="LoadingIndicator"/>
             <fx:define>
-                <ToggleGroup fx:id="LengthOption"/>
+                <ToggleGroup fx:id="LengthOption" />
             </fx:define>
-            <RadioButton text="Short" fx:id="ShortOption" toggleGroup="$LengthOption"/>
-            <RadioButton text="Medium" fx:id="MediumOption" toggleGroup="$LengthOption" />
-            <RadioButton text="Long" fx:id="LongOption" toggleGroup="$LengthOption" />
+<!--            User data is the length-->
+            <RadioButton text="Short" fx:id="ShortOption" toggleGroup="$LengthOption" userData="100"/>
+            <RadioButton text="Medium" fx:id="MediumOption" toggleGroup="$LengthOption" userData="200"/>
+            <RadioButton text="Long" fx:id="LongOption" toggleGroup="$LengthOption" userData="300"/>
+
 
             <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"/>
         </VBox>
