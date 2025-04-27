@@ -2,19 +2,22 @@ package com.example.thenotelobster;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+
 import java.io.IOException;
 import java.sql.*;
 
 public class HelloApplication extends Application {
 
     public static final String TITLE = "The Note Lobster";
-
-    public static final int WIDTH = 640;
-    public static final int HEIGHT = 640;
+    static Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+    public static final int WIDTH = (int) screenSize.getWidth();
+    public static final int HEIGHT = (int) screenSize.getHeight();
 
 
     @Override
@@ -24,6 +27,7 @@ public class HelloApplication extends Application {
         String stylesheet = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
         scene.getStylesheets().add(stylesheet);
         stage.setTitle(TITLE);
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }
