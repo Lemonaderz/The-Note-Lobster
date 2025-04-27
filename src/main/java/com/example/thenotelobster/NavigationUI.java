@@ -25,9 +25,8 @@ abstract class NavigationUI {
 
     String lightmode = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
     String darkmode = HelloApplication.class.getResource("style/dark_mode.css").toExternalForm();
-
-    String darkmodeIcon = HelloApplication.class.getResource("images/darkmode_icon.png").toExternalForm();
-    String lightmodeIcon = HelloApplication.class.getResource("images/lightmode_icon.png").toExternalForm();
+//    String darkmodeIcon = HelloApplication.class.getResource("images/darkmode_icon.png").toExternalForm();
+//    String lightmodeIcon = HelloApplication.class.getResource("images/lightmode_icon.png").toExternalForm();
 
     // Double value used to determine which mode the application is in, e.g. 0 = light mode and 1 = dark mode.
     private static double mode;
@@ -52,12 +51,12 @@ abstract class NavigationUI {
             if (mode == 0) {
                 SceneTheme.getStylesheets().add(darkmode);
                 SceneTheme.getStylesheets().remove(lightmode);
-                ModeIcon.setImage(new Image(darkmodeIcon));
+//                ModeIcon.setImage(new Image(darkmodeIcon));
                 mode = 1;
             } else if (mode == 1) { // Mode is equal to 1, therefore the application is currently in dark mode.
                 SceneTheme.getStylesheets().add(lightmode);
                 SceneTheme.getStylesheets().remove(darkmode);
-                ModeIcon.setImage(new Image(lightmodeIcon));
+//                ModeIcon.setImage(new Image(lightmodeIcon));
                 mode = 0;
             }
         });

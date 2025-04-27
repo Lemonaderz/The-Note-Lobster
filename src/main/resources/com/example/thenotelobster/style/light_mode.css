@@ -19,6 +19,8 @@
     -fx-background-color: #d8d8d8;
     -fx-text-fill: black;
     -fx-background-radius: 5,5,4;
+    -fx-border-radius: 5,5,4;
+    -fx-border-color: black;
 }
 
 /* Set style of button when mouse hovers over it */
@@ -26,10 +28,20 @@
     -fx-background-color: #d9d9d9;
 }
 
+#SummarizeButton, #ResummarizeButton {
+    -fx-background-color: #20639B;
+    -fx-text-fill: f2f2f2;
+    -fx-background-radius: 5,5,4;
+    -fx-border-color: transparent;
+}
+
 /* Set style of navigation bar buttons */
 #NotesButton, #SignOutButton, #QuizButton, #modeButton {
-    -fx-background-color: white;
+    -fx-background-color: #d8d8d8;
+    -fx-text-fill: black;
+    -fx-background-radius: 5,5,4;
 }
+
 /* Set color of node with fx:id="confirmBtn" */
 #confirmBtn {
     -fx-background-color: #2386ad;

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -29,5 +30,4 @@ public class MainController extends NavigationUI {
         scene.getStylesheets().add(checkCurrentMode());
         stage.setScene(scene);
     }
-
 }

@@ -42,15 +42,30 @@
 
 /* Set style options for button */
 .button {
-    -fx-background-color: #20639B;
+    -fx-background-color: #5c5c5c;
     -fx-text-fill: #f2f2f2;
     -fx-background-radius: 5,5,4;
-    /*
-    -fx-background-color: #474747;
-    -fx-text-fill: #f2f2f2;
-    -fx-border-radius: 5;
+    -fx-border-radius: 5,5,4;
     -fx-border-color: #f2f2f2;
-    */
+}
+
+/* Set style of button when mouse hovers over it */
+.button:hover {
+    -fx-background-color: #4c4c4c;
+}
+
+#SummarizeButton, #ResummarizeButton {
+    -fx-background-color: #20639B;
+    -fx-text-fill: f2f2f2;
+    -fx-background-radius: 5,5,4;
+    -fx-border-color: transparent;
+}
+
+/* Set style of navigation bar buttons */
+#NotesButton, #SignOutButton, #QuizButton, #modeButton {
+    -fx-background-color: #474747;
+    -fx-text-fill: f2f2f2;
+    -fx-background-radius: 5,5,4;
 }
 
 
