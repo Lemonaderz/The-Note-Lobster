@@ -1,17 +1,23 @@
 package com.example.thenotelobster.QuizClasses;
 
 public class QuizQuestion {
-    String question;
-    String answer;
+    public String question;
+    public String answer;
 
+    public QuizQuestion()
+    {
+
+    }
     public QuizQuestion(String question, String answer)
     {
-        this.question = question;
-        this.answer = answer;
+
     }
+
+    // Getters and Setters
+
     public boolean checkResponse(String response)
     {
-        return (answer==response);
+        return (answer.equals(response));
     }
 
 
