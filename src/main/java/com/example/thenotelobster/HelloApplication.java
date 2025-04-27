@@ -16,8 +16,8 @@ public class HelloApplication extends Application {
 
     public static final String TITLE = "The Note Lobster";
     static Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-    public static final int WIDTH = (int) screenSize.getWidth();
-    public static final int HEIGHT = (int) screenSize.getHeight();
+    public static final int WIDTH = (int) screenSize.getWidth() - 10;
+    public static final int HEIGHT = (int) screenSize.getHeight() -10;
 
 
     @Override
@@ -27,7 +27,6 @@ public class HelloApplication extends Application {
         String stylesheet = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
         scene.getStylesheets().add(stylesheet);
         stage.setTitle(TITLE);
-        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }
