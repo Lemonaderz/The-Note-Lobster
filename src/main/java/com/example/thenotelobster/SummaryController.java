@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.jsoup.Progress;
 import org.w3c.dom.Text;
 import java.io.IOException;
 
@@ -23,7 +24,7 @@ public class SummaryController extends NavigationUI {
     @FXML private Button BackButton;
 
     @FXML private Button SummaryButton;
-
+    @FXML private ProgressIndicator LoadingIndicator;
     @FXML private TextField SubjectText;
 
     @FXML protected void onSaveClick() {
@@ -32,7 +33,7 @@ public class SummaryController extends NavigationUI {
 
     }
 
-    @FXML protected void onResummarizeClick()
+    @FXML protected void onResummarise()
     {
         //Modularize this when I can
         AIManager aiManager = AIManager.getInstance();
@@ -42,10 +43,10 @@ public class SummaryController extends NavigationUI {
         Task<Void> fetchAsynchronousChatResponse = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                String resummarizeText = "";
+
                 SummaryResponse summaryResponse = aiManager.singleSummary;
                 System.out.println("Currently working");
-                aiManager.fetchChatResponse(resummarizeText, summaryResponse.length, summaryResponse.complexity);
+                aiManager.fetchChatResponse(ResummarizeNotes.getText(), summaryResponse.length, summaryResponse.complexity);
                 System.out.println("Obtained Response");
                 return null;
             }
@@ -54,14 +55,14 @@ public class SummaryController extends NavigationUI {
         fetchAsynchronousChatResponse.setOnSucceeded(e -> {
             System.out.println("Refreshing Summary");
 
-            //ResummarizeButton.setDisable(false);
-            //LoadingIndicator.setVisible(false);
+            ResummarizeButton.setDisable(false);
+            LoadingIndicator.setVisible(false);
             setSummaryDetails();
 
 
         });
-        //LoadingIndicator.setVisible(true);
-        //ResummarizeButton.setDisable(true);
+        LoadingIndicator.setVisible(true);
+        ResummarizeButton.setDisable(true);
 
         new Thread(fetchAsynchronousChatResponse).start();
     }
@@ -81,10 +82,7 @@ public class SummaryController extends NavigationUI {
         stage.setScene(scene);
     }
 
-    @FXML protected void onResummarise() {
-        //Implement resummarise button functionality
 
-    }
 
     @FXML private void initialize() {
 //        AIManager aiManager = AIManager.getInstance();

@@ -70,7 +70,6 @@
             <Slider fx:id="ComplexitySlider" min="1" max="10" value="1"/>
             <Label text="Length" style="-fx-font-size: 15px"/>
 
-            <ProgressIndicator visible="false" fx:id="LoadingIndicator"/>
             <fx:define>
                 <ToggleGroup fx:id="LengthOption" />
             </fx:define>
@@ -81,6 +80,8 @@
 
 
             <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"/>
+            <ProgressIndicator visible="false" fx:id="LoadingIndicator"/>
+
         </VBox>
     </right>
 

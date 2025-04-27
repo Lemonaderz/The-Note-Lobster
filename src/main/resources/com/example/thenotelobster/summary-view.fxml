@@ -67,6 +67,7 @@
             <TextArea fx:id="ResummarizeNotes" wrapText="true" prefHeight="300"
                       promptText='To add additional notes to the note summary, enter or paste notes/information here and press "Resummarize"'/>
             <Button fx:id="ResummarizeButton" text="Resummarize" onAction="#onResummarise"/>
+            <ProgressIndicator visible="false" fx:id="LoadingIndicator"/>
             <Region VBox.vgrow="ALWAYS"/>
             <ButtonBar>
                 <buttons>
