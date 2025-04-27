@@ -1,6 +1,7 @@
 package com.example.thenotelobster;
 
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,16 +21,53 @@ public class SummaryController {
 
     @FXML private Button SummaryButton;
 
+    @FXML private Label SubjectText;
+
     @FXML protected void onSaveClick() {
 
 
 
     }
 
-    public void setSummaryText()
+    @FXML protected void onResummarizeClick()
+    {
+        //Modularize this when I can
+        AIManager aiManager = AIManager.getInstance();
+
+//        aiManager.fetchAsynchronousChatResponse(summary,length, complexity, new MainResponseListener());
+
+        Task<Void> fetchAsynchronousChatResponse = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                String resummarizeText = "";
+                SummaryResponse summaryResponse = aiManager.singleSummary;
+                System.out.println("Currently working");
+                aiManager.fetchChatResponse(resummarizeText, summaryResponse.length, summaryResponse.complexity);
+                System.out.println("Obtained Response");
+                return null;
+            }
+        };
+
+        fetchAsynchronousChatResponse.setOnSucceeded(e -> {
+            System.out.println("Refreshing Summary");
+
+            //ResummarizeButton.setDisable(false);
+            //LoadingIndicator.setVisible(false);
+            setSummaryDetails();
+
+
+        });
+        //LoadingIndicator.setVisible(true);
+        //ResummarizeButton.setDisable(true);
+
+        new Thread(fetchAsynchronousChatResponse).start();
+    }
+
+    public void setSummaryDetails()
     {
         AIManager aiManager = AIManager.getInstance();
-        SummaryText.setText(aiManager.singleMessage);
+        SubjectText.setText(aiManager.singleSummary.subject);
+        SummaryText.setText(aiManager.singleSummary.response);
     }
 
     @FXML protected void onBackClick() throws IOException {
@@ -45,9 +83,9 @@ public class SummaryController {
 //        AIManager aiManager = AIManager.getInstance();
 //        String summary = aiManager.singleMessage;
 //        SummaryText.setText(summary);
-        AIManager aiManager = AIManager.getInstance();
-        String summary = aiManager.singleMessage;
-        SummaryText.setText(summary);
+
+        setSummaryDetails();
+
 
         Platform.runLater(() -> {
 

@@ -11,6 +11,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
+import javafx.concurrent.Task;
 
 public final class AIManager {
 
@@ -19,7 +20,7 @@ public final class AIManager {
     public String Url = "http://localhost:11434/api/generate";
     public String messageHistory = "\"messages\": [";
     public boolean chatActive = false;
-    public String singleMessage;
+    public SummaryResponse singleSummary = new SummaryResponse("", "");
     private final static AIManager INSTANCE = new AIManager();
 
     private AIManager()
@@ -29,12 +30,12 @@ public final class AIManager {
     public static AIManager getInstance() {
         return INSTANCE;
     }
-    public String fetchPromptResponse(String message, String length, int complexity)
+    public String fetchPromptResponse(String message, String length, double complexity)
     {
 
         return fetchPromptResponse(message, length, complexity, Url);
     }
-    public String fetchPromptResponse(String prompt, String length, int complexity, String url)
+    public String fetchPromptResponse(String prompt, String length, double complexity, String url)
     {
         // This is the request here, pretty much building the template
 
@@ -62,7 +63,7 @@ public final class AIManager {
 
 
     }
-    public String fetchSingleResponse(String message, String length, int complexity)
+    public SummaryResponse fetchSingleResponse(String message, String length, double complexity)
     {
         String prompt = "{\"model\": \"gemma3\", \"prompt\": \"" +
                 "Please summarize the following text, with a maximum of"
@@ -76,11 +77,10 @@ public final class AIManager {
         String stringResponse = jsonResponse.get("response").getAsString();  // Get a field named "answer"
 
         System.out.println(stringResponse);
-        singleMessage = stringResponse;
-        System.out.println("FInished");
-        return stringResponse;
+        singleSummary.response = stringResponse;
+        return singleSummary;
     }
-    public String fetchChatResponse(String message, String length, int complexity)
+    public String fetchChatResponse(String message, String length, double complexity)
     {
 
         if (!chatActive) {
@@ -108,11 +108,13 @@ public final class AIManager {
         JsonObject jsonResponse = JsonParser.parseString(response).getAsJsonObject();
         String stringResponse = (jsonResponse.get("message").getAsJsonObject()).get("content").getAsString();  // Get a field named "answer"
         //Put that raw text into the message history
-        //replace the new lines with spaces so it doesnt cause json issues
+        //replace the new lines with spaces so it doesn't cause json issues
         messageHistory += " { \"role\": \"assistant\", \"content\": \""+ (stringResponse.replace("\n", " ")).replace("\"", "'") + "\" },";
 
-        singleMessage = stringResponse;
-        return response;
+        singleSummary.SetResponse(stringResponse);
+        singleSummary.SetLength(length);
+        singleSummary.SetComplexity(complexity);
+        return stringResponse;
     }
 
     public void clearChat()
@@ -120,6 +122,8 @@ public final class AIManager {
         chatActive = false;
         messageHistory = "\"messages\": [";
     }
+
+
 
 
 

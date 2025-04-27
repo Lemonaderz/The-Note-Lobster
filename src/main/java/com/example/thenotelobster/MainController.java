@@ -1,5 +1,6 @@
 package com.example.thenotelobster;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,20 +38,59 @@ public class MainController {
 
     @FXML private Slider ComplexitySlider;
 
+    @FXML private ProgressIndicator LoadingIndicator;
+
     @FXML
     protected void onSummarizeClick() throws IOException {
-
+// Modularize this at  some point with SummaryController
         String summary = AddNotes.getText();
         AIManager aiManager = AIManager.getInstance();
-        System.out.println(ComplexitySlider.getValue());
-        System.out.println(LengthOption.getSelectedToggle().getProperties().get());
-//        aiManager.fetchChatResponse(summary,"1000", ComplexitySlider.getValue());
+        double complexity = ComplexitySlider.getValue();
+        String length = LengthOption.getSelectedToggle().getUserData().toString();
+
+//        aiManager.fetchAsynchronousChatResponse(summary,length, complexity, new MainResponseListener());
+
+        Task<Void> fetchAsynchronousChatResponse = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                System.out.println("Currently working");
+                aiManager.clearChat();
+                aiManager.fetchChatResponse(summary, length, complexity);
+                System.out.println("Obtained Response");
+                aiManager.singleSummary.SetSubject(NotesSubject.getText());
+                return null;
+            }
+        };
+
+        fetchAsynchronousChatResponse.setOnSucceeded(e -> {
+            System.out.println("Going to Summary Page");
+
+            try {
+                goToSummaryPage();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+        });
+        LoadingIndicator.setVisible(true);
+        SummarizeButton.setDisable(true);
+
+        new Thread(fetchAsynchronousChatResponse).start();
+    }
+
+    @FXML
+    protected void goToSummaryPage() throws IOException {
+
         System.out.println("Summary made");
+
         Stage stage = (Stage) SummarizeButton.getScene().getWindow();
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("summary-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        Scene scene = null;
+        scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+
         String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
 
         scene.getStylesheets().add(stylesheet);
@@ -70,6 +110,16 @@ public class MainController {
     @FXML
     protected void onSignOut() {
         // Implement sign out
+    }
+
+
+    static class MainResponseListener implements ResponseListener {
+        String response;
+        @Override
+        public void onResponseReceived(String response) {
+            this.response = response;
+
+        }
     }
 
 
