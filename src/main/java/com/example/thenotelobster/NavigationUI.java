@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,12 +19,20 @@ abstract class NavigationUI {
     @FXML private VBox secondary;
     @FXML private Button modeButton;
     @FXML private Button NotesButton;
+    @FXML private Button SignOutButton;
+    @FXML private Button QuizButton;
+    @FXML private ImageView ModeIcon;
 
     String lightmode = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
     String darkmode = HelloApplication.class.getResource("style/dark_mode.css").toExternalForm();
 
+    String darkmodeIcon = HelloApplication.class.getResource("images/darkmode_icon.png").toExternalForm();
+    String lightmodeIcon = HelloApplication.class.getResource("images/lightmode_icon.png").toExternalForm();
+
     // Double value used to determine which mode the application is in, e.g. 0 = light mode and 1 = dark mode.
     private static double mode;
+
+    //String which returns current application theme, used to translate theme across from different views.
     private String CurrentTheme;
 
     @FXML
@@ -34,6 +44,7 @@ abstract class NavigationUI {
         stage.setScene(scene);
     }
 
+    //
     @FXML
     protected void onChangeModeClick() {
         modeButton.setOnMouseClicked(mouseEvent -> {
@@ -41,10 +52,12 @@ abstract class NavigationUI {
             if (mode == 0) {
                 SceneTheme.getStylesheets().add(darkmode);
                 SceneTheme.getStylesheets().remove(lightmode);
+                ModeIcon.setImage(new Image(darkmodeIcon));
                 mode = 1;
             } else if (mode == 1) { // Mode is equal to 1, therefore the application is currently in dark mode.
                 SceneTheme.getStylesheets().add(lightmode);
                 SceneTheme.getStylesheets().remove(darkmode);
+                ModeIcon.setImage(new Image(lightmodeIcon));
                 mode = 0;
             }
         });
@@ -59,11 +72,9 @@ abstract class NavigationUI {
     protected String checkCurrentMode() {
         if (mode == 0) { // IF LIGHT MODE:
             String CurrentTheme = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
-            mode = 0;
             return CurrentTheme;
         } else if (mode == 1) { // IF DARK MODE:
             String CurrentTheme = HelloApplication.class.getResource("style/dark_mode.css").toExternalForm();
-            mode = 1;
             return CurrentTheme;
         }
         return CurrentTheme;

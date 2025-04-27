@@ -14,20 +14,22 @@
     -fx-background-color: #e5e5e5;
 }
 
-/* Select all buttons and set the background color to red
-and the text color to white */
+/* Set style options for button */
 .button {
-    -fx-background-color: #f2f2f2;
+    -fx-background-color: #d8d8d8;
     -fx-text-fill: black;
-    -fx-border-color: black;
-    -fx-border-radius: 5;
+    -fx-background-radius: 5,5,4;
 }
 
-/* Set color of button when mouse hovers over it */
+/* Set style of button when mouse hovers over it */
 .button:hover {
     -fx-background-color: #d9d9d9;
 }
 
+/* Set style of navigation bar buttons */
+#NotesButton, #SignOutButton, #QuizButton, #modeButton {
+    -fx-background-color: white;
+}
 /* Set color of node with fx:id="confirmBtn" */
 #confirmBtn {
     -fx-background-color: #2386ad;
