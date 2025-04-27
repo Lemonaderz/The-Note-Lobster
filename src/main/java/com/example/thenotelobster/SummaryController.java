@@ -11,18 +11,12 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 
-public class SummaryController {
+public class SummaryController extends NavigationUI {
 
-    @FXML private VBox header;
-    @FXML private VBox secondary;
     @FXML private TextArea SummaryText;
-
     @FXML private TextArea ResummarizeNotes;
-
     @FXML private Button SaveButton;
-
     @FXML private Button ResummarizeButton;
-
     @FXML private Button BackButton;
 
     @FXML protected void onSaveClick() {
@@ -33,7 +27,7 @@ public class SummaryController {
         Stage stage = (Stage) BackButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("style/stylesheet.css").toExternalForm();
+        String stylesheet = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
         scene.getStylesheets().add(stylesheet);
         stage.setScene(scene);
     }

@@ -10,79 +10,24 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class MainController {
-
-    @FXML private BorderPane parent;
-
-    @FXML private VBox header;
-
-    @FXML private VBox secondary;
+public class MainController extends NavigationUI {
 
     @FXML private TextArea AddNotes;
-
     @FXML private TextArea SourceLinks;
-
-    @FXML private Button modeButton;
-
-    @FXML private Button SummarizeButton;
-
-    @FXML private Button NotesButton;
-
-    @FXML private Button SignOutButton;
-
-    //@FXML private Button NotesButton;
-
-    //@FXML private Button SignOutButton;
-
     @FXML private TextField NotesSubject;
-
+    @FXML private Button SummarizeButton;
     @FXML private RadioButton ShortOption;
-
     @FXML private RadioButton MediumOption;
-
     @FXML private RadioButton LongOption;
-
     @FXML private ToggleGroup LengthOption;
-
-    private double mode = 0;
 
     @FXML
     protected void onSummarizeClick() throws IOException {
         Stage stage = (Stage) SummarizeButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("summary-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("style/stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(stylesheet);
+        scene.getStylesheets().add(checkCurrentMode());
         stage.setScene(scene);
     }
 
-    @FXML
-    protected void onNotesClick() throws IOException {
-        Stage stage = (Stage) NotesButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NotePage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("style/stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(stylesheet);
-        stage.setScene(scene);
-    }
-
-    @FXML
-    protected void onChangeModeClick() {
-//        modeButton.setOnMouseClicked(event -> {
-//            if (mode == 0) {
-//                parent.getStylesheets().add("stylesheet.css");
-//                parent.getStylesheets().remove("dark_mode.css");
-//                mode = 1;
-//            } else if (mode == 1) {
-//                parent.getStylesheets().add("dark_mode.css");
-//                parent.getStylesheets().remove("stylesheet.css");
-//                mode = 0;
-//            }
-//        });
-    }
-
-    @FXML
-    protected void onSignOut() {
-        // Implement sign out
-    }
 }

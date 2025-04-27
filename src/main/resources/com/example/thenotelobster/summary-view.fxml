@@ -7,16 +7,29 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
+<BorderPane fx:id="SceneTheme"
+            xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.thenotelobster.SummaryController"
             prefHeight="400.0" prefWidth="600.0">
 
     <!-- Top BorderPane, contains header with title and navigation bar -->
     <top>
-       <VBox fx:id="header">
-           <Label text="Note Lobster" style="-fx-font-size: 40px"/>
-       </VBox>
+        <VBox fx:id="header">
+            <Label text="Note Lobster" style="-fx-font-size: 40px"/>
+            <!-- ButtonBar contains navigation bar buttons -->
+            <ButtonBar>
+                <padding>
+                    <Insets left="10" right="10"/>
+                </padding>
+                <buttons>
+                    <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Quizzes" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Mode" fx:id="modeButton" onAction="#onChangeModeClick" ButtonBar.buttonData="RIGHT"/>
+                    <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
+                </buttons>
+            </ButtonBar>
+        </VBox>
     </top>
 
     <!-- Center BorderPane, contains text field for subject and text area for AI summary output -->

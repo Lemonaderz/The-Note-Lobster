@@ -8,7 +8,7 @@
 <?import javafx.geometry.Insets?>
 
 <?import com.sun.javafx.scene.control.WebColorField?>
-<BorderPane fx:id="parent"
+<BorderPane fx:id="SceneTheme"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.thenotelobster.MainController"
             prefHeight="Infinity" prefWidth="Infinity">
