@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<BorderPane xmlns:fx="http://javafx.com/fxml"
+<BorderPane fx:id="SceneTheme" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.thenotelobster.QuizController"
 
             prefHeight="Infinity" prefWidth="Infinity">
@@ -15,11 +15,8 @@
 
     <!-- Top BorderPane, contains header with title and navigation bar -->
     <top>
-        <VBox style="-fx-background-color: #d8d8d8;">
-            <HBox style="-fx-background-color: #d8d8d8;">
-                <Label text="Note Lobster" style="-fx-font-size: 40px"/>
-                <!--                <Label text="" fx:id="NameLabel" alignment="TOP_RIGHT"/>-->
-            </HBox>
+        <VBox fx:id="header">
+            <Label text="Note Lobster" style="-fx-font-size: 40px"/>
             <!-- ButtonBar contains navigation bar buttons -->
             <ButtonBar>
                 <padding>
@@ -37,15 +34,13 @@
                     </Button>
                     <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
                 </buttons>
-
             </ButtonBar>
         </VBox>
     </top>
-    <center>
-        <SplitPane dividerPositions="0.25" mouseTransparent="true">
 
-    <!--        Left Side-->
-            <VBox spacing="20" style="-fx-background-color: #e5e5e5;">
+    <center>
+        <HBox>
+            <VBox fx:id="secondary" spacing="20" minWidth="300">
                 <padding>
                     <Insets left="10" right="10" top="10"/>
                 </padding>
@@ -56,43 +51,26 @@
                 </HBox>
             </VBox>
 
-    <!--        Right side-->
-            <ScrollPane>
-                <VBox spacing="10" fx:id="quizBox">
-        <!--            Headings-->
-                    <VBox>
+            <ScrollPane fitToWidth="true" fitToHeight="true">
+                <VBox fx:id="scrollBox" spacing="10">
+                    <!--            Headings-->
+                    <VBox fx:id="headingsBox" mouseTransparent="true">
                         <padding>
                             <Insets left="10" right="10" top="10"/>
                         </padding>
                         <Label text="[Title]" style="-fx-font-size: 25px"/>
                         <Label wrapText="true"
                                text="[Description... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique lectus erat, a placerat tellus. "/>
-        <!--                page break-->
-                        <Label/>
+                        <!--                page break-->
+                        <Label mouseTransparent="true"/>
                         <Label wrapText="true"
-                                text="For multiple choice questions select the best answer.  For numeric answer questions give your final answer only.  Points for each question are as marked.  Answer all questions."/>
+                               text="For multiple choice questions select the best answer.  For numeric answer questions give your final answer only.  Points for each question are as marked.  Answer all questions."/>
                     </VBox>
-    <!--                Multiplie Choice Quiz-->
-                    <VBox spacing="10" style="-fx-border-color: d8d8d8; -fx-padding: 10;">
-                        <Label text="Question 1"/>
-                        <Label text="[Question]"/>
-                        <RadioButton text="A"/>
-                        <RadioButton text="B"/>
-                        <RadioButton text="C"/>
-                        <RadioButton text="D"/>
-                    </VBox>
-                    <VBox spacing="10" style="-fx-border-color: d8d8d8; -fx-padding: 10;">
-                        <Label text="Question 2"/>
-                        <Label text="[Question]"/>
-                        <RadioButton text="A"/>
-                        <RadioButton text="B"/>
-                        <RadioButton text="C"/>
-                        <RadioButton text="D"/>
-                    </VBox>
-                </VBox>
+                    <VBox fx:id="quizBox" spacing="10"/>
 
+                </VBox>
             </ScrollPane>
-        </SplitPane>
+        </HBox>
     </center>
 
 </BorderPane>

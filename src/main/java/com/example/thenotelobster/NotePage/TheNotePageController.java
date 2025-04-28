@@ -136,8 +136,9 @@ public class TheNotePageController extends NavigationUI {
 
     @FXML
     private void backbutton()  throws IOException  {
+
         Stage stage = (Stage) buttonBox.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/thenotelobster/main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(checkCurrentMode());
         stage.setScene(scene);
@@ -222,64 +223,4 @@ public class TheNotePageController extends NavigationUI {
     private void expandNotes(){
 
     }
-
-    @FXML private Button AccountButton;
-    @FXML private Button MainButton;
-    @FXML private Button NotesButton;
-    @FXML private Button QuizzesButton;
-    @FXML private Button SignOutButton;
-
-    @FXML
-    protected void onNotesClick() throws IOException {
-        Stage stage = (Stage) buttonBox.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/thenotelobster/NotePage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(stylesheet);
-        stage.setScene(scene);
-
-    }
-    @FXML
-    protected void onAccountButtonClick() throws IOException {
-
-        Stage stage = (Stage) buttonBox.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/thenotelobster/account-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(stylesheet);
-        stage.setScene(scene);
-    }
-
-    @FXML
-    protected void onMainClick() throws IOException {
-        Stage stage = (Stage) buttonBox.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/thenotelobster/main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(stylesheet);
-        stage.setScene(scene);
-    }
-
-    @FXML
-    protected void onQuizzesClick() throws IOException {
-
-        Stage stage = (Stage) buttonBox.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/thenotelobster/quiz-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(stylesheet);
-        stage.setScene(scene);
-    }
-
-    @FXML
-    protected void onSignOut() throws IOException {
-
-        Stage stage = (Stage) buttonBox.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/thenotelobster/login-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(stylesheet);
-        stage.setScene(scene);
-    }
-
 }
