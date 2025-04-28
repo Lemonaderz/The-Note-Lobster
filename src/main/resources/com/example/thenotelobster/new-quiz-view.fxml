@@ -50,7 +50,9 @@
                     <Insets top="20"/>
                 </padding>
                 <Button text="back" fx:id="backButton" onAction="#onBackButtonClick"/>
-                <Button text="Create Quiz"/>
+                <Button text="Create Quiz" fx:id="createQuizButton" onAction="#onCreateQuizButtonClick"/>
+                <ProgressIndicator visible="false" fx:id="LoadingIndicator"/>
+
             </HBox>
         </VBox>
     </center>

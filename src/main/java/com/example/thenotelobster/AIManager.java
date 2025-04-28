@@ -17,6 +17,7 @@ public final class AIManager {
     public boolean chatActive = false;
     public SummaryResponse singleSummary = new SummaryResponse("", "");
     private final static AIManager INSTANCE = new AIManager();
+    public QuizResponse currentQuiz;
 
     private AIManager()
     {
@@ -144,6 +145,7 @@ public final class AIManager {
         Gson gson = new Gson();
         quizResponse = gson.fromJson(quizJson, QuizResponse.class);
         quizResponse.consoleDisplay();
+        currentQuiz = quizResponse;
         return quizResponse;
 
 

@@ -1,5 +1,7 @@
 package com.example.thenotelobster;
 
+import com.example.thenotelobster.QuizClasses.QuizMultipleChoiceQuestion;
+import com.example.thenotelobster.QuizClasses.QuizResponse;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -29,33 +31,44 @@ public class QuizController extends NavigationUI {
 
     public void initialize() {
         // Example quiz creation inside controller
-        Quiz quiz = new Quiz("Sample Quiz", Arrays.asList(
-                new Question("What is 2 + 2?", Arrays.asList("3", "4", "5", "6")),
-                new Question("What color is the sky?", Arrays.asList("Blue", "Green", "Red", "Yellow"))
-        ));
+
+        AIManager aiManager = AIManager.getInstance();
+        QuizResponse quiz;
+        if(aiManager.currentQuiz == null) {
+
+
+            quiz = new  QuizResponse("Sample Quiz", Arrays.asList(
+                    new QuizMultipleChoiceQuestion("What is 2 + 2?", "4", Arrays.asList("3", "4", "5", "6")),
+                    new QuizMultipleChoiceQuestion("What color is the sky?", "A", Arrays.asList("Blue", "Green", "Red", "Yellow", "A"))
+            ));
+        }
+        else
+        {
+            quiz = aiManager.currentQuiz;
+        }
 
         loadQuiz(quiz);
     }
 
-    private void loadQuiz(Quiz quiz) {
+    private void loadQuiz(QuizResponse quiz) {
         // Clear old content
         quizBox.getChildren().clear();
 
-        for (int i = 0; i < quiz.getQuestions().size(); i++) {
-            Question question = quiz.getQuestions().get(i);
+        for (int i = 0; i < quiz.multipleChoiceQuestions.size(); i++) {
+            QuizMultipleChoiceQuestion question = quiz.multipleChoiceQuestions.get(i);
 
             VBox questionBox = new VBox(5);
             questionBox.setSpacing(10);
             questionBox.setStyle("-fx-border-color: d8d8d8; -fx-padding: 10;");
 
             Label questionLabel = new Label("Question " + (i + 1));
-            Label questionText = new Label(question.getQuestionText());
+            Label questionText = new Label(question.question);
 
             questionBox.getChildren().add(0, questionLabel); // Add at top
             questionBox.getChildren().add(1, questionText);  // Add under label
 
             ToggleGroup group = new ToggleGroup();
-            for (String option : question.getOptions()) {
+            for (String option : question.choices) {
                 RadioButton radioButton = new RadioButton(option);
                 radioButton.setToggleGroup(group);
                 questionBox.getChildren().add(radioButton);
