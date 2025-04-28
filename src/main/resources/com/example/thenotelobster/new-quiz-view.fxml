@@ -44,7 +44,7 @@
                 <Insets top="30"/>
             </padding>
             <Label text="List of Notes" style="-fx-font-size: 20px"/>
-            <TreeView prefWidth="400" maxWidth="400"/>
+            <TreeView prefWidth="400" maxWidth="400" fx:id="notesTreeView"/>
             <HBox alignment="TOP_CENTER" spacing="20">
                 <padding>
                     <Insets top="20"/>

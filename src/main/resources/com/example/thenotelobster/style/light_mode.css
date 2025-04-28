@@ -73,6 +73,19 @@
 .tree-view, .tree-cell {
     -fx-text-fill: black;
     -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-padding: 5px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.tree-cell:selected {
+    -fx-background-color: #d0d0d0; /* or a light gray */
+    -fx-text-fill: black;
+}
+
+.tree-cell:hover {
+    -fx-background-color: #e0e0e0;
 }
 
 /* Set style for ListView */
