@@ -18,6 +18,8 @@ public class QuizController extends NavigationUI {
     @FXML private VBox quizBox;
     @FXML private VBox scrollBox;
     @FXML private Button newQuizButton;
+    @FXML private Label descriptionLabel;
+    @FXML private Label titleLabel;
 
     @FXML
     protected void onCreateNewQuizClick() throws IOException {
@@ -53,7 +55,8 @@ public class QuizController extends NavigationUI {
     private void loadQuiz(QuizResponse quiz) {
         // Clear old content
         quizBox.getChildren().clear();
-
+        titleLabel.setText(quiz.title);
+        descriptionLabel.setText(quiz.description);
         for (int i = 0; i < quiz.multipleChoiceQuestions.size(); i++) {
             QuizMultipleChoiceQuestion question = quiz.multipleChoiceQuestions.get(i);
 

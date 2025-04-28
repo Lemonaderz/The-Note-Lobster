@@ -59,9 +59,8 @@
                         <padding>
                             <Insets left="10" right="10" top="10"/>
                         </padding>
-                        <Label text="[Title]" style="-fx-font-size: 25px"/>
-                        <Label wrapText="true"
-                               text="[Description... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique lectus erat, a placerat tellus. "/>
+                        <Label text="[Title]" fx:id="titleLabel" style="-fx-font-size: 25px"/>
+                        <Label wrapText="true" fx:id="descriptionLabel" text="[Description... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique lectus erat, a placerat tellus. "/>
                         <!--                page break-->
                         <Label mouseTransparent="true"/>
                         <Label wrapText="true"

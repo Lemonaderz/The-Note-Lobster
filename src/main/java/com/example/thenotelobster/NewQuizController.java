@@ -1,5 +1,6 @@
 package com.example.thenotelobster;
 
+import com.example.thenotelobster.QuizClasses.QuizResponse;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -156,9 +157,9 @@ public class NewQuizController extends NavigationUI {
             @Override
             protected Void call() throws Exception {
 
-                SummaryResponse summaryResponse = aiManager.singleSummary;
                 System.out.println("Currently working");
-                aiManager.fetchQuizResponse(finalText);
+                QuizResponse quizResponse = aiManager.fetchQuizResponse(finalText);
+                // save to database here
                 System.out.println("Obtained Response");
                 return null;
             }
@@ -169,6 +170,7 @@ public class NewQuizController extends NavigationUI {
 
             createQuizButton.setDisable(false);
             LoadingIndicator.setVisible(false);
+
 
             Stage stage = (Stage) createQuizButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("quiz-view.fxml"));

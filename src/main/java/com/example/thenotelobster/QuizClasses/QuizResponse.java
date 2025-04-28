@@ -21,8 +21,13 @@ public class QuizResponse {
 
     public void consoleDisplay()
     {
+        System.out.println(title);
+        System.out.println("");
+        System.out.println(description);
+        System.out.println("");
         for(QuizMultipleChoiceQuestion question : multipleChoiceQuestions)
         {
+            System.out.println("");
             System.out.println(question.question);
             for(String choice : question.choices)
             {

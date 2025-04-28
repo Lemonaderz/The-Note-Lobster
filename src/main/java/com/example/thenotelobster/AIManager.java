@@ -110,6 +110,8 @@ public final class AIManager {
         String jsonFormat = "{" +
                 "  \"type\": \"object\"," +
                 "  \"properties\": {" +
+                "\"title\": { \"type\": \"string\" }," +
+                "\"description\": { \"type\": \"string\" }," +
                 "    \"multipleChoiceQuestions\": {" +
                 "      \"type\": \"array\"," +
                 "      \"items\": {" +
@@ -123,13 +125,13 @@ public final class AIManager {
                 "      }" +
                 "    }" +
                 "  }," +
-                "  \"required\": [\"multipleChoiceQuestions\"]" +
+                "  \"required\": [\"multipleChoiceQuestions\", \"title\", \"description\" ]" +
                 "}";
 
 
         String prompt = ("{\"model\": \"gemma3\", \"prompt\": \"" +
                 "Please make a Quiz with the following notes/summary. Make the quiz have both multiple choice questions" +
-                " using Letter Options (A, B, C, D etc) Do not put letters answers in front of the choices. Use the Json Format provided as your response. Here is the Notes/Summary: " +
+                " using Letter Options (A, B, C, D etc) Do not put letters answers in front of the choices. Add a relevant title and a brief description of what the quiz is about. Begin the description with 'This quiz is about'. Use the Json Format provided as your response. Here is the Notes/Summary: " +
                 summary.replace("\"", "'").replace("\n", " ")
                 + "\",\"stream\": false, \"format\" :" +
                   jsonFormat +
