@@ -51,14 +51,28 @@
 
 /* Set style of button when mouse hovers over it */
 .button:hover {
-    -fx-background-color: #4c4c4c;
+    -fx-background-color: #555555;
+    -fx-cursor: hand;
+}
+
+.button:pressed {
+    -fx-background-color: #333333;
 }
 
 #SummarizeButton, #ResummarizeButton {
-    -fx-background-color: #20639B;
-    -fx-text-fill: f2f2f2;
+    -fx-background-color: #1b4f72;
+    -fx-text-fill: #f2f2f2;
     -fx-background-radius: 5,5,4;
     -fx-border-color: transparent;
+}
+
+#SummarizeButton:hover, #ResummarizeButton:hover {
+    -fx-background-color: #154360;
+    -fx-cursor: hand;
+}
+
+#SummarizeButton:pressed, #ResummarizeButton:pressed {
+    -fx-background-color: #10314a;
 }
 
 /* Set style of navigation bar buttons */
@@ -68,7 +82,41 @@
     -fx-background-radius: 5,5,4;
 }
 
+#NotesButton:hover, #SignOutButton:hover, #QuizButton:hover, #modeButton:hover, #AccountButton:hover, #MainButton:hover {
+    -fx-background-color: #555555;
+    -fx-cursor: hand;
+}
+
+#NotesButton:pressed, #SignOutButton:pressed, #QuizButton:pressed, #modeButton:pressed, #AccountButton:pressed, #MainButton:pressed {
+    -fx-background-color: #333333;
+}
+
 .tree-view, .tree-cell {
     -fx-text-fill: #f2f2f2;
     -fx-background-color: #333333;
+    -fx-background-insets: 0;
+    -fx-padding: 5px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.tree-cell:selected {
+    -fx-background-color: #5c5c5c; /* or a slightly lighter gray */
+    -fx-text-fill: #ffffff;
+}
+
+.tree-cell:hover {
+    -fx-background-color: #3d3d3d;
+}
+
+/* Set style for ListView */
+.list-view, .list-cell {
+    -fx-background-color: #333333;
+    -fx-text-fill: #f2f2f2;
+}
+
+/* Highlight selected item in ListView */
+.list-cell:selected {
+    -fx-background-color: #5c5c5c;
+    -fx-text-fill: #ffffff;
 }

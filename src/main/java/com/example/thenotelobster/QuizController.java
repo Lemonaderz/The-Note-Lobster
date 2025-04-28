@@ -15,6 +15,17 @@ public class QuizController extends NavigationUI {
 
     @FXML private VBox quizBox;
     @FXML private VBox scrollBox;
+    @FXML private Button newQuizButton;
+
+    @FXML
+    protected void onCreateNewQuizClick() throws IOException {
+        Stage stage = (Stage) newQuizButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("new-quiz-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        scene.getStylesheets().add(checkCurrentMode());
+        stage.setScene(scene);
+
+    }
 
     public void initialize() {
         // Example quiz creation inside controller
@@ -47,17 +58,11 @@ public class QuizController extends NavigationUI {
             for (String option : question.getOptions()) {
                 RadioButton radioButton = new RadioButton(option);
                 radioButton.setToggleGroup(group);
-
-                radioButton.setOnAction(e -> {
-                    System.out.println("Selected: " + radioButton.getText());
-                });
-
                 questionBox.getChildren().add(radioButton);
             }
 
             quizBox.getChildren().add(questionBox);
         }
-        System.out.println("Loaded " + quiz.getQuestions().size() + " questions into quizBox");
     }
 
 }
