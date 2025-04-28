@@ -25,7 +25,12 @@
 
 /* Set style of button when mouse hovers over it */
 .button:hover {
-    -fx-background-color: #d9d9d9;
+    -fx-background-color: #c0c0c0;
+    -fx-cursor: hand;
+}
+
+.button:pressed {
+    -fx-background-color: #a0a0a0;
 }
 
 #SummarizeButton, #ResummarizeButton {
@@ -35,11 +40,29 @@
     -fx-border-color: transparent;
 }
 
+#SummarizeButton:hover, #ResummarizeButton:hover {
+    -fx-background-color: #1e5a8a;
+    -fx-cursor: hand;
+}
+
+#SummarizeButton:pressed, #ResummarizeButton:pressed {
+    -fx-background-color: #184b71;
+}
+
 /* Set style of navigation bar buttons */
 #NotesButton, #SignOutButton, #QuizButton, #modeButton, #AccountButton, #MainButton {
     -fx-background-color: #d8d8d8;
     -fx-text-fill: black;
     -fx-background-radius: 5,5,4;
+}
+
+#NotesButton:hover, #SignOutButton:hover, #QuizButton:hover, #modeButton:hover, #AccountButton:hover, #MainButton:hover {
+    -fx-background-color: #c0c0c0;
+    -fx-cursor: hand;
+}
+
+#NotesButton:pressed, #SignOutButton:pressed, #QuizButton:pressed, #modeButton:pressed, #AccountButton:pressed, #MainButton:pressed {
+    -fx-background-color: #a0a0a0;
 }
 
 /* Set color of node with fx:id="confirmBtn" */
