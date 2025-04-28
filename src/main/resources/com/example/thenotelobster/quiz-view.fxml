@@ -52,7 +52,7 @@
                 </HBox>
             </VBox>
 
-            <ScrollPane hbarPolicy="NEVER">
+            <ScrollPane hbarPolicy="NEVER" fitToHeight="true">
                 <VBox fx:id="scrollBox" spacing="10">
                     <!--            Headings-->
                     <VBox fx:id="headingsBox" mouseTransparent="true">
@@ -68,7 +68,6 @@
                                text="For multiple choice questions select the best answer.  For numeric answer questions give your final answer only.  Points for each question are as marked.  Answer all questions."/>
                     </VBox>
                     <VBox fx:id="quizBox" spacing="10"/>
-
                 </VBox>
             </ScrollPane>
         </HBox>
