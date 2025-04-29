@@ -19,11 +19,12 @@ public class QuizDAO {
 
     /** Insert a new Quiz, return its generated ID */
     public int insertQuiz(QuizResponse quiz, int noteId) throws SQLException {
-        String sql = "INSERT INTO Quiz (noteId, name, description) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Quiz (noteId, name, description, email) VALUES (?,?,?,?)";
         try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, noteId);
             ps.setString(2, quiz.title);
             ps.setString(3, quiz.description);
+            ps.setString(4, UserAccount.getInstance().getEmail());
             ps.executeUpdate();
             ResultSet keys = ps.getGeneratedKeys();
             return keys.next() ? keys.getInt(1) : -1;
@@ -92,40 +93,41 @@ public class QuizDAO {
         return quiz;
     }
 
-    public List<QuizResponse> getAllQuizzes() throws SQLException {
+    public List<QuizResponse> getAllQuizzesForCurrentUser() throws SQLException {
         List<QuizResponse> quizzes = new ArrayList<>();
 
         // First load all quiz metadata
-        String q1 = "SELECT quizId, name, description FROM Quiz";
-        try (Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(q1)) {
+        String sql = "SELECT quizId, name, description FROM Quiz WHERE email = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, UserAccount.getInstance().getEmail());
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                QuizResponse qr = new QuizResponse();
-                qr.title = rs.getString("name");
-                qr.description = rs.getString("description");
-                int quizId = rs.getInt("quizId");
+        while (rs.next()) {
+            QuizResponse qr = new QuizResponse();
+            qr.title = rs.getString("name");
+            qr.description = rs.getString("description");
+            int quizId = rs.getInt("quizId");
 
-                // Now load questions for this quiz
-                String q2 = "SELECT question, answer, choices FROM Question WHERE quizId = ?";
-                try (PreparedStatement ps2 = conn.prepareStatement(q2)) {
-                    ps2.setInt(1, quizId);
-                    ResultSet rs2 = ps2.executeQuery();
-                    List<QuizMultipleChoiceQuestion> list = new ArrayList<>();
-                    while (rs2.next()) {
-                        String text    = rs2.getString("question");
-                        String ans     = rs2.getString("answer");
-                        String jsonArr = rs2.getString("choices");
-                        List<String> choices =
-                                Arrays.asList(gson.fromJson(jsonArr, String[].class));
-                        list.add(new QuizMultipleChoiceQuestion(text, ans, choices));
-                    }
-                    qr.multipleChoiceQuestions = list;
+            // Now load questions for this quiz
+            String q2 = "SELECT question, answer, choices FROM Question WHERE quizId = ?";
+            try (PreparedStatement ps2 = conn.prepareStatement(q2)) {
+                ps2.setInt(1, quizId);
+                ResultSet rs2 = ps2.executeQuery();
+                List<QuizMultipleChoiceQuestion> list = new ArrayList<>();
+                while (rs2.next()) {
+                    String text = rs2.getString("question");
+                    String ans = rs2.getString("answer");
+                    String jsonArr = rs2.getString("choices");
+                    List<String> choices =
+                            Arrays.asList(gson.fromJson(jsonArr, String[].class));
+                    list.add(new QuizMultipleChoiceQuestion(text, ans, choices));
                 }
-
-                quizzes.add(qr);
+                qr.multipleChoiceQuestions = list;
             }
+
+            quizzes.add(qr);
         }
+
 
         return quizzes;
     }
@@ -133,9 +135,10 @@ public class QuizDAO {
 
     public QuizResponse getQuizByTitle(String title) throws SQLException {
         // Find the quizId and description row
-        String q1 = "SELECT quizId, description FROM Quiz WHERE name = ?";
-        try (PreparedStatement ps = conn.prepareStatement(q1)) {
+        String q1 = "SELECT quizId, description FROM Quiz WHERE name = ? AND email = ?";
+        try (PreparedStatement ps = conn.prepareStatement(q1);) {
             ps.setString(1, title);
+            ps.setString(2, UserAccount.getInstance().getEmail());
             ResultSet rs = ps.executeQuery();
             if (!rs.next()) return null;
 

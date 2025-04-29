@@ -59,7 +59,7 @@ public class QuizController extends NavigationUI {
 
         ObservableList<String> quizTitles = FXCollections.observableArrayList();
         try {
-            List<QuizResponse> saved = quizDAO.getAllQuizzes();
+            List<QuizResponse> saved = quizDAO.getAllQuizzesForCurrentUser();
             for (QuizResponse quizResponse : saved) {
                 quizTitles.add(quizResponse.title);
             }

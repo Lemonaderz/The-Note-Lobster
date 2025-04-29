@@ -158,7 +158,7 @@ public class NewQuizController extends NavigationUI {
         }
         String finalText = text;
 
-        // single task that both fetches from AI and saves to DB
+        // saving it to the database
         Task<Void> fetchAsynchronousChatResponse = new Task<>() {
             @Override protected Void call() throws Exception {
                 System.out.println("Currently working");

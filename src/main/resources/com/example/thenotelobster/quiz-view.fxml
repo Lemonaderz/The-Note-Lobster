@@ -52,7 +52,7 @@
                 </HBox>
             </VBox>
 
-            <ScrollPane hbarPolicy="NEVER" fitToHeight="true">
+            <ScrollPane hbarPolicy="NEVER">
                 <VBox fx:id="scrollBox" spacing="10">
                     <!--            Headings-->
                     <VBox fx:id="headingsBox" mouseTransparent="true">
@@ -60,11 +60,11 @@
                             <Insets left="10" right="10" top="10"/>
                         </padding>
                         <Label text="[Title]" fx:id="titleLabel" style="-fx-font-size: 25px"/>
-                        <Label wrapText="true" fx:id="descriptionLabel" text="[Description]" maxWidth="1000"/>
+                        <Label wrapText="true" fx:id="descriptionLabel" text="[Description]" maxWidth="800"/>
                         <!--                page break-->
                         <Label mouseTransparent="true"/>
                         <Label wrapText="true"
-                               maxWidth="1000"
+                               maxWidth="800"
                                text="For multiple choice questions select the best answer.  For numeric answer questions give your final answer only.  Points for each question are as marked.  Answer all questions."/>
                     </VBox>
                     <VBox fx:id="quizBox" spacing="10"/>
