@@ -23,7 +23,7 @@ public class NoteSummaryDAO {
                     "name TEXT NOT NULL, " +
                     "folderID INTEGER," +
                     "text TEXT, " +
-                    "subject INTEGER, " +
+                    "subject TEXT, " +
                     "userEmail VARCHAR NOT NULL, " +
                     "FOREIGN KEY (folderId) REFERENCES Folder (folderId), " +
                     "FOREIGN KEY (userEmail) REFERENCES userAccounts )";
@@ -33,7 +33,7 @@ public class NoteSummaryDAO {
 
     }
 
-    public void insertSummary(String summary, String email){
+    public void insertSummary(String subject, String summary, String email){
         try {
             PreparedStatement insert = connection.prepareStatement(
                     "INSERT INTO Notes (name, folderId, text, subject, userEmail) " +
@@ -43,7 +43,7 @@ public class NoteSummaryDAO {
             insert.setString(1, "DEFAULT");
             insert.setInt(2, 1);
             insert.setString(3, summary);
-            insert.setInt(4, 1);
+            insert.setString(4, subject);
             insert.setString(5, email);
 
             insert.execute();

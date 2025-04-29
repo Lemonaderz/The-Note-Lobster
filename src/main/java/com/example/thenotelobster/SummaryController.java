@@ -35,7 +35,7 @@ public class SummaryController extends NavigationUI {
         String email = UserAccount.getInstance().getEmail();
 
         NoteSummaryDAO noteSummaryDAO = new NoteSummaryDAO();
-        noteSummaryDAO.insertSummary(summary, email);
+        noteSummaryDAO.insertSummary(subject, summary, email);
     }
 
     @FXML protected void onResummarise()

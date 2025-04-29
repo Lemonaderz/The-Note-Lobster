@@ -93,7 +93,7 @@ public abstract class NavigationUI {
 
     @FXML
     protected void onQuizClick() throws IOException {
-        Stage stage = (Stage) AccountButton.getScene().getWindow();
+        Stage stage = (Stage) QuizButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("quiz-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(checkCurrentMode());
