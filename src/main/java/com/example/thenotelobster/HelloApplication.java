@@ -54,7 +54,6 @@ public class HelloApplication extends Application {
 
         NoteSummaryDAO noteSummaryDAO = new NoteSummaryDAO();
         noteSummaryDAO.createTable();
-        noteSummaryDAO.deleteSummary(3);
 
 //        NoteSummaryDAO noteSummaryDAO = new NoteSummaryDAO();
 //        noteSummaryDAO.createTable();

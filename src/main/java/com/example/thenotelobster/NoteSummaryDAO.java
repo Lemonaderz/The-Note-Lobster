@@ -8,6 +8,9 @@ import java.sql.Statement;
 
 public class NoteSummaryDAO {
     private Connection connection;
+
+    String userEmail = UserAccount.getInstance().getEmail();
+
     public NoteSummaryDAO() {
         connection = DatabaseConnection.getInstance();
     }
@@ -60,6 +63,10 @@ public class NoteSummaryDAO {
         } catch (SQLException exception) {
             System.err.println(exception);
         }
+    }
+
+    public void getByEmail() {
+
     }
 
 }

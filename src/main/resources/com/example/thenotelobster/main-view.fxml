@@ -17,28 +17,27 @@
 
     <!--     Top BorderPane, contains header with title and navigation bar -->
     <top>
-        <fx:reference source="navigation-bar-view.fxml"/>
-<!--        <VBox fx:id="header">-->
-<!--            <Label text="Note Lobster" style="-fx-font-size: 40px"/>-->
-<!--            &lt;!&ndash; ButtonBar contains navigation bar buttons &ndash;&gt;-->
-<!--            <ButtonBar>-->
-<!--                <padding>-->
-<!--                    <Insets left="10" right="10"/>-->
-<!--                </padding>-->
-<!--                <buttons>-->
-<!--                    <Button text="Home" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>-->
-<!--                    <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>-->
-<!--                    <Button text="Quizzes" fx:id="QuizButton" onAction="#onQuizClick" ButtonBar.buttonData="LEFT"/>-->
-<!--                    <Button text="Account" fx:id="AccountButton" onAction="#onAccountClick" ButtonBar.buttonData="LEFT" />-->
-<!--                    <Button text="Mode" fx:id="modeButton" onAction="#onChangeModeClick" ButtonBar.buttonData="RIGHT">-->
-<!--&lt;!&ndash;                        <graphic>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <ImageView fx:id="ModeIcon" fitWidth="18.0" fitHeight="18.0"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </graphic>&ndash;&gt;-->
-<!--                    </Button>-->
-<!--                    <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>-->
-<!--                </buttons>-->
-<!--            </ButtonBar>-->
-<!--        </VBox>-->
+        <VBox fx:id="header">
+            <Label text="Note Lobster" style="-fx-font-size: 40px"/>
+            <!-- ButtonBar contains navigation bar buttons -->
+            <ButtonBar>
+                <padding>
+                    <Insets left="10" right="10"/>
+                </padding>
+                <buttons>
+                    <Button text="Home" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Quizzes" fx:id="QuizButton" onAction="#onQuizClick" ButtonBar.buttonData="LEFT"/>
+                    <Button text="Account" fx:id="AccountButton" onAction="#onAccountClick" ButtonBar.buttonData="LEFT" />
+                    <Button text="Mode" fx:id="modeButton" onAction="#onChangeModeClick" ButtonBar.buttonData="RIGHT">
+<!--                        <graphic>-->
+<!--                        <ImageView fx:id="ModeIcon" fitWidth="18.0" fitHeight="18.0"/>-->
+<!--                        </graphic>-->
+                    </Button>
+                    <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
+                </buttons>
+            </ButtonBar>
+        </VBox>
     </top>
 
     <!-- Center BorderPane, contains text fields/areas for notes and links -->
@@ -70,13 +69,18 @@
             <Slider fx:id="ComplexitySlider" min="1" max="10" value="1"/>
             <Label text="Length" style="-fx-font-size: 15px"/>
 
-            <fx:define>
-                <ToggleGroup fx:id="LengthOption" />
-            </fx:define>
-<!--            User data is the length-->
-            <RadioButton text="Short" fx:id="ShortOption" toggleGroup="$LengthOption" userData="100" selected="true"/>
-            <RadioButton text="Medium" fx:id="MediumOption" toggleGroup="$LengthOption" userData="200"/>
-            <RadioButton text="Long" fx:id="LongOption" toggleGroup="$LengthOption" userData="300"/>
+            <VBox spacing="20">
+                <padding>
+                    <Insets left="90"/>
+                </padding>
+                <fx:define>
+                    <ToggleGroup fx:id="LengthOption" />
+                </fx:define>
+                <!--            User data is the length-->
+                <RadioButton text="Short" fx:id="ShortOption" toggleGroup="$LengthOption" userData="100" selected="true"/>
+                <RadioButton text="Medium" fx:id="MediumOption" toggleGroup="$LengthOption" userData="200"/>
+                <RadioButton text="Long" fx:id="LongOption" toggleGroup="$LengthOption" userData="300"/>
+            </VBox>
 
 
             <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"/>
