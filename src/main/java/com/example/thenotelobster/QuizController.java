@@ -11,7 +11,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.List;
 
 public class QuizController extends NavigationUI {
 
@@ -32,23 +34,22 @@ public class QuizController extends NavigationUI {
     }
 
     public void initialize() {
-        // Example quiz creation inside controller
-
-        AIManager aiManager = AIManager.getInstance();
         QuizResponse quiz;
-        if(aiManager.currentQuiz == null) {
-
-
-            quiz = new  QuizResponse("Sample Quiz", Arrays.asList(
-                    new QuizMultipleChoiceQuestion("What is 2 + 2?", "4", Arrays.asList("3", "4", "5", "6")),
-                    new QuizMultipleChoiceQuestion("What color is the sky?", "A", Arrays.asList("Blue", "Green", "Red", "Yellow", "A"))
+        try {
+            // load the quiz you just saved (for now we use ID=1; later bind this to selection)
+            QuizDAO dao = new QuizDAO();
+            quiz = dao.loadQuiz(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // fallback to AI‐sample if DB fails
+            AIManager aiManager = AIManager.getInstance();
+            quiz = (aiManager.currentQuiz != null)
+                    ? aiManager.currentQuiz
+                    : new QuizResponse("Sample Quiz", Arrays.asList(
+                    new QuizMultipleChoiceQuestion("What is 2 + 2?", "4", List.of("3", "4", "5", "6")),
+                    new QuizMultipleChoiceQuestion("What color is the sky?", "A", List.of("Blue", "Green", "Red", "Yellow"))
             ));
         }
-        else
-        {
-            quiz = aiManager.currentQuiz;
-        }
-
         loadQuiz(quiz);
     }
 

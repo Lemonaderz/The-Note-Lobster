@@ -49,13 +49,18 @@ public class NewQuizController extends NavigationUI {
 
 
     @FXML
-    public void onCreateQuizButtonClick()
-    {
+    public void onCreateQuizButtonClick() {
         String selectedNote = notesTreeView.getSelectionModel().getSelectedItem().getValue();
-        String text = "No note selected";
-        if (selectedNote.equals("Dragon Notes"))
-        {
-            text = "Fire Breathing Dragon Physiology\n" +
+        int noteId = switch (selectedNote) {
+            case "Dragon Notes"  -> 1;
+            case "History Notes" -> 2;
+            case "Math Notes"    -> 3;
+            default               -> 0;
+        };
+
+        String text;
+        switch (selectedNote) {
+            case "Dragon Notes"  -> text = "Fire Breathing Dragon Physiology\n" +
                     "To breathe fire, a dragon needs:\n" +
                     "A Fuel Source – What burns?\n" +
                     "An Ignition System – What starts the fire?\n" +
@@ -146,49 +151,52 @@ public class NewQuizController extends NavigationUI {
                     "Heat Resistance:\n" +
                     " The enamel and underlying structure of their teeth might be specially adapted to withstand high temperatures—possibly incorporating mineral elements that dissipate heat quickly or resist burning.\n" +
                     " \n";
+
+            case "History Notes" -> text = "dummy history text";
+            case "Math Notes"    -> text = "dummy math text";
+            default              -> text = "No note selected";
         }
-
-        AIManager aiManager = AIManager.getInstance();
-
-//       aiManager.fetchAsynchronousChatResponse(summary,length, complexity, new MainResponseListener());
-
         String finalText = text;
-        Task<Void> fetchAsynchronousChatResponse = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
 
+        // single task that both fetches from AI and saves to DB
+        Task<Void> fetchAsynchronousChatResponse = new Task<>() {
+            @Override protected Void call() throws Exception {
                 System.out.println("Currently working");
-                QuizResponse quizResponse = aiManager.fetchQuizResponse(finalText);
-                // save to database here
-                System.out.println("Obtained Response");
+                QuizResponse quizResponse = AIManager.getInstance()
+                        .fetchQuizResponse(finalText);
+
+                // now save into your database
+                QuizDAO dao = new QuizDAO();
+                dao.save(quizResponse, noteId);
+
+                System.out.println("Obtained and saved response");
                 return null;
             }
         };
 
         fetchAsynchronousChatResponse.setOnSucceeded(e -> {
-            System.out.println("Refreshing going to quiz");
-
+            System.out.println("Switching back to quiz view");
             createQuizButton.setDisable(false);
             LoadingIndicator.setVisible(false);
 
-
-            Stage stage = (Stage) createQuizButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("quiz-view.fxml"));
-            Scene scene = null;
             try {
-                scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+                Stage stage = (Stage) createQuizButton.getScene().getWindow();
+                FXMLLoader fxmlLoader = new FXMLLoader(
+                        HelloApplication.class.getResource("quiz-view.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(),
+                        HelloApplication.WIDTH,
+                        HelloApplication.HEIGHT);
+                scene.getStylesheets().add(checkCurrentMode());
+                stage.setScene(scene);
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                ex.printStackTrace();
             }
-            scene.getStylesheets().add(checkCurrentMode());
-            stage.setScene(scene);
-
         });
+
+        // disable button & show spinner while working
         LoadingIndicator.setVisible(true);
         createQuizButton.setDisable(true);
-
         new Thread(fetchAsynchronousChatResponse).start();
-
-
     }
+
 }
