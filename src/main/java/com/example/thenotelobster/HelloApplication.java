@@ -31,7 +31,7 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         AIManager manager = AIManager.getInstance();
         //         EXAMPLE HOW TO USE AIManager
@@ -51,7 +51,13 @@ public class HelloApplication extends Application {
         Connection connection = DatabaseConnection.getInstance();
         UserAccountDAO userAccountDAO = new UserAccountDAO();
         userAccountDAO.createTable();
-        NoteSummaryDAO.createTable();
+
+        NoteSummaryDAO noteSummaryDAO = new NoteSummaryDAO();
+        noteSummaryDAO.createTable();
+        noteSummaryDAO.deleteSummary(3);
+
+//        NoteSummaryDAO noteSummaryDAO = new NoteSummaryDAO();
+//        noteSummaryDAO.createTable();
 
 //        userAccountDAO.insert(new UserAccount("hudson@email.com", "Hudson", "Password1"));
 //        userAccountDAO.insert(new UserAccount("lucas@email.com", "Lucas", "Password2"));

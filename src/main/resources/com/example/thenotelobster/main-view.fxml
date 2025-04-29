@@ -17,27 +17,28 @@
 
     <!--     Top BorderPane, contains header with title and navigation bar -->
     <top>
-        <VBox fx:id="header">
-            <Label text="Note Lobster" style="-fx-font-size: 40px"/>
-            <!-- ButtonBar contains navigation bar buttons -->
-            <ButtonBar>
-                <padding>
-                    <Insets left="10" right="10"/>
-                </padding>
-                <buttons>
-                    <Button text="Home" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>
-                    <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>
-                    <Button text="Quizzes" fx:id="QuizButton" onAction="#onQuizClick" ButtonBar.buttonData="LEFT"/>
-                    <Button text="Account" fx:id="AccountButton" onAction="#onAccountClick" ButtonBar.buttonData="LEFT" />
-                    <Button text="Mode" fx:id="modeButton" onAction="#onChangeModeClick" ButtonBar.buttonData="RIGHT">
-<!--                        <graphic>-->
-<!--                        <ImageView fx:id="ModeIcon" fitWidth="18.0" fitHeight="18.0"/>-->
-<!--                        </graphic>-->
-                    </Button>
-                    <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>
-                </buttons>
-            </ButtonBar>
-        </VBox>
+        <fx:reference source="navigation-bar-view.fxml"/>
+<!--        <VBox fx:id="header">-->
+<!--            <Label text="Note Lobster" style="-fx-font-size: 40px"/>-->
+<!--            &lt;!&ndash; ButtonBar contains navigation bar buttons &ndash;&gt;-->
+<!--            <ButtonBar>-->
+<!--                <padding>-->
+<!--                    <Insets left="10" right="10"/>-->
+<!--                </padding>-->
+<!--                <buttons>-->
+<!--                    <Button text="Home" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>-->
+<!--                    <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>-->
+<!--                    <Button text="Quizzes" fx:id="QuizButton" onAction="#onQuizClick" ButtonBar.buttonData="LEFT"/>-->
+<!--                    <Button text="Account" fx:id="AccountButton" onAction="#onAccountClick" ButtonBar.buttonData="LEFT" />-->
+<!--                    <Button text="Mode" fx:id="modeButton" onAction="#onChangeModeClick" ButtonBar.buttonData="RIGHT">-->
+<!--&lt;!&ndash;                        <graphic>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <ImageView fx:id="ModeIcon" fitWidth="18.0" fitHeight="18.0"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </graphic>&ndash;&gt;-->
+<!--                    </Button>-->
+<!--                    <Button text="Sign Out" fx:id="SignOutButton" onAction="#onSignOut" ButtonBar.buttonData="RIGHT"/>-->
+<!--                </buttons>-->
+<!--            </ButtonBar>-->
+<!--        </VBox>-->
     </top>
 
     <!-- Center BorderPane, contains text fields/areas for notes and links -->

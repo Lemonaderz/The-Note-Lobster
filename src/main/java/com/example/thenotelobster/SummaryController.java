@@ -31,11 +31,11 @@ public class SummaryController extends NavigationUI {
 
     @FXML protected void onSaveClick() {
         String subject = SubjectText.getText();
-        System.out.println(subject);
         String summary = SummaryText.getText();
-        System.out.println(summary);
         String email = UserAccount.getInstance().getEmail();
-        System.out.println(email);
+
+        NoteSummaryDAO noteSummaryDAO = new NoteSummaryDAO();
+        noteSummaryDAO.insertSummary(summary, email);
     }
 
     @FXML protected void onResummarise()
