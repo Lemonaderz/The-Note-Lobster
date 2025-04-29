@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import org.jsoup.Progress;
 import org.w3c.dom.Text;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class SummaryController extends NavigationUI {
 
@@ -28,9 +30,12 @@ public class SummaryController extends NavigationUI {
     @FXML private TextField SubjectText;
 
     @FXML protected void onSaveClick() {
-
-
-
+        String subject = SubjectText.getText();
+        System.out.println(subject);
+        String summary = SummaryText.getText();
+        System.out.println(summary);
+        String email = UserAccount.getInstance().getEmail();
+        System.out.println(email);
     }
 
     @FXML protected void onResummarise()

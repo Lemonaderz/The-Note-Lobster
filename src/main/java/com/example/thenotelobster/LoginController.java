@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class LoginController {
+public class LoginController extends NavigationUI {
 
     @FXML
     private Button createAccButton;
@@ -32,8 +32,7 @@ public class LoginController {
         Stage stage = (Stage) createAccButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("create-acc-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
-        scene.getStylesheets().add(stylesheet);
+        scene.getStylesheets().add(checkCurrentMode());
         stage.setScene(scene);
     }
 
@@ -52,8 +51,7 @@ public class LoginController {
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-                String stylesheet = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
-                scene.getStylesheets().add(stylesheet);
+                scene.getStylesheets().add(checkCurrentMode());
                 stage.setScene(scene);
             } else {
                 errorLabel.setText("Incorrect username or Password! Please try again.");

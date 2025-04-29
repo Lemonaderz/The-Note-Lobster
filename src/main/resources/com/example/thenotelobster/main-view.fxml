@@ -15,8 +15,7 @@
             fx:controller="com.example.thenotelobster.MainController"
             prefHeight="Infinity" prefWidth="Infinity">
 
-
-    <!-- Top BorderPane, contains header with title and navigation bar -->
+    <!--     Top BorderPane, contains header with title and navigation bar -->
     <top>
         <VBox fx:id="header">
             <Label text="Note Lobster" style="-fx-font-size: 40px"/>

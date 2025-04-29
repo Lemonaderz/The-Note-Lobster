@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CreateAccController {
+public class CreateAccController extends NavigationUI {
 
     @FXML
     private Button contuineButton;
@@ -34,8 +34,7 @@ public class CreateAccController {
             Stage stage = (Stage) contuineButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-            String stylesheet = HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
-            scene.getStylesheets().add(stylesheet);
+            scene.getStylesheets().add(checkCurrentMode());
             stage.setScene(scene);
         }
     }

@@ -51,6 +51,7 @@ public class HelloApplication extends Application {
         Connection connection = DatabaseConnection.getInstance();
         UserAccountDAO userAccountDAO = new UserAccountDAO();
         userAccountDAO.createTable();
+        NoteSummaryDAO.createTable();
 
 //        userAccountDAO.insert(new UserAccount("hudson@email.com", "Hudson", "Password1"));
 //        userAccountDAO.insert(new UserAccount("lucas@email.com", "Lucas", "Password2"));
