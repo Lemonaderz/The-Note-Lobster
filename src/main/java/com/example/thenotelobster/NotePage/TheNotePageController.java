@@ -3,6 +3,7 @@ package com.example.thenotelobster.NotePage;
 import com.example.thenotelobster.HelloApplication;
 import com.example.thenotelobster.NavigationUI;
 import com.example.thenotelobster.UserAccount;
+import com.sun.source.tree.Tree;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -34,7 +35,6 @@ public class TheNotePageController extends NavigationUI {
         chatHistory.setRoot(rootItem);
         chatHistory.setShowRoot(false);
         chatHistory.setCellFactory(tv -> new editcell());
-
         searchField.textProperty().addListener((observableValue, oldVal, newVal) -> findMatchingNote(newVal));
 
         chatHistory.getSelectionModel().selectedItemProperty().addListener((observableValue, oldVal, newVal) -> {
@@ -99,35 +99,95 @@ public class TheNotePageController extends NavigationUI {
     @FXML
     private void createNewChat() {
         TreeItem<String> selected = chatHistory.getSelectionModel().getSelectedItem();
+        if(selected !=null && rootItem.getChildren().contains(selected)){
+            TextInputDialog dialog = new TextInputDialog("New Chat");
+            dialog.setTitle("Create new Chat");
+            dialog.setHeaderText("Enter a name for the new chat:");
+            dialog.showAndWait().ifPresent(chatName ->{
+                int folderId = notePageDAO.getFolderId(selected.getValue());
+                if(folderId != -1){
+                    notePageDAO.insertNote(chatName,folderId,"", selected.getValue(), userEmail);
+                    TreeItem<String> chat = new TreeItem<>(chatName);
 
-        if (selected != null && rootItem.getChildren().contains(selected)) {
-            TreeItem<String> chat = new TreeItem<>("New Chat");
-            selected.getChildren().add(chat);
-            selected.setExpanded(true);
-            chatHistory.getSelectionModel().select(chat);
-            chatHistory.edit(chat);
+                    //This will attach empty TextArea for new chats
+                    TextArea noteArea = new TextArea();
+                    noteArea.setWrapText((true));
+                    chat.setGraphic(noteArea);
+                    selected.getChildren().add(chat);
+                    selected.setExpanded(true);
+
+                    //This will auto select and edi the brand new chat
+                    chatHistory.getSelectionModel().select(chat);
+                    chatHistory.edit(chat);
+
+                }
+            });
         }
     }
 
     @FXML
     private void createNewFolder() {
-        TreeItem<String> folder = new TreeItem<>("New Subject");
-        folder.setExpanded(true);
-        rootItem.getChildren().add(folder);
-        chatHistory.getSelectionModel().select(folder);
-        chatHistory.edit(folder);
+        TextInputDialog dialog = new TextInputDialog("New Subject");
+        dialog.setTitle("Create new Folder");
+        dialog.setHeaderText("Enter a name for the new subject");
+        dialog.showAndWait().ifPresent(name -> {
+            int folderId = notePageDAO.insertFolder(name);
+            if (folderId !=-1){
+                TreeItem<String> folder = new TreeItem<>(name);
+                folder.setExpanded(true);
+                rootItem.getChildren().add(folder);
+
+                //autoselect folder if user wants to rename
+                chatHistory.getSelectionModel().select(folder);
+                chatHistory.edit(folder);
+            }
+        });
     }
 
     @FXML
     private void saveNotes(){
         TreeItem<String> selected = chatHistory.getSelectionModel().getSelectedItem();
-
-        if (selected != null && selected.getParent() != null && selected.getParent() != rootItem) {
-            TextArea hiddenNote = new TextArea(notesContent.getText());
-            hiddenNote.setWrapText(true);
-            hiddenNote.setPrefHeight(0);
-            selected.setGraphic(hiddenNote);
+        if(selected == null){
+            return;
         }
+
+        TreeItem<String> parent = selected.getParent();
+
+        if (parent !=null && parent !=rootItem) {
+            String chatName = selected.getValue();
+            String folderName = parent.getValue();
+            String content = notesContent.getText();
+
+            int folderId = notePageDAO.getFolderId(folderName);
+            if (folderId == -1) {
+                System.out.println("Folder ID not found for saving note.");
+                return;
+            }
+
+
+            int noteId = notePageDAO.getNoteId(chatName, folderId, userEmail);
+            if (noteId != -1) {
+                notePageDAO.updateNoteText(noteId, content); //if note already exists update
+            } else {
+                notePageDAO.insertNote(chatName, folderId, content, folderName, userEmail); // if note does not exist insert mew
+            }
+
+            TextArea updatedTextArea = new TextArea(content);
+            updatedTextArea.setWrapText(true);
+            selected.setGraphic(updatedTextArea);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Save Successfull");
+            alert.setHeaderText(null);
+            alert.setContentText("your note has been saved sucessfully");
+            alert.showAndWait();
+        }
+        else if (parent == rootItem){
+            System.out.println("The Selected item is a folder, not a note.");
+
+        }
+
+
     }
 
     @FXML
