@@ -1,18 +1,13 @@
 package com.example.thenotelobster.NotePage;
 
-import com.example.thenotelobster.HelloApplication;
+
 import com.example.thenotelobster.NavigationUI;
 import com.example.thenotelobster.UserAccount;
-import com.sun.source.tree.Tree;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
-import javafx.stage.Stage;
-import java.io.IOException;
 
 
 public class TheNotePageController extends NavigationUI {
@@ -37,6 +32,7 @@ public class TheNotePageController extends NavigationUI {
         chatHistory.setCellFactory(tv -> new editcell());
         searchField.textProperty().addListener((observableValue, oldVal, newVal) -> findMatchingNote(newVal));
 
+        loadFoldersAndNotes();
         chatHistory.getSelectionModel().selectedItemProperty().addListener((observableValue, oldVal, newVal) -> {
             if (newVal !=null){
                 TreeItem<String> selected = newVal;
@@ -193,95 +189,114 @@ public class TheNotePageController extends NavigationUI {
     @FXML
     private void deleteSelectedItem(){
         TreeItem<String> selected = chatHistory.getSelectionModel().getSelectedItem();
-        if (selected != null && selected.getParent() != null) {
-            selected.getParent().getChildren().remove(selected);
+        if (selected == null){
+            return;
         }
-    }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Deletion");
+        alert.setHeaderText("Are you want to delete?");
+        alert.setContentText("This acction will not be undone");
 
-    @FXML
-    private void backbutton()  throws IOException  {
+        alert.showAndWait().ifPresent(response ->{
+            if (response == ButtonType.OK){
+                TreeItem<String> parent= selected.getParent();
+                if (parent == null || parent == rootItem){
+                    //it's a folder
+                    int folderId = notePageDAO.getFolderId(selected.getValue());
+                    if(folderId !=-1){
+                        notePageDAO.deleteFolder(folderId);
+                    }
+                } else {
+                    // it's a chat
+                    int folderId = notePageDAO.getFolderId(parent.getValue());
+                    if(folderId !=-1){
+                        int noteId = notePageDAO.getNoteId(selected.getValue(),folderId,userEmail);
+                        if (noteId !=-1){
+                            notePageDAO.deleteNote(noteId);
+                        }
+                    }
+                }
+                if(parent !=null) {
+                    parent.getChildren().remove(selected);
+                } else {
+                    rootItem.getChildren().remove(selected);
+                }
+            }
+        });
 
-        Stage stage = (Stage) buttonBox.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        scene.getStylesheets().add(checkCurrentMode());
-        stage.setScene(scene);
 
     }
 
 
     private class editcell extends TreeCell<String>{
-        private final TextField textField = new TextField();
-
         public editcell(){
-            setOnMouseClicked(mouseEvent -> {
-                if (mouseEvent.getClickCount() ==2 && !isEmpty()) startEdit();
-
+            setOnMouseClicked(mouseEvent ->{
+                if (mouseEvent.getClickCount() == 2 && !isEmpty()){
+                    showEditPopup();
+                }
             });
-            textField.setOnAction(e -> commitOrCancel());
-            textField.focusedProperty().addListener(((observableValue, oldVal, newVal) -> {
-                if (!newVal) commitOrCancel();
-            }
-            ));
         }
 
-        private void commitOrCancel(){
-            String input = textField.getText().trim();
-            if (!input.isEmpty()) {
-                getTreeItem().setValue(input);
-                commitEdit(input);
-            } else {
-                cancelEdit();
-            }
+        private void showEditPopup(){
+            TreeItem<String> item = getTreeItem();
+            if (item==null) return;
+            TextInputDialog dialog = new TextInputDialog(item.getValue());
+            dialog.setTitle("Rename");
+            dialog.setHeaderText("Enter a new name:");
+            dialog.showAndWait().ifPresent(newName ->{
+                if (!newName.trim().isEmpty()){
+                    String oldName= item.getValue();
+                    item.setValue(newName.trim());
+
+                    if (item.getParent() == rootItem) {
+                        notePageDAO.renameFolder(oldName, newName.trim());
+                    }
+                    else{
+                        int folderId = notePageDAO.getFolderId((item.getParent().getValue()));
+                        int noteId = notePageDAO.getNoteId(oldName,folderId,userEmail);
+                        if (noteId !=-1) {
+                            notePageDAO.renameNote(noteId,newName.trim());
+
+                        }
+                    }
+                }
+            });
         }
 
-        @Override
-        public void startEdit(){
-            super.startEdit();
-            textField.setText(getItem());
-            setText(null);
-            setGraphic(textField);
-            textField.selectAll();
-            textField.requestFocus();
-
-        }
-        @Override
-        public void cancelEdit(){
-            super.cancelEdit();
-            setText(getItem());
-            setGraphic(null);
-
-        }
-
-        @Override
-        public void commitEdit(String newName){
-            super.commitEdit(newName);
-            setText(newName);
-            setText(newName);
-            setGraphic(null);
-
-        }
         @Override
         protected void updateItem(String item, boolean empty){
-            super.updateItem(item,empty);
+            super.updateItem(item, empty);
             if (empty) {
                 setText(null);
                 setGraphic(null);
             }
-            else if (isEditing()) {
-                textField.setText(getItem());
-                setText(null);
-                setGraphic(textField);
-            }
             else{
                 setText(getItem());
                 setGraphic(null);
-
             }
         }
 
     }
 
+    private void loadFoldersAndNotes() {
+        try {
+            for (var folder : notePageDAO.getAllFolders()) {
+                TreeItem<String> folderItem = new TreeItem<>(folder.getName());
+                folderItem.setExpanded(true);
+
+                for(var note: notePageDAO.getNotesByFolder(folder.getFolderId(),userEmail)){
+                    TreeItem<String> noteItem = new TreeItem<>(note.getName());
+                    TextArea noteArea = new TextArea(note.getText());
+                    noteArea.setWrapText(true);
+                    noteItem.setGraphic(noteArea);
+                    folderItem.getChildren().add(noteItem);
+                }
+                rootItem.getChildren().add(folderItem);
+            }
+        } catch (Exception error) {
+            error. printStackTrace();
+        }
+    }
 
     @FXML
     private void expandNotes(){
