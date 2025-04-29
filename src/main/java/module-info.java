@@ -7,6 +7,7 @@ module com.example.thenotelobster {
     requires java.sql;
     requires java.desktop;
     requires org.jsoup;
+    requires jdk.compiler;
 
 
     opens com.example.thenotelobster to javafx.fxml;

@@ -65,7 +65,7 @@ public class NoteSummaryDAO {
         }
     }
 
-    public void getByEmail() {
+    public void getSummary() {
 
     }
 

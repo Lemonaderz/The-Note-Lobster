@@ -16,7 +16,6 @@
 
             <!-- Buttons -->
             <HBox fx:id="buttonBox" spacing="10">
-                <Button onAction="#backbutton" text="Back" />
                 <Button onAction="#createNewChat" text="Create New Chat" />
                 <Button onAction="#createNewFolder" text="Create Folder" />
                 <Button onAction="#saveNotes" text="Save" />
