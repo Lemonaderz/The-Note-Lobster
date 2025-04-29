@@ -5,10 +5,10 @@ public class Note {
     private String name;
     private String text;
 
-    public Note(int noteId, String name, String text) {
-        this.noteId = noteId;
+    public Note(int noteID, String name, String text){
+        this.noteId = noteID;
         this.name = name;
-        this.text = text;
+        this.text= text;
     }
 
     public int getNoteId() {
@@ -18,8 +18,7 @@ public class Note {
     public String getName() {
         return name;
     }
-
-    public String getText() {
+    public String getText(){
         return text;
     }
 }

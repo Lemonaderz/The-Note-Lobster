@@ -2,6 +2,7 @@ package com.example.thenotelobster.NotePage;
 
 import com.example.thenotelobster.HelloApplication;
 import com.example.thenotelobster.NavigationUI;
+import com.example.thenotelobster.UserAccount;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,6 +23,8 @@ public class TheNotePageController extends NavigationUI {
     @FXML private TextField searchField;
     @FXML private Label titleLabel;
     private TreeItem<String> rootItem;
+    private final NotePageDAO notePageDAO = new NotePageDAO();
+    private final String userEmail = UserAccount.getInstance().getEmail();
 
 
     @FXML
@@ -31,7 +34,8 @@ public class TheNotePageController extends NavigationUI {
         chatHistory.setRoot(rootItem);
         chatHistory.setShowRoot(false);
         chatHistory.setCellFactory(tv -> new editcell());
-        searchField.textProperty().addListener((observableValue, oldText, newText) -> findMatchingNote(newText));
+
+        searchField.textProperty().addListener((observableValue, oldVal, newVal) -> findMatchingNote(newVal));
 
         chatHistory.getSelectionModel().selectedItemProperty().addListener((observableValue, oldVal, newVal) -> {
             if (newVal !=null){
