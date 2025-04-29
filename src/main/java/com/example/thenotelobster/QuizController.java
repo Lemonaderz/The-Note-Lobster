@@ -2,6 +2,8 @@ package com.example.thenotelobster;
 
 import com.example.thenotelobster.QuizClasses.QuizMultipleChoiceQuestion;
 import com.example.thenotelobster.QuizClasses.QuizResponse;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,6 +24,7 @@ public class QuizController extends NavigationUI {
     @FXML private Button newQuizButton;
     @FXML private Label descriptionLabel;
     @FXML private Label titleLabel;
+    @FXML private ListView<String> QuizMenu;
 
     @FXML
     protected void onCreateNewQuizClick() throws IOException {
@@ -51,6 +54,30 @@ public class QuizController extends NavigationUI {
             ));
         }
         loadQuiz(quiz);
+
+        QuizDAO quizDAO = new QuizDAO();
+
+        ObservableList<String> quizTitles = FXCollections.observableArrayList();
+        try {
+            List<QuizResponse> saved = quizDAO.getAllQuizzes();
+            for (QuizResponse quizResponse : saved) {
+                quizTitles.add(quizResponse.title);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        QuizMenu.setItems(quizTitles);
+
+        QuizMenu.getSelectionModel().selectedItemProperty().addListener((obs, oldTitle, newTitle) -> {
+            if (newTitle != null) {
+                try {
+                    QuizResponse q = quizDAO.getQuizByTitle(newTitle);
+                    if (q != null) loadQuiz(q);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void loadQuiz(QuizResponse quiz) {
@@ -58,6 +85,7 @@ public class QuizController extends NavigationUI {
         quizBox.getChildren().clear();
         titleLabel.setText(quiz.title);
         descriptionLabel.setText(quiz.description);
+
         for (int i = 0; i < quiz.multipleChoiceQuestions.size(); i++) {
             QuizMultipleChoiceQuestion question = quiz.multipleChoiceQuestions.get(i);
 
