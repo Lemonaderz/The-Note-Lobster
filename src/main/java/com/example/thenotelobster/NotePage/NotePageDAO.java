@@ -12,10 +12,11 @@ public class NotePageDAO {
         conn = DatabaseConnection.getInstance();
     }
 
-    public int insertFolder(String folderName) {
-        String sql = "INSERT INTO Folder (name) VALUES (?)";
+    public int insertFolder(String folderName, String userEmail) {
+        String sql = "INSERT INTO Folder (name, userEmail) VALUES (?, ?)";
         try (PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, folderName);
+            statement.setString(2, userEmail);
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) return resultSet.getInt(1);
@@ -24,10 +25,11 @@ public class NotePageDAO {
         } return -1;
     }
 
-    public int getFolderId(String folderName){
-        String sql = "SELECT folderID from Folder WHERE name = ?";
+    public int getFolderId(String folderName, String userEmail){
+        String sql = "SELECT folderId from Folder WHERE name = ? AND userEmail = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, folderName);
+            statement.setString(2, userEmail);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) return resultSet.getInt("folderId");
         } catch (SQLException sqlException){
@@ -35,14 +37,13 @@ public class NotePageDAO {
         } return -1;
     }
 
-    public void insertNote (String name, int folderId, String text, String subject, String userEmail){
-        String sql = "INSERT INTO Notes (name, folderId, text, subject, userEmail) VALUES (?, ?, ?, ?, ?)";
+    public void insertNote (String name, int folderId, String text, String subject){
+        String sql = "INSERT INTO Notes (name, folderId, text, subject) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, name);
             statement.setInt(2, folderId);
             statement.setString(3, text);
             statement.setString(4, subject);
-            statement.setString(5, userEmail);
             statement.executeUpdate();
         }
         catch (SQLException sqlException){
@@ -52,12 +53,11 @@ public class NotePageDAO {
 
     }
 
-    public int getNoteId(String noteName, int folderId, String userEmail){
-        String sql = "SELECT noteId FROM Notes WHERE name = ? AND folderId = ? AND userEmail = ?";
+    public int getNoteId(String noteName, int folderId){
+        String sql = "SELECT noteId FROM Notes WHERE name = ? AND folderId = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, noteName);
             statement.setInt(2, folderId);
-            statement.setString(3, userEmail);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) return resultSet.getInt("noteId");
         }
@@ -77,11 +77,12 @@ public class NotePageDAO {
         }
     }
 
-    public void renameFolder(String oldName, String newName){
-        String sql = "UPDATE Folder SET name = ? WHERE name = ?";
+    public void renameFolder(String oldName, String newName, String userEmail){
+        String sql = "UPDATE Folder SET name = ? WHERE name = ? AND userEmail = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, newName);
             statement.setString(2, oldName);
+            statement.setString(3, userEmail);
             statement.executeUpdate();
         }
         catch (SQLException sqlException){
@@ -124,9 +125,12 @@ public class NotePageDAO {
     }
 
 
-    public List<Folder> getAllFolders(){
+    public List<Folder> getAllFolders(String userEmail){
         List<Folder> folders = new ArrayList<>();
-        try(PreparedStatement statement = conn.prepareStatement("SELECT * FROM Folder")){
+        try(PreparedStatement statement = conn.prepareStatement(
+                "SELECT folderId, name FROM Folder WHERE userEmail = ?"))
+        {
+            statement.setString(1, userEmail);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 folders.add(new Folder(resultSet.getInt("folderId"), resultSet.getString("name")));
@@ -137,12 +141,11 @@ public class NotePageDAO {
         return  folders;
     }
 
-    public List<Note> getNotesByFolder(int folderId, String userEmail) {
+    public List<Note> getNotesByFolder(int folderId) {
         List<Note> notes = new ArrayList<>();
-        String sql =  "SELECT * FROM Notes WHERE folderId = ? AND userEmail = ?";
+        String sql =  "SELECT * FROM Notes WHERE folderId = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)){
             statement.setInt(1,folderId);
-            statement.setString(2,userEmail);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 notes.add(new Note(resultSet.getInt("noteId"), resultSet.getString("name"), resultSet.getString("text")));

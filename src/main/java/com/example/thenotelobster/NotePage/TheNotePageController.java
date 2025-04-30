@@ -100,9 +100,9 @@ public class TheNotePageController extends NavigationUI {
             dialog.setTitle("Create new Chat");
             dialog.setHeaderText("Enter a name for the new chat:");
             dialog.showAndWait().ifPresent(chatName ->{
-                int folderId = notePageDAO.getFolderId(selected.getValue());
+                int folderId = notePageDAO.getFolderId(selected.getValue(), userEmail);
                 if(folderId != -1){
-                    notePageDAO.insertNote(chatName,folderId,"", selected.getValue(), userEmail);
+                    notePageDAO.insertNote(chatName,folderId,"", selected.getValue());
                     TreeItem<String> chat = new TreeItem<>(chatName);
 
                     //This will attach empty TextArea for new chats
@@ -127,7 +127,7 @@ public class TheNotePageController extends NavigationUI {
         dialog.setTitle("Create new Folder");
         dialog.setHeaderText("Enter a name for the new subject");
         dialog.showAndWait().ifPresent(name -> {
-            int folderId = notePageDAO.insertFolder(name);
+            int folderId = notePageDAO.insertFolder(name, userEmail);
             if (folderId !=-1){
                 TreeItem<String> folder = new TreeItem<>(name);
                 folder.setExpanded(true);
@@ -154,18 +154,18 @@ public class TheNotePageController extends NavigationUI {
             String folderName = parent.getValue();
             String content = notesContent.getText();
 
-            int folderId = notePageDAO.getFolderId(folderName);
+            int folderId = notePageDAO.getFolderId(folderName, userEmail);
             if (folderId == -1) {
                 System.out.println("Folder ID not found for saving note.");
                 return;
             }
 
 
-            int noteId = notePageDAO.getNoteId(chatName, folderId, userEmail);
+            int noteId = notePageDAO.getNoteId(chatName, folderId);
             if (noteId != -1) {
                 notePageDAO.updateNoteText(noteId, content); //if note already exists update
             } else {
-                notePageDAO.insertNote(chatName, folderId, content, folderName, userEmail); // if note does not exist insert mew
+                notePageDAO.insertNote(chatName, folderId, content, folderName); // if note does not exist insert mew
             }
 
             TextArea updatedTextArea = new TextArea(content);
@@ -202,15 +202,15 @@ public class TheNotePageController extends NavigationUI {
                 TreeItem<String> parent= selected.getParent();
                 if (parent == null || parent == rootItem){
                     //it's a folder
-                    int folderId = notePageDAO.getFolderId(selected.getValue());
+                    int folderId = notePageDAO.getFolderId(selected.getValue(), userEmail);
                     if(folderId !=-1){
                         notePageDAO.deleteFolder(folderId);
                     }
                 } else {
                     // it's a chat
-                    int folderId = notePageDAO.getFolderId(parent.getValue());
+                    int folderId = notePageDAO.getFolderId(parent.getValue(), userEmail);
                     if(folderId !=-1){
-                        int noteId = notePageDAO.getNoteId(selected.getValue(),folderId,userEmail);
+                        int noteId = notePageDAO.getNoteId(selected.getValue(),folderId);
                         if (noteId !=-1){
                             notePageDAO.deleteNote(noteId);
                         }
@@ -249,11 +249,11 @@ public class TheNotePageController extends NavigationUI {
                     item.setValue(newName.trim());
 
                     if (item.getParent() == rootItem) {
-                        notePageDAO.renameFolder(oldName, newName.trim());
+                        notePageDAO.renameFolder(oldName, newName.trim(), userEmail);
                     }
                     else{
-                        int folderId = notePageDAO.getFolderId((item.getParent().getValue()));
-                        int noteId = notePageDAO.getNoteId(oldName,folderId,userEmail);
+                        int folderId = notePageDAO.getFolderId((item.getParent().getValue()), userEmail);
+                        int noteId = notePageDAO.getNoteId(oldName,folderId);
                         if (noteId !=-1) {
                             notePageDAO.renameNote(noteId,newName.trim());
 
@@ -280,11 +280,11 @@ public class TheNotePageController extends NavigationUI {
 
     private void loadFoldersAndNotes() {
         try {
-            for (var folder : notePageDAO.getAllFolders()) {
+            for (var folder : notePageDAO.getAllFolders(userEmail)) {
                 TreeItem<String> folderItem = new TreeItem<>(folder.getName());
                 folderItem.setExpanded(true);
 
-                for(var note: notePageDAO.getNotesByFolder(folder.getFolderId(),userEmail)){
+                for(var note: notePageDAO.getNotesByFolder(folder.getFolderId())){
                     TreeItem<String> noteItem = new TreeItem<>(note.getName());
                     TextArea noteArea = new TextArea(note.getText());
                     noteArea.setWrapText(true);
