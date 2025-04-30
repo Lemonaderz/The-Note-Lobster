@@ -50,10 +50,13 @@
 
             <HBox spacing="5">
                 <Label text="Subject:" style="-fx-font-size: 20px"/>
-                <TextField fx:id ="SubjectText" editable="false" prefWidth="150" promptText="Subject title here.."/>
+                <TextField fx:id ="SubjectText" prefWidth="150" promptText="Subject title here.."/>
+
+                <Label text="Title:" style="-fx-font-size: 20px"/>
+                <TextField fx:id ="TitleText" prefWidth="150" promptText="Subject title here.."/>
             </HBox>
 
-            <TextArea fx:id="SummaryText" editable="false" wrapText="true" prefHeight="500"
+            <TextArea fx:id="SummaryText" wrapText="true" prefHeight="500"
                       promptText="AI output summary here.." VBox.vgrow="ALWAYS"/>
         </VBox>
     </center>

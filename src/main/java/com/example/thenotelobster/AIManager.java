@@ -72,6 +72,7 @@ public final class AIManager {
 
             chatActive = true;
         }
+
         else {
             messageHistory += "{\"role\": \"user\", \"content\": \"" +message + "\" },";
         }
@@ -155,6 +156,11 @@ public final class AIManager {
 
 
 //        System.out.println(stringResponse);
+    }
+
+    public void fetchFirstResummary()
+    {
+
     }
 
 

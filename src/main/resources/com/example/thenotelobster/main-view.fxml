@@ -51,7 +51,7 @@
                 <TextField fx:id ="SubjectText" prefWidth="150" promptText="Subject title here.."/>
 
                 <Label text="Title:" style="-fx-font-size: 20px"/>
-                <TextField fx:id ="TitleText" prefWidth="150" promptText="Subject title here.."/>
+                <TextField fx:id ="TitleText" prefWidth="150" promptText="Note title here.."/>
             </HBox>
 
 

@@ -35,7 +35,7 @@ public class NoteSummaryDAO {
 
     }
 
-    public void insertSummary(String subject, String summary, String email){
+    public void insertSummary(String subject, String title, String summary, String email){
         try {
 
             NotePageDAO notePageDAO= new NotePageDAO();
@@ -54,7 +54,7 @@ public class NoteSummaryDAO {
                             "VALUES (?, ?, ?)"
             );
 //            insert.setInt(1, 2);
-            insert.setString(1, "DEFAULT");
+            insert.setString(1, title);
             insert.setInt(2, folderId);
             insert.setString(3, summary);
 

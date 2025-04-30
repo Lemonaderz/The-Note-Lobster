@@ -28,14 +28,18 @@ public class SummaryController extends NavigationUI {
     @FXML private Button SummaryButton;
     @FXML private ProgressIndicator LoadingIndicator;
     @FXML private TextField SubjectText;
+    @FXML private TextField TitleText;
 
     @FXML protected void onSaveClick() throws IOException {
+        AIManager aiManager = AIManager.getInstance();
+        aiManager.clearChat();
         String subject = SubjectText.getText();
         String summary = SummaryText.getText();
+        String title = TitleText.getText();
         String email = UserAccount.getInstance().getEmail();
 
         NoteSummaryDAO noteSummaryDAO = new NoteSummaryDAO();
-        noteSummaryDAO.insertSummary(subject, summary, email);
+        noteSummaryDAO.insertSummary(subject,title, summary, email);
         onNotesClick();
     }
 
@@ -77,6 +81,7 @@ public class SummaryController extends NavigationUI {
     {
         AIManager aiManager = AIManager.getInstance();
         SubjectText.setText(aiManager.singleSummary.subject);
+        TitleText.setText(aiManager.singleSummary.title);
         SummaryText.setText(aiManager.singleSummary.response);
     }
 

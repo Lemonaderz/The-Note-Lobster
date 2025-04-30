@@ -38,8 +38,13 @@ public class SummaryResponse {
 
     public void SetComplexity(double complexity)
     {
-        this.response = response;
+        this.complexity = complexity;
 
+    }
+
+    public void SetTitle(String title)
+    {
+        this.title = title;
     }
 
 
