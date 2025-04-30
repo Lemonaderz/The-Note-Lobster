@@ -46,9 +46,14 @@
             <padding>
                 <Insets top="10"  bottom="10" left="10" right="10"/>
             </padding>
+            <HBox spacing="5">
+                <Label text="Subject:" style="-fx-font-size: 20px"/>
+                <TextField fx:id ="SubjectText" prefWidth="150" promptText="Subject title here.."/>
 
-            <TextField fx:id="NotesSubject" promptText="Enter subject here."
-                       alignment="TOP_CENTER"/>
+                <Label text="Title:" style="-fx-font-size: 20px"/>
+                <TextField fx:id ="TitleText" prefWidth="150" promptText="Subject title here.."/>
+            </HBox>
+
 
             <TextArea fx:id="AddNotes" wrapText="true" prefHeight="450" VBox.vgrow="ALWAYS"
                       promptText='To create a note summary, enter or paste notes/information here and press "Summarize".'/>

@@ -20,7 +20,7 @@
                 <Button onAction="#createNewFolder" text="Create Folder" />
                 <Button onAction="#saveNotes" text="Save" />
                 <Button onAction="#deleteSelectedItem" text="Delete Chat" />
-                <Button onAction="#expandNotes" text="Expand on my notes" />
+                <Button onAction="#expandNotes" fx:id='ExpandNotesButton' text="Expand on my notes" />
             </HBox>
 
         </VBox>

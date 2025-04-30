@@ -1,13 +1,17 @@
 package com.example.thenotelobster.NotePage;
 
 
+import com.example.thenotelobster.AIManager;
 import com.example.thenotelobster.NavigationUI;
+import com.example.thenotelobster.SummaryResponse;
 import com.example.thenotelobster.UserAccount;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
+
+import java.io.IOException;
 
 
 public class TheNotePageController extends NavigationUI {
@@ -18,6 +22,7 @@ public class TheNotePageController extends NavigationUI {
     @FXML private TextArea notesContent;
     @FXML private TextField searchField;
     @FXML private Label titleLabel;
+    @FXML private Button ExpandNotesButton;
     private TreeItem<String> rootItem;
     private final NotePageDAO notePageDAO = new NotePageDAO();
     private final String userEmail = UserAccount.getInstance().getEmail();
@@ -228,6 +233,8 @@ public class TheNotePageController extends NavigationUI {
     }
 
 
+
+
     private class editcell extends TreeCell<String>{
         public editcell(){
             setOnMouseClicked(mouseEvent ->{
@@ -299,7 +306,10 @@ public class TheNotePageController extends NavigationUI {
     }
 
     @FXML
-    private void expandNotes(){
+    private void expandNotes() throws IOException {
+        AIManager aiManager = AIManager.getInstance();
+        aiManager.singleSummary = new SummaryResponse(notesContent.getText(), chatHistory.getSelectionModel().getSelectedItem().getParent().getValue(), "300", 5, chatHistory.getSelectionModel().getSelectedItem().getValue() + " - Expanded");
+        goToSummaryPage(ExpandNotesButton);
 
     }
 }

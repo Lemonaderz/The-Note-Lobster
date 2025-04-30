@@ -20,7 +20,9 @@ public class MainController extends NavigationUI {
     @FXML
     private TextArea SourceLinks;
     @FXML
-    private TextField NotesSubject;
+    private TextField SubjectText;
+    @FXML
+    private TextField TitleText;
     @FXML
     private Button SummarizeButton;
     @FXML
@@ -66,7 +68,7 @@ public class MainController extends NavigationUI {
             System.out.println("Going to Summary Page");
 
             try {
-                goToSummaryPage();
+                goToSummaryPage(SummarizeButton);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -79,15 +81,5 @@ public class MainController extends NavigationUI {
         new Thread(fetchAsynchronousChatResponse).start();
     }
 
-    @FXML
-    protected void goToSummaryPage() throws IOException {
 
-        System.out.println("Summary made");
-        Stage stage = (Stage) SummarizeButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("summary-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        scene.getStylesheets().add(checkCurrentMode());
-        stage.setScene(scene);
-
-    }
 }

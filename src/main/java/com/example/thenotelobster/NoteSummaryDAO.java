@@ -1,5 +1,7 @@
 package com.example.thenotelobster;
 
+import com.example.thenotelobster.NotePage.NotePageDAO;
+
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,16 +37,26 @@ public class NoteSummaryDAO {
 
     public void insertSummary(String subject, String summary, String email){
         try {
+
+            NotePageDAO notePageDAO= new NotePageDAO();
+
+            // We can consider making this block here in the notePageDAO class and making it either its own function or part of getFolderInt by default.
+            int folderId = notePageDAO.getFolderId(subject, email);
+            if(folderId == -1)
+            {
+                notePageDAO.insertFolder(subject, email);
+                folderId = notePageDAO.getFolderId(subject, email);
+            }
+
+
             PreparedStatement insert = connection.prepareStatement(
-                    "INSERT INTO Notes (name, folderId, text, subject, userEmail) " +
-                            "VALUES (?, ?, ?, ?, ?)"
+                    "INSERT INTO Notes (name, folderId, text) " +
+                            "VALUES (?, ?, ?)"
             );
 //            insert.setInt(1, 2);
             insert.setString(1, "DEFAULT");
-            insert.setInt(2, 1);
+            insert.setInt(2, folderId);
             insert.setString(3, summary);
-            insert.setString(4, subject);
-            insert.setString(5, email);
 
             insert.execute();
             System.out.println("Note Summary saved successfully");

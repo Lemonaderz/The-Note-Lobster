@@ -92,6 +92,18 @@ public abstract class NavigationUI {
     }
 
     @FXML
+    protected void goToSummaryPage(Button button) throws IOException {
+
+        System.out.println("Summary made");
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("summary-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        scene.getStylesheets().add(checkCurrentMode());
+        stage.setScene(scene);
+
+    }
+
+    @FXML
     protected void onQuizClick() throws IOException {
         Stage stage = (Stage) QuizButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("quiz-view.fxml"));
@@ -100,6 +112,8 @@ public abstract class NavigationUI {
         stage.setScene(scene);
 
     }
+
+
 
     // Method used to check which theme the application is currently in, e.g Dark Mode or Light Mode.
     protected String checkCurrentMode() {

@@ -5,11 +5,18 @@ public class SummaryResponse {
     public String subject;
     public String length;
     public double complexity;
+    public String title;
+    public SummaryResponse()
+    {
 
-    public SummaryResponse(String response, String subject)
+    }
+    public SummaryResponse(String response, String subject, String length, double complexity, String title)
     {
         this.response = response;
         this.subject = subject;
+        this.length = length;
+        this.complexity = complexity;
+        this.title = title;
     }
 
     public void SetResponse(String response)

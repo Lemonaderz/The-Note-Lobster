@@ -29,13 +29,14 @@ public class SummaryController extends NavigationUI {
     @FXML private ProgressIndicator LoadingIndicator;
     @FXML private TextField SubjectText;
 
-    @FXML protected void onSaveClick() {
+    @FXML protected void onSaveClick() throws IOException {
         String subject = SubjectText.getText();
         String summary = SummaryText.getText();
         String email = UserAccount.getInstance().getEmail();
 
         NoteSummaryDAO noteSummaryDAO = new NoteSummaryDAO();
         noteSummaryDAO.insertSummary(subject, summary, email);
+        onNotesClick();
     }
 
     @FXML protected void onResummarise()

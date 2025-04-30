@@ -15,7 +15,7 @@ public final class AIManager {
     public String Url = "http://localhost:11434/api/generate";
     public String messageHistory = "\"messages\": [";
     public boolean chatActive = false;
-    public SummaryResponse singleSummary = new SummaryResponse("", "");
+    public SummaryResponse singleSummary = new SummaryResponse();
     private final static AIManager INSTANCE = new AIManager();
     public QuizResponse currentQuiz;
 
