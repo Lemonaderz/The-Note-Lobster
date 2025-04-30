@@ -92,6 +92,23 @@
 .radio-button {
     -fx-text-fill: black;
 }
+.radio-button.correct {
+    -fx-text-fill: green;
+}
+.radio-button.correct:focused,
+.radio-button.correct:hover,
+.radio-button.correct:selected {
+    -fx-text-fill: green;
+}
+
+.radio-button.wrong {
+    -fx-text-fill: red;
+}
+.radio-button.wrong:focused,
+.radio-button.wrong:hover,
+.radio-button.wrong:selected {
+    -fx-text-fill: red;
+}
 
 .tree-view, .tree-cell {
     -fx-text-fill: black;

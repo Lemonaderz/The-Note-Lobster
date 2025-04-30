@@ -2,25 +2,25 @@ package com.example.thenotelobster.QuizClasses;
 
 public class QuizQuestion {
     public String question;
-    public String answer;
+    public int answer;
 
     public QuizQuestion() { }
-    public QuizQuestion(String question, String answer) {
+    public QuizQuestion(String question, int answer) {
         this.question = question;
         this.answer = answer;
     }
 
     // Getters and Setters
 
-    public boolean checkResponse(String response) {
-        return answer != null && answer.equals(response);
+    public boolean checkResponse(int response) {
+        return answer == response;
     }
 
     public String getQuestion() {
         return question;
     }
 
-    public String getAnswer() {
+    public int getAnswer() {
         return answer;
     }
 
@@ -28,7 +28,7 @@ public class QuizQuestion {
         this.question = question;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(int answer) {
         this.answer = answer;
     }
 }

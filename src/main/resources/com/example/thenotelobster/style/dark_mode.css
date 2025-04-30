@@ -39,7 +39,23 @@
 .radio-button {
     -fx-text-fill: #f2f2f2;
 }
+.radio-button.correct {
+    -fx-text-fill: green;
+}
+.radio-button.correct:focused,
+.radio-button.correct:hover,
+.radio-button.correct:selected {
+    -fx-text-fill: green;
+}
 
+.radio-button.wrong {
+    -fx-text-fill: red;
+}
+.radio-button.wrong:focused,
+.radio-button.wrong:hover,
+.radio-button.wrong:selected {
+    -fx-text-fill: red;
+}
 /* Set style options for button */
 .button {
     -fx-background-color: #5c5c5c;

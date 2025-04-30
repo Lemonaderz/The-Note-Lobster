@@ -9,10 +9,12 @@ public class QuizMultipleChoiceQuestion extends QuizQuestion{
     {
 
     }
-    public QuizMultipleChoiceQuestion(String question, String answer, List<String> choices) {
+    public QuizMultipleChoiceQuestion(String question, int answer, List<String> choices) {
         super(question, answer);
         this.choices = choices;
     }
+
+
 
 
 

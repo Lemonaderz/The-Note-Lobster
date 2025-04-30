@@ -52,14 +52,18 @@
                 </HBox>
             </VBox>
 
-            <ScrollPane hbarPolicy="NEVER">
+            <ScrollPane hbarPolicy="NEVER" fx:id="ScrollBar">
                 <VBox fx:id="scrollBox" spacing="10">
                     <!--            Headings-->
                     <VBox fx:id="headingsBox" mouseTransparent="true">
                         <padding>
                             <Insets left="10" right="10" top="10"/>
                         </padding>
+
                         <Label text="[Title]" fx:id="titleLabel" style="-fx-font-size: 25px"/>
+
+                        <Label text="[grade]" fx:id="gradeLabel" style="-fx-font-size: 25px"/>
+
                         <Label wrapText="true" fx:id="descriptionLabel" text="[Description]" maxWidth="800"/>
                         <!--                page break-->
                         <Label mouseTransparent="true"/>
@@ -68,9 +72,14 @@
                                text="For multiple choice questions select the best answer.  For numeric answer questions give your final answer only.  Points for each question are as marked.  Answer all questions."/>
                     </VBox>
                     <VBox fx:id="quizBox" spacing="10"/>
+
+                    <Button text="Submit" fx:id="SubmitButton" visible="false" onAction="#onSubmitButtonClick"/>
+                        <Button text="Retry" fx:id="RetryButton" visible="false" onAction="#onRetryClick"/>
                 </VBox>
+
             </ScrollPane>
         </HBox>
+
     </center>
 
 </BorderPane>
