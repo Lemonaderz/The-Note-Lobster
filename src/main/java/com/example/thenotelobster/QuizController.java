@@ -25,6 +25,9 @@ public class QuizController extends NavigationUI {
     @FXML private Label descriptionLabel;
     @FXML private Label titleLabel;
     @FXML private ListView<String> QuizMenu;
+    @FXML private Button deleteQuizButton;
+
+    private final String userEmail = UserAccount.getInstance().getEmail();
 
     @FXML
     protected void onCreateNewQuizClick() throws IOException {
@@ -108,6 +111,37 @@ public class QuizController extends NavigationUI {
 
             quizBox.getChildren().add(questionBox);
         }
+    }
+
+    @FXML
+    protected void onDeleteQuizButton() {
+        String title = QuizMenu.getSelectionModel().getSelectedItem();
+        if (title == null) return;
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+                "Delete quiz \""+ title +"\"?",
+                ButtonType.OK, ButtonType.CANCEL);
+        confirm.setHeaderText(null);
+        confirm.showAndWait().ifPresent(btn -> {
+            if (btn == ButtonType.OK) {
+                try {
+                    QuizDAO dao = new QuizDAO();
+                    int quizId = dao.getQuizIdByTitle(title, userEmail);
+                    if (quizId != -1) {
+                        dao.deleteQuiz(quizId);
+                        // remove from ListView
+                        QuizMenu.getItems().remove(title);
+                        // clear display if it was showing
+                        quizBox.getChildren().clear();
+                        titleLabel.setText("");
+                        descriptionLabel.setText("");
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "Could not delete quiz").showAndWait();
+                }
+            }
+        });
     }
 
 }

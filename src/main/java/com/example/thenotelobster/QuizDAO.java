@@ -147,7 +147,6 @@ public class QuizDAO {
             qr.title = title;
             qr.description = rs.getString("description");
 
-            // Load its questions
             String q2 = "SELECT question, answer, choices FROM Question WHERE quizId = ?";
             try (PreparedStatement ps2 = conn.prepareStatement(q2)) {
                 ps2.setInt(1, quizId);
@@ -165,6 +164,31 @@ public class QuizDAO {
             }
 
             return qr;
+        }
+    }
+
+    public int getQuizIdByTitle(String title, String userEmail) throws SQLException {
+        String sql = "SELECT quizId FROM Quiz WHERE name = ? AND email = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, title);
+            ps.setString(2, userEmail);
+            ResultSet rs = ps.executeQuery();
+            return rs.next() ? rs.getInt("quizId") : -1;
+        }
+    }
+
+    public void deleteQuiz(int quizId) throws SQLException {
+        // delete questions first
+        try (PreparedStatement ps1 = conn.prepareStatement(
+                "DELETE FROM Question WHERE quizId = ?")) {
+            ps1.setInt(1, quizId);
+            ps1.executeUpdate();
+        }
+        // delete quiz record
+        try (PreparedStatement ps2 = conn.prepareStatement(
+                "DELETE FROM Quiz WHERE quizId = ?")) {
+            ps2.setInt(1, quizId);
+            ps2.executeUpdate();
         }
     }
 }
