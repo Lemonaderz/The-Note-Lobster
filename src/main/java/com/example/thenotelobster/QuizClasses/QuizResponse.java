@@ -3,6 +3,7 @@ package com.example.thenotelobster.QuizClasses;
 import com.example.thenotelobster.Question;
 
 import java.util.List;
+import java.util.Random;
 
 public class QuizResponse {
     public String title;
@@ -36,6 +37,19 @@ public class QuizResponse {
             System.out.println("Answer:  " + question.answer);
         }
     }
-    // Getters and Setters
+    // This is to randomize the quiz since the AI is prone to picking B/C as its favourite answers.
+    public void randomizeAnswers()
+    {
+         for(QuizMultipleChoiceQuestion question : multipleChoiceQuestions)
+         {
+             Random r = new Random();
+             int randomPosition = r.nextInt(4);
+             String correctAnswer = question.choices.get(Integer.parseInt(question.answer)-1);
+             question.choices.remove(correctAnswer);
+             question.choices.add(randomPosition, correctAnswer);
+             question.answer = String.valueOf(randomPosition +1);
+         }
+
+    }
 
 }
