@@ -38,7 +38,7 @@ public class QuizDAO {
             for (QuizMultipleChoiceQuestion q : questions) {
                 ps.setInt(1, quizId);
                 ps.setString(2, q.question);
-                ps.setString(3, q.answer);
+                ps.setInt(3, q.answer);
                 ps.setString(4, gson.toJson(q.choices));
                 ps.addBatch();
             }
@@ -83,7 +83,7 @@ public class QuizDAO {
             List<QuizMultipleChoiceQuestion> list = new ArrayList<>();
             while (rs.next()) {
                 String text    = rs.getString("question");
-                String answer  = rs.getString("answer");
+                int answer  = rs.getInt("answer");
                 String jsonArr = rs.getString("choices");
                 List<String> choices = Arrays.asList(gson.fromJson(jsonArr, String[].class));
                 list.add(new QuizMultipleChoiceQuestion(text, answer, choices));
@@ -116,11 +116,11 @@ public class QuizDAO {
                 List<QuizMultipleChoiceQuestion> list = new ArrayList<>();
                 while (rs2.next()) {
                     String text = rs2.getString("question");
-                    String ans = rs2.getString("answer");
+                    int answer = rs2.getInt("answer");
                     String jsonArr = rs2.getString("choices");
                     List<String> choices =
                             Arrays.asList(gson.fromJson(jsonArr, String[].class));
-                    list.add(new QuizMultipleChoiceQuestion(text, ans, choices));
+                    list.add(new QuizMultipleChoiceQuestion(text, answer, choices));
                 }
                 qr.multipleChoiceQuestions = list;
             }
@@ -154,11 +154,11 @@ public class QuizDAO {
                 List<QuizMultipleChoiceQuestion> list = new ArrayList<>();
                 while (rs2.next()) {
                     String text    = rs2.getString("question");
-                    String ans     = rs2.getString("answer");
+                    int answer     = rs2.getInt("answer");
                     String jsonArr = rs2.getString("choices");
                     List<String> choices =
                             Arrays.asList(gson.fromJson(jsonArr, String[].class));
-                    list.add(new QuizMultipleChoiceQuestion(text, ans, choices));
+                    list.add(new QuizMultipleChoiceQuestion(text, answer, choices));
                 }
                 qr.multipleChoiceQuestions = list;
             }

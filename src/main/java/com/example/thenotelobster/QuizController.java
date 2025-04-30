@@ -2,6 +2,7 @@ package com.example.thenotelobster;
 
 import com.example.thenotelobster.QuizClasses.QuizMultipleChoiceQuestion;
 import com.example.thenotelobster.QuizClasses.QuizResponse;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,10 +11,13 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,6 +30,11 @@ public class QuizController extends NavigationUI {
     @FXML private Label titleLabel;
     @FXML private ListView<String> QuizMenu;
     @FXML private Button deleteQuizButton;
+    @FXML private Button SubmitButton;
+    @FXML private Button RetryButton;
+    @FXML private Label gradeLabel;
+    @FXML private ScrollPane ScrollBar;
+    private QuizResponse selectedQuiz;
 
     private final String userEmail = UserAccount.getInstance().getEmail();
 
@@ -51,8 +60,8 @@ public class QuizController extends NavigationUI {
             quiz = (aiManager.currentQuiz != null)
                     ? aiManager.currentQuiz
                     : new QuizResponse("Sample Quiz", Arrays.asList(
-                    new QuizMultipleChoiceQuestion("What is 2 + 2?", "4", List.of("3", "4", "5", "6")),
-                    new QuizMultipleChoiceQuestion("What color is the sky?", "A", List.of("Blue", "Green", "Red", "Yellow"))
+                    new QuizMultipleChoiceQuestion("What is 2 + 2?", 2, List.of("3", "4", "5", "6")),
+                    new QuizMultipleChoiceQuestion("What color is the sky?", 1, List.of("Blue", "Green", "Red", "Yellow"))
             ));
         }
         loadQuiz(quiz);
@@ -89,7 +98,9 @@ public class QuizController extends NavigationUI {
 
     private void loadQuiz(QuizResponse quiz) {
         // Clear old content
+
         quizBox.getChildren().clear();
+        gradeLabel.setVisible(false);
         titleLabel.setText(quiz.title);
         descriptionLabel.setText(quiz.description);
 
@@ -105,16 +116,19 @@ public class QuizController extends NavigationUI {
 
             questionBox.getChildren().add(0, questionLabel); // Add at top
             questionBox.getChildren().add(1, questionText);  // Add under label
-
             ToggleGroup group = new ToggleGroup();
-            for (String option : question.choices) {
-                RadioButton radioButton = new RadioButton(option);
+            for (int questionNumber = 0; questionNumber < 4; questionNumber++) {
+                RadioButton radioButton = new RadioButton(question.choices.get(questionNumber));
+                radioButton.setUserData(questionNumber + 1);
                 radioButton.setToggleGroup(group);
                 questionBox.getChildren().add(radioButton);
             }
 
             quizBox.getChildren().add(questionBox);
         }
+        SubmitButton.setVisible(true);
+        RetryButton.setVisible(false);
+        selectedQuiz = quiz;
     }
 
     @FXML
@@ -146,6 +160,78 @@ public class QuizController extends NavigationUI {
                 }
             }
         });
+    }
+
+    @FXML
+    protected void onSubmitButtonClick()
+    {
+        int questionNumber = 0;
+        int grade = 0;
+        //search through each quizbox's  question box and get the toggle group for that box.
+        for(Node questionBox: quizBox.getChildren())
+        {
+            if (questionBox instanceof VBox) {
+                for (Node child : ((VBox) questionBox).getChildren()) {
+                    if (child instanceof RadioButton) {
+                        //find the first radio button of the section
+                        RadioButton firstChoice = (RadioButton) child;
+                        ToggleGroup choices = firstChoice.getToggleGroup();
+                        Toggle selectedButton = choices.getSelectedToggle();
+                        QuizMultipleChoiceQuestion currentQuestion = selectedQuiz.multipleChoiceQuestions.get(questionNumber);
+                        // if they didnt pick an answer instantly wrong
+                        if (selectedButton != null) {
+
+
+                            int answer = (int) choices.getSelectedToggle().getUserData();
+                            //Disable touching the buttons again
+                            for (Toggle button : choices.getToggles()) {
+                                RadioButton radioButton = (RadioButton) button;
+                                radioButton.setMouseTransparent(true);
+                            }
+                            //If their answer is wrong, colour it red
+                            if (!currentQuestion.checkResponse(answer)) {
+                                RadioButton chosenAnswer = (RadioButton) choices.getSelectedToggle();
+                                chosenAnswer.getStyleClass().add("wrong");
+                            } else {
+                                grade += 1;
+                            }
+                        }
+                        //Set the correct answer to green, overriding if they chose it
+                        RadioButton correctAnswer = (RadioButton) choices.getToggles().get(currentQuestion.answer - 1);
+                        correctAnswer.getStyleClass().remove("wrong");
+                        correctAnswer.getStyleClass().add("correct");
+                        //Next question
+
+                        questionNumber += 1;
+
+
+                        break;
+                    }
+                }
+            }
+
+
+        }
+        //set button visibility
+        SubmitButton.setVisible(false);
+        RetryButton.setVisible(true);
+        gradeLabel.setVisible(true);
+
+        //tell you grade
+        gradeLabel.setText("Grade:" + grade + "/" + selectedQuiz.multipleChoiceQuestions.size());
+
+        //reset to top
+        Platform.runLater(() -> {
+            ScrollBar.setVvalue(0);
+        });
+
+    }
+
+    @FXML
+    protected void onRetryClick()
+    {
+        loadQuiz(selectedQuiz);
+
     }
 
 }

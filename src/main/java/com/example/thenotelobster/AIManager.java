@@ -134,7 +134,7 @@ public final class AIManager {
                 "        \"properties\": {" +
                 "          \"question\": { \"type\": \"string\" }," +
                 "          \"choices\": { \"type\": \"array\", \"items\": { \"type\": \"string\" } }," +
-                "          \"answer\": { \"type\": \"string\", \"pattern\": \"^[1-4]$\" }" +
+                "          \"answer\": { \"type\": \"integer\" }" +
                 "        }," +
                 "        \"required\": [\"question\", \"choices\", \"answer\"]" +
                 "      }" +
@@ -145,8 +145,8 @@ public final class AIManager {
 
 
         String prompt = ("{\"model\": \"gemma3\", \"prompt\": \"" +
-                "Please make a Quiz with the following notes/summary. Make the quiz have both multiple choice questions" +
-                "Indicate the answer with a number (1-4) for the answer. Ensure the correct answer is randomly positioned among the options. Add a relevant title and a brief description of what the quiz is about. Begin the description with 'This quiz is about'. Use the Json Format provided as your response. Here is the Notes/Summary: " +
+                "Please make a Quiz with the following notes/summary. Make the quiz be multiple choice questions" +
+                "Indicate the answer with a number (1-4) for the position. Ensure the correct answer is randomly positioned among the options. Add a relevant title and a brief description of what the quiz is about. Begin the description with 'This quiz is about'. Use the Json Format provided as your response. Here is the Notes/Summary: " +
                 summary.replace("\"", "'").replace("\n", " ")
                 + "\",\"stream\": false, \"format\" :" +
                   jsonFormat +
@@ -155,7 +155,7 @@ public final class AIManager {
 //        System.out.println(response);
         JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
 
-        String responseString = jsonObject.get("response").getAsString();
+        String responseString = jsonObject.get("response").getAsString().replaceAll("(?m)^[A-Da-d]\\.\\s?", "");
 
         JsonObject quizJson = JsonParser.parseString(responseString).getAsJsonObject();
 
