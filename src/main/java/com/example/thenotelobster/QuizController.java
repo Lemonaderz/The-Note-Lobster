@@ -42,7 +42,6 @@ public class QuizController extends NavigationUI {
     public void initialize() {
         QuizResponse quiz;
         try {
-            // load the quiz you just saved (for now we use ID=1; later bind this to selection)
             QuizDAO dao = new QuizDAO();
             quiz = dao.loadQuiz(1);
         } catch (SQLException e) {
@@ -81,6 +80,11 @@ public class QuizController extends NavigationUI {
                 }
             }
         });
+
+        // clears the quiz on load up
+        quizBox.getChildren().clear();
+        titleLabel.setText("");
+        descriptionLabel.setText("");
     }
 
     private void loadQuiz(QuizResponse quiz) {
