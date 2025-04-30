@@ -60,23 +60,8 @@ public final class AIManager {
 
     }
 
-    public String fetchChatResponse(String message, String length, double complexity)
+    public String fetchPromptResponseWithHistory()
     {
-
-        if (!chatActive) {
-            // on the first time through, summarize your
-            messageHistory += " { \"role\": \"user\", \"content\": \"" + "Please summarize the following text, with a maximum of "
-                    + length + " words. You MUST Adhere to this word limit and if  and with a complexity of "
-                    + complexity + " out of 10:"
-                    + message.replace("\n"," ") + "\" },";
-
-            chatActive = true;
-        }
-
-        else {
-            messageHistory += "{\"role\": \"user\", \"content\": \"" +message + "\" },";
-        }
-
         String formattedMessage = messageHistory.substring(0,messageHistory.length()-1) +"]";
         //formats out message into json
 
@@ -93,10 +78,39 @@ public final class AIManager {
         messageHistory += " { \"role\": \"assistant\", \"content\": \""+ (stringResponse.replace("\n", " ")).replace("\"", "'") + "\" },";
 
         singleSummary.SetResponse(stringResponse);
+
+        return stringResponse;
+
+    }
+
+    public String fetchChatResponse(String message, String length, double complexity)
+    {
+
+        if (!chatActive) {
+            // on the first time through, summarize your
+            messageHistory += " { \"role\": \"user\", \"content\": \"" + "Please summarize the following text, with a maximum of "
+                    + length + " words. You MUST Adhere to this word limit and if  and with a complexity of "
+                    + complexity + " out of 10:"
+                    + message.replace("\n"," ").replace("\"", "'") + "\" },";
+
+            chatActive = true;
+        }
+
+        else {
+            messageHistory += "{\"role\": \"user\", \"content\": \"" +message.replace("\n"," ").replace("\"", "'") + "\" },";
+        }
+//        System.out.println(messageHistory);
+
+        fetchPromptResponseWithHistory();
         singleSummary.SetLength(length);
         singleSummary.SetComplexity(complexity);
-        return stringResponse;
+//        System.out.println(messageHistory);
+
+        return singleSummary.response;
+
     }
+
+
 
     public void clearChat()
     {
@@ -138,7 +152,7 @@ public final class AIManager {
                   jsonFormat +
                 " }");
         String response = fetchPromptResponse(prompt);
-        System.out.println(response);
+//        System.out.println(response);
         JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
 
         String responseString = jsonObject.get("response").getAsString();
@@ -158,8 +172,12 @@ public final class AIManager {
 //        System.out.println(stringResponse);
     }
 
-    public void fetchFirstResummary()
+    public void setResummaryMode()
     {
+        messageHistory += " { \"role\": \"assistant\", \"content\": \"" + singleSummary.response.replace("\n"," ").replace("\"", "'") + "\" },";
+        chatActive = true;
+
+
 
     }
 

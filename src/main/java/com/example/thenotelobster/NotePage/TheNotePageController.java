@@ -309,6 +309,7 @@ public class TheNotePageController extends NavigationUI {
     private void expandNotes() throws IOException {
         AIManager aiManager = AIManager.getInstance();
         aiManager.singleSummary = new SummaryResponse(notesContent.getText(), chatHistory.getSelectionModel().getSelectedItem().getParent().getValue(), "300", 5, chatHistory.getSelectionModel().getSelectedItem().getValue() + " - Expanded");
+        aiManager.setResummaryMode();
         goToSummaryPage(ExpandNotesButton);
 
     }
