@@ -1,8 +1,5 @@
-package com.example.thenotelobster.QuizClasses;
+package com.example.thenotelobster.model.QuizClasses;
 
-import com.example.thenotelobster.Question;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -43,12 +40,7 @@ public class QuizResponse {
     {
          for(QuizMultipleChoiceQuestion question : multipleChoiceQuestions)
          {
-             Random r = new Random();
-             int randomPosition = r.nextInt(4);
-             String correctAnswer = question.choices.get(question.answer - 1);
-             question.choices.remove(correctAnswer);
-             question.choices.add(randomPosition, correctAnswer);
-             question.answer = randomPosition + 1;
+             question.randomizeAnswer();
          }
 
     }

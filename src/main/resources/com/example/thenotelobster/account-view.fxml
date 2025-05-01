@@ -10,7 +10,7 @@
 <?import com.sun.javafx.scene.control.WebColorField?>
 <BorderPane fx:id="SceneTheme"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.thenotelobster.AccountController"
+            fx:controller="com.example.thenotelobster.controller.AccountController"
 
             prefHeight="Infinity" prefWidth="Infinity">
 

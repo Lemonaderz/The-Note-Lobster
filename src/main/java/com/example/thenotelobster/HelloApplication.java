@@ -1,13 +1,15 @@
 package com.example.thenotelobster;
 
+import com.example.thenotelobster.controller.AIManager;
+import com.example.thenotelobster.controller.DatabaseConnection;
+import com.example.thenotelobster.model.NoteClasses.NoteSummaryDAO;
+import com.example.thenotelobster.model.UserClasses.UserAccountDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.sql.*;

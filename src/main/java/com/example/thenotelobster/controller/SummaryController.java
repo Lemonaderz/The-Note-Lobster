@@ -1,19 +1,18 @@
-package com.example.thenotelobster;
+package com.example.thenotelobster.controller;
 
+import com.example.thenotelobster.*;
+import com.example.thenotelobster.model.NoteClasses.NoteSummaryDAO;
+import com.example.thenotelobster.model.SummaryResponse;
+import com.example.thenotelobster.model.UserClasses.UserAccount;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.jsoup.Progress;
-import org.w3c.dom.Text;
+
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class SummaryController extends NavigationUI {
 

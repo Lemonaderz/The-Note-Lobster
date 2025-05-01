@@ -1,7 +1,7 @@
-package com.example.thenotelobster;
+package com.example.thenotelobster.model.QuizClasses;
 
-import com.example.thenotelobster.QuizClasses.QuizMultipleChoiceQuestion;
-import com.example.thenotelobster.QuizClasses.QuizResponse;
+import com.example.thenotelobster.controller.DatabaseConnection;
+import com.example.thenotelobster.model.UserClasses.UserAccount;
 import com.google.gson.Gson;
 
 import java.sql.*;

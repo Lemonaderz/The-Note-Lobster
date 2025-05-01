@@ -8,7 +8,7 @@
 
 <?import javafx.geometry.Insets?>
 <BorderPane fx:id="SceneTheme" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.thenotelobster.QuizController"
+            fx:controller="com.example.thenotelobster.controller.QuizController"
 
             prefHeight="Infinity" prefWidth="Infinity">
 

@@ -1,10 +1,9 @@
-package com.example.thenotelobster.NotePage;
+package com.example.thenotelobster.controller;
 
 
-import com.example.thenotelobster.AIManager;
-import com.example.thenotelobster.NavigationUI;
-import com.example.thenotelobster.SummaryResponse;
-import com.example.thenotelobster.UserAccount;
+import com.example.thenotelobster.model.NoteClasses.NotePageDAO;
+import com.example.thenotelobster.model.SummaryResponse;
+import com.example.thenotelobster.model.UserClasses.UserAccount;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;

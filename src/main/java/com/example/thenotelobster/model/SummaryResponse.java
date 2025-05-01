@@ -1,4 +1,4 @@
-package com.example.thenotelobster;
+package com.example.thenotelobster.model;
 
 public class SummaryResponse {
     public String response;

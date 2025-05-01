@@ -1,5 +1,6 @@
-package com.example.thenotelobster.NotePage;
-import com.example.thenotelobster.DatabaseConnection;
+package com.example.thenotelobster.model.NoteClasses;
+
+import com.example.thenotelobster.controller.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

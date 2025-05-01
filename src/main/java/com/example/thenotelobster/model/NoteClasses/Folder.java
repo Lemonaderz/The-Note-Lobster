@@ -1,4 +1,4 @@
-package com.example.thenotelobster.NotePage;
+package com.example.thenotelobster.model.NoteClasses;
 
 public class Folder {
     private int folderId;

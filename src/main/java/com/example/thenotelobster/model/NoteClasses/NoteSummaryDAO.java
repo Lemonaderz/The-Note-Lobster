@@ -1,8 +1,8 @@
-package com.example.thenotelobster;
+package com.example.thenotelobster.model.NoteClasses;
 
-import com.example.thenotelobster.NotePage.NotePageDAO;
+import com.example.thenotelobster.controller.DatabaseConnection;
+import com.example.thenotelobster.model.UserClasses.UserAccount;
 
-import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

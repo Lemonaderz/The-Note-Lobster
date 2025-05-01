@@ -1,19 +1,21 @@
-package com.example.thenotelobster;
+package com.example.thenotelobster.controller;
 
-import com.example.thenotelobster.NotePage.*;
-import com.example.thenotelobster.QuizClasses.QuizResponse;
+import com.example.thenotelobster.HelloApplication;
+import com.example.thenotelobster.model.QuizClasses.QuizResponse;
+import com.example.thenotelobster.model.QuizClasses.QuizDAO;
+import com.example.thenotelobster.model.UserClasses.UserAccount;
+import com.example.thenotelobster.model.NoteClasses.Folder;
+import com.example.thenotelobster.model.NoteClasses.Note;
+import com.example.thenotelobster.model.NoteClasses.NotePageDAO;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class NewQuizController extends NavigationUI {
 

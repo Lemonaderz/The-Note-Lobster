@@ -1,4 +1,4 @@
-package com.example.thenotelobster.QuizClasses;
+package com.example.thenotelobster.model.QuizClasses;
 
 public class QuizQuestion {
     public String question;

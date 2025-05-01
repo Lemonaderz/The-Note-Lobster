@@ -1,4 +1,4 @@
-package com.example.thenotelobster.NotePage;
+package com.example.thenotelobster.model.NoteClasses;
 
 public class Note {
     private int noteId;

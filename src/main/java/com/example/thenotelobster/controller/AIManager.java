@@ -1,9 +1,10 @@
-package com.example.thenotelobster;
+package com.example.thenotelobster.controller;
 import java.net.URI;
 import java.net.http.*;
 
-import com.example.thenotelobster.QuizClasses.QuizResponse;
+import com.example.thenotelobster.model.QuizClasses.QuizResponse;
 
+import com.example.thenotelobster.model.SummaryResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

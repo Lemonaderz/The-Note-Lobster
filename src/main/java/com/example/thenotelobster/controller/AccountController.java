@@ -1,11 +1,10 @@
-package com.example.thenotelobster;
+package com.example.thenotelobster.controller;
 
+import com.example.thenotelobster.model.UserClasses.UserAccount;
+import com.example.thenotelobster.model.UserClasses.UserAccountDAO;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 

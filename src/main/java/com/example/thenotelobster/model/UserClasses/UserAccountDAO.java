@@ -1,8 +1,8 @@
-package com.example.thenotelobster;
+package com.example.thenotelobster.model.UserClasses;
+
+import com.example.thenotelobster.controller.DatabaseConnection;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserAccountDAO {
     private Connection connection;

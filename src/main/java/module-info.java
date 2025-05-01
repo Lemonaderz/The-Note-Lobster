@@ -12,7 +12,14 @@ module com.example.thenotelobster {
 
     opens com.example.thenotelobster to javafx.fxml;
     exports com.example.thenotelobster;
-    exports com.example.thenotelobster.NotePage;
-    exports com.example.thenotelobster.QuizClasses;
-    opens com.example.thenotelobster.NotePage to javafx.fxml;
+    exports com.example.thenotelobster.model;
+    exports com.example.thenotelobster.model.QuizClasses;
+    opens com.example.thenotelobster.model to javafx.fxml;
+    exports com.example.thenotelobster.controller;
+    opens com.example.thenotelobster.controller to javafx.fxml;
+    opens com.example.thenotelobster.model.QuizClasses to javafx.fxml;
+    exports com.example.thenotelobster.model.NoteClasses;
+    opens com.example.thenotelobster.model.NoteClasses to javafx.fxml;
+    exports com.example.thenotelobster.model.UserClasses;
+    opens com.example.thenotelobster.model.UserClasses to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package com.example.thenotelobster;
+package com.example.thenotelobster.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

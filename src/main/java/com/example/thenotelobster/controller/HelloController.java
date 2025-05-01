@@ -1,5 +1,6 @@
-package com.example.thenotelobster;
+package com.example.thenotelobster.controller;
 
+import com.example.thenotelobster.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

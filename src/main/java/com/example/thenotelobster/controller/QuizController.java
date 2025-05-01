@@ -1,7 +1,10 @@
-package com.example.thenotelobster;
+package com.example.thenotelobster.controller;
 
-import com.example.thenotelobster.QuizClasses.QuizMultipleChoiceQuestion;
-import com.example.thenotelobster.QuizClasses.QuizResponse;
+import com.example.thenotelobster.HelloApplication;
+import com.example.thenotelobster.model.QuizClasses.QuizMultipleChoiceQuestion;
+import com.example.thenotelobster.model.QuizClasses.QuizResponse;
+import com.example.thenotelobster.model.QuizClasses.QuizDAO;
+import com.example.thenotelobster.model.UserClasses.UserAccount;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,13 +14,10 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
