@@ -1,11 +1,11 @@
 package com.example.thenotelobster.model;
 
 public class SummaryResponse {
-    public String response;
-    public String subject;
-    public String length;
-    public double complexity;
-    public String title;
+    private String response;
+    private String subject;
+    private String length;
+    private double complexity;
+    private String title;
     public SummaryResponse()
     {
 
@@ -19,32 +19,57 @@ public class SummaryResponse {
         this.title = title;
     }
 
-    public void SetResponse(String response)
+    public void setResponse(String response)
     {
         this.response = response;
 
     }
 
-    public void SetSubject(String subject)
+    public String getResponse()
+    {
+        return response;
+    }
+
+    public void setSubject(String subject)
     {
         this.subject = subject;
     }
 
-    public void SetLength(String length)
+    public String getSubject()
+    {
+        return subject;
+    }
+
+    public void setLength(String length)
     {
         this.length = length;
 
     }
 
-    public void SetComplexity(double complexity)
+    public String getLength()
+    {
+        return length;
+    }
+
+    public void setComplexity(double complexity)
     {
         this.complexity = complexity;
 
     }
 
-    public void SetTitle(String title)
+    public double getComplexity()
+    {
+        return complexity;
+    }
+
+    public void setTitle(String title)
     {
         this.title = title;
+    }
+
+    public String getTitle()
+    {
+        return title;
     }
 
 

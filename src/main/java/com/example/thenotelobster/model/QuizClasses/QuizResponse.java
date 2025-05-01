@@ -13,27 +13,37 @@ public class QuizResponse {
 
     }
 
-    public QuizResponse(String title, List<QuizMultipleChoiceQuestion> questions) {
+    public QuizResponse(String title, String description, List<QuizMultipleChoiceQuestion> questions) {
         this.title = title;
+        this.description = description;
         this.multipleChoiceQuestions = questions;
     }
 
-    public void consoleDisplay()
+    public String displayQuiz()
     {
-        System.out.println(title);
-        System.out.println("");
-        System.out.println(description);
-        System.out.println("");
+        String displayString = "";
+        displayString += title + "\n";
+        displayString += "\n";
+        displayString += description + "\n";
+        displayString += "\n";
+
+
+
         for(QuizMultipleChoiceQuestion question : multipleChoiceQuestions)
         {
-            System.out.println("");
-            System.out.println(question.question);
+            displayString += "\n";
+
+            displayString += question.question + "\n";
+
             for(String choice : question.choices)
             {
-                System.out.println(choice);
+                displayString += choice + "\n";
             }
-            System.out.println("Answer:  " + question.answer);
+            displayString += "Answer:  " + question.answer + "\n";
+
         }
+        System.out.println(displayString);
+        return displayString;
     }
     // This is to randomize the quiz since the AI is prone to picking B/C as its favourite answers.
     public void randomizeAnswers()

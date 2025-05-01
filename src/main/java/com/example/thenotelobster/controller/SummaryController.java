@@ -55,7 +55,7 @@ public class SummaryController extends NavigationUI {
 
                 SummaryResponse summaryResponse = aiManager.singleSummary;
                 System.out.println("Currently working");
-                aiManager.fetchChatResponse(ResummarizeNotes.getText(), summaryResponse.length, summaryResponse.complexity);
+                aiManager.fetchChatResponse(ResummarizeNotes.getText(), summaryResponse.getLength(), summaryResponse.getComplexity());
                 System.out.println("Obtained Response");
                 return null;
             }
@@ -79,9 +79,9 @@ public class SummaryController extends NavigationUI {
     public void setSummaryDetails()
     {
         AIManager aiManager = AIManager.getInstance();
-        SubjectText.setText(aiManager.singleSummary.subject);
-        TitleText.setText(aiManager.singleSummary.title);
-        SummaryText.setText(aiManager.singleSummary.response);
+        SubjectText.setText(aiManager.singleSummary.getSubject());
+        TitleText.setText(aiManager.singleSummary.getTitle());
+        SummaryText.setText(aiManager.singleSummary.getResponse());
     }
 
     @FXML protected void onBackClick() throws IOException {

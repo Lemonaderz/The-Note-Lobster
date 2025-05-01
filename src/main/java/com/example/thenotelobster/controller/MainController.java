@@ -52,8 +52,8 @@ public class MainController extends NavigationUI {
                 aiManager.clearChat();
                 aiManager.fetchChatResponse(summary, length, complexity);
                 System.out.println("Obtained Response");
-                aiManager.singleSummary.SetSubject(SubjectText.getText());
-                aiManager.singleSummary.SetTitle(TitleText.getText());
+                aiManager.singleSummary.setSubject(SubjectText.getText());
+                aiManager.singleSummary.setTitle(TitleText.getText());
                 return null;
             }
         };

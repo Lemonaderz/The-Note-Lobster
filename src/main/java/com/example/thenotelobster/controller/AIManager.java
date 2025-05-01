@@ -78,7 +78,7 @@ public final class AIManager {
         //replace the new lines with spaces so it doesn't cause json issues
         messageHistory += " { \"role\": \"assistant\", \"content\": \""+ (stringResponse.replace("\n", " ")).replace("\"", "'") + "\" },";
 
-        singleSummary.SetResponse(stringResponse);
+        singleSummary.setResponse(stringResponse);
 
         return stringResponse;
 
@@ -103,11 +103,11 @@ public final class AIManager {
 //        System.out.println(messageHistory);
 
         fetchPromptResponseWithHistory();
-        singleSummary.SetLength(length);
-        singleSummary.SetComplexity(complexity);
+        singleSummary.setLength(length);
+        singleSummary.setComplexity(complexity);
 //        System.out.println(messageHistory);
 
-        return singleSummary.response;
+        return singleSummary.getResponse();
 
     }
 
@@ -163,7 +163,7 @@ public final class AIManager {
         Gson gson = new Gson();
         quizResponse = gson.fromJson(quizJson, QuizResponse.class);
         quizResponse.randomizeAnswers();
-        quizResponse.consoleDisplay();
+        quizResponse.displayQuiz();
 
         currentQuiz = quizResponse;
         return quizResponse;
@@ -175,11 +175,8 @@ public final class AIManager {
 
     public void setResummaryMode()
     {
-        messageHistory += " { \"role\": \"assistant\", \"content\": \"" + singleSummary.response.replace("\n"," ").replace("\"", "'") + "\" },";
+        messageHistory += " { \"role\": \"assistant\", \"content\": \"" + singleSummary.getResponse().replace("\n"," ").replace("\"", "'") + "\" },";
         chatActive = true;
-
-
-
     }
 
 

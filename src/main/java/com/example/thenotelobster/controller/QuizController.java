@@ -59,7 +59,7 @@ public class QuizController extends NavigationUI {
             AIManager aiManager = AIManager.getInstance();
             quiz = (aiManager.currentQuiz != null)
                     ? aiManager.currentQuiz
-                    : new QuizResponse("Sample Quiz", Arrays.asList(
+                    : new QuizResponse("Sample Quiz", "Sample", Arrays.asList(
                     new QuizMultipleChoiceQuestion("What is 2 + 2?", 2, List.of("3", "4", "5", "6")),
                     new QuizMultipleChoiceQuestion("What color is the sky?", 1, List.of("Blue", "Green", "Red", "Yellow"))
             ));

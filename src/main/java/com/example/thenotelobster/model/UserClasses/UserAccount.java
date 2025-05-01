@@ -19,11 +19,6 @@ public final class UserAccount {
         this.currentUser = currentUser;
     }
 
-    public UserAccount getUser() {
-        return this.currentUser;
-    }
-
-
 
     public void  setUser(String email, String userName, String password) {
         // Since the id is auto-incremented, it is nice to have a constructor without it
