@@ -39,12 +39,11 @@ public class NotePageDAO {
     }
 
     public void insertNote (String name, int folderId, String text, String subject){
-        String sql = "INSERT INTO Notes (name, folderId, text, subject) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Notes (name, folderId, text) VALUES (?, ?, ?)";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, name);
             statement.setInt(2, folderId);
             statement.setString(3, text);
-            statement.setString(4, subject);
             statement.executeUpdate();
         }
         catch (SQLException sqlException){

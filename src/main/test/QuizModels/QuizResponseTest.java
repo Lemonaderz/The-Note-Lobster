@@ -16,8 +16,8 @@ public class QuizResponseTest {
     private static final String QUESTION_TWO = "What is 3 + 5";
     private static final List<String> CHOICES_ONE =  Arrays.asList("Blue", "Green", "Black", "White");
     private static final List<String> CHOICES_TWO = Arrays.asList("0", "3", "8", "12");
-    private static final int ANSWER_ONE = 1;
-    private static final int ANSWER_TWO = 3;
+    private static final String ANSWER_ONE = "A";
+    private static final String ANSWER_TWO = "C";
 
     QuizResponse response;
 
@@ -42,14 +42,14 @@ public class QuizResponseTest {
                 "Green\n" +
                 "Black\n" +
                 "White\n" +
-                "Answer:  1\n" +
+                "Answer:  A\n" +
                 "\n" +
                 "What is 3 + 5\n" +
                 "0\n" +
                 "3\n" +
                 "8\n" +
                 "12\n" +
-                "Answer:  3\n", QuizText);
+                "Answer:  C\n", QuizText);
 
     }
 }

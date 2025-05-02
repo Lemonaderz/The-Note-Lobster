@@ -60,8 +60,8 @@ public class QuizController extends NavigationUI {
             quiz = (aiManager.currentQuiz != null)
                     ? aiManager.currentQuiz
                     : new QuizResponse("Sample Quiz", "Sample", Arrays.asList(
-                    new QuizMultipleChoiceQuestion("What is 2 + 2?", 2, List.of("3", "4", "5", "6")),
-                    new QuizMultipleChoiceQuestion("What color is the sky?", 1, List.of("Blue", "Green", "Red", "Yellow"))
+                    new QuizMultipleChoiceQuestion("What is 2 + 2?", "B", List.of("3", "4", "5", "6")),
+                    new QuizMultipleChoiceQuestion("What color is the sky?", "A", List.of("Blue", "Green", "Red", "Yellow"))
             ));
         }
         loadQuiz(quiz);
@@ -111,7 +111,7 @@ public class QuizController extends NavigationUI {
             questionBox.setSpacing(10);
             questionBox.setStyle("-fx-border-color: d8d8d8; -fx-padding: 10;");
 
-            Label questionLabel = new Label("Question " + (i + 1));
+            Label questionLabel = new Label("Question " + (QuizMultipleChoiceQuestion.letterOptions.get(i)));
             Label questionText = new Label(question.question);
 
             questionBox.getChildren().add(0, questionLabel); // Add at top
@@ -182,7 +182,7 @@ public class QuizController extends NavigationUI {
                         if (selectedButton != null) {
 
 
-                            int answer = (int) choices.getSelectedToggle().getUserData();
+                            String answer = (String) choices.getSelectedToggle().getUserData();
                             //Disable touching the buttons again
                             for (Toggle button : choices.getToggles()) {
                                 RadioButton radioButton = (RadioButton) button;
@@ -197,7 +197,7 @@ public class QuizController extends NavigationUI {
                             }
                         }
                         //Set the correct answer to green, overriding if they chose it
-                        RadioButton correctAnswer = (RadioButton) choices.getToggles().get(currentQuestion.answer - 1);
+                        RadioButton correctAnswer = (RadioButton) choices.getToggles().get(QuizMultipleChoiceQuestion.letterOptions.indexOf(currentQuestion.answer));
                         correctAnswer.getStyleClass().remove("wrong");
                         correctAnswer.getStyleClass().add("correct");
                         //Next question

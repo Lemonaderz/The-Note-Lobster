@@ -15,8 +15,8 @@ public class QuizMultipleChoiceQuestionTest {
     private static final String QUESTION_TWO = "What is 3 + 5";
     private static final List<String> CHOICES_ONE =  Arrays.asList("Blue", "Green", "Black", "White");
     private static final List<String> CHOICES_TWO = Arrays.asList("0", "3", "8", "12");
-    private static final int ANSWER_ONE = 1;
-    private static final int ANSWER_TWO = 3;
+    private static final String ANSWER_ONE = "A";
+    private static final String ANSWER_TWO = "B";
 
 
     private QuizMultipleChoiceQuestion questionOne;
@@ -30,8 +30,9 @@ public class QuizMultipleChoiceQuestionTest {
 
     @Test
     public void testCheckResponse() {
-        assertTrue(questionOne.checkResponse(1));
-        assertFalse(questionTwo.checkResponse(4));
+        assertTrue(questionOne.checkResponse("A"));
+        assertFalse(questionTwo.checkResponse("D"));
+
     }
 
 

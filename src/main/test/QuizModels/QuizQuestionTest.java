@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class QuizQuestionTest {
 
     private static final String QUESTION = "What is 8*8?";
-    private static final int ANSWER = 64;
+    private static final String ANSWER = "64";
 
     private QuizQuestion question;
 
@@ -23,14 +23,14 @@ public class QuizQuestionTest {
 
     @Test
     public void testCheckResponseCorrect() {
-        assertTrue(question.checkResponse(64));
+        assertTrue(question.checkResponse("64"));
 
     }
 
     @Test
     public void testCheckResponseWrong()
     {
-        assertFalse(question.checkResponse(10));
+        assertFalse(question.checkResponse("10"));
     }
 }
 
