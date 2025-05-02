@@ -66,7 +66,7 @@ public final class AIManager {
         String formattedMessage = messageHistory.substring(0,messageHistory.length()-1) +"]";
         //formats out message into json
 
-        String prompt = "{\"model\": \"gemma3\","
+        String prompt = "{\"model\": \"gemma3:12b\","
                 + formattedMessage
                 + ",\"stream\": false }";
         String response = fetchPromptResponse(prompt,"http://localhost:11434/api/chat");
@@ -135,7 +135,7 @@ public final class AIManager {
                 "        \"properties\": {" +
                 "          \"question\": { \"type\": \"string\" }," +
                 "          \"choices\": { \"type\": \"array\", \"items\": { \"type\": \"string\" } }," +
-                "          \"answer\": { \"type\": \"string\", \"pattern\" : \"[A-D]\" }" +
+                "          \"answer\": { \"type\": \"string\", \"pattern\" : \"^[A-D]$\" }" +
                 "        }," +
                 "        \"required\": [\"question\", \"choices\", \"answer\"]" +
                 "      }" +
@@ -145,7 +145,7 @@ public final class AIManager {
                 "}";
 
 
-        String prompt = ("{\"model\": \"gemma3\", \"prompt\": \"" +
+        String prompt = ("{\"model\": \"gemma3:12b\", \"prompt\": \"" +
                 "Please make a Quiz with the following notes/summary. Make the quiz be multiple choice questions" +
                 "Indicate the answer with a Letter (A,B,C,D) for the position. Add a relevant title and a brief description of what the quiz is about. Begin the description with 'This quiz is about'. Use the Json Format provided as your response. Here is the Notes/Summary: " +
                 summary.replace("\"", "'").replace("\n", " ")
@@ -153,6 +153,7 @@ public final class AIManager {
                   jsonFormat +
                 " }");
         String response = fetchPromptResponse(prompt);
+        System.out.println(response);
 //        System.out.println(response);
         JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
 

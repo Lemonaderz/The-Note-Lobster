@@ -64,6 +64,7 @@ public class QuizController extends NavigationUI {
                     new QuizMultipleChoiceQuestion("What color is the sky?", "A", List.of("Blue", "Green", "Red", "Yellow"))
             ));
         }
+
         loadQuiz(quiz);
 
         QuizDAO quizDAO = new QuizDAO();
@@ -83,7 +84,11 @@ public class QuizController extends NavigationUI {
             if (newTitle != null) {
                 try {
                     QuizResponse q = quizDAO.getQuizByTitle(newTitle);
-                    if (q != null) loadQuiz(q);
+                    if (q != null)
+                    {
+                        q.displayQuiz();
+                        loadQuiz(q);
+                    }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -111,7 +116,7 @@ public class QuizController extends NavigationUI {
             questionBox.setSpacing(10);
             questionBox.setStyle("-fx-border-color: d8d8d8; -fx-padding: 10;");
 
-            Label questionLabel = new Label("Question " + (QuizMultipleChoiceQuestion.letterOptions.get(i)));
+            Label questionLabel = new Label("Question " + (i+1));
             Label questionText = new Label(question.question);
 
             questionBox.getChildren().add(0, questionLabel); // Add at top
@@ -119,7 +124,7 @@ public class QuizController extends NavigationUI {
             ToggleGroup group = new ToggleGroup();
             for (int questionNumber = 0; questionNumber < 4; questionNumber++) {
                 RadioButton radioButton = new RadioButton(question.choices.get(questionNumber));
-                radioButton.setUserData(questionNumber + 1);
+                radioButton.setUserData(QuizMultipleChoiceQuestion.letterOptions.get(questionNumber));
                 radioButton.setToggleGroup(group);
                 questionBox.getChildren().add(radioButton);
             }

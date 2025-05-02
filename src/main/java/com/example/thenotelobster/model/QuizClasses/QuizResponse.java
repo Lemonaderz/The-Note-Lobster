@@ -21,6 +21,7 @@ public class QuizResponse {
 
     public String displayQuiz()
     {
+        System.out.println(multipleChoiceQuestions.size());
         String displayString = "";
         displayString += title + "\n";
         displayString += "\n";
