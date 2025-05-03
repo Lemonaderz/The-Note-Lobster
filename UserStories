@@ -1,0 +1,51 @@
+Must-Have
+As a user, I would like to create an account, given that I have joined for the first time. When I input my details into the create account page , it will then be saved in the database M 2
+As a user, I would like to log in to my account. Given that my account details has been saved in the database. I will then have access to the Notelobster M 2
+As a user, I want to be able to use AI to assist in taking my notes so that I can have an easier and quicker time when taking notes. Given that I have typed a prompt, then the AI will create notes. M 3
+As a user, I want to be able to change the complexity options for notes so that I can select the detail of my note contents such as surface level or in depth understanding. Given that i have selected a specific complexity option. The AI will then send out a prompt based on the selected complexity option. M 2
+As a user, I want to be able to store organized notes I can look through. Given that I have notes already written. Then the organized notes will be saved through the database. M 2
+As a user, I want to be able to select the length of the notes so that I can have notes summarised to a specific word count. Given that a specific length has been selected then the AI will create a summary based on the selected word count. M 3
+As a user, I want the AI to add appropriate titles to my notes so that the topic is easily visible. Given that I have notes already written so that the AI has context on the subject. Then the AI will create a title for the current notes. M 2
+As a user, I want NoteLobster to have an easy-to-use graphical interface so that I am not overwhelmed by options and information. M 1
+As a user, I would like to give the AI additional prompts in order to customise my notes. Given that there are prompts already typed into the additional prompt field.Then the AI will customise the notes based on the typed prompts.  M 3
+As a user, I would like to edit my notes personally so that I can add or delete information. Given that there are notes already saved into the database. Then I would be able to edit my notes in my own way. M  2
+As a user, I would like a navigation bar so that I can easily move through different pages of the interface.  Given that I’ve logged into my account to access the main UI. Then I will have the option to navigate through the pages by the navigation bar. M 2
+As a user I would like high-contrast pages so I can read it easily. M Given that the elements of the UI have high colour contrast. 1
+As a user, I would like to change my account details, like email and password. M Given that I created and logged into account. 2
+
+Should-Have:
+As a user, I want to be able to sort my notes based on subject so that they are more organised and easily accessible. S Given that I’ve already created an AI note summary and saved it to my notes page. Then I can give it a subject to sort by 2
+As a user, I want to be able to search through my notes for keywords so that I can easily find the topic I am looking for. S Given that I’ve already created at least one AI note summary and saved it to my notes page. Then it can search and return me notes by keywords 2
+As a user I would like my notes to be connected to my account, so I can see them from different computers. S Given that I’ve created my own account and created an AI note summary and saved it to my notes page. 2
+As a user I would like to be able to easily share my notes between users so I can share notes with my friends/vice versa. S Given that I’ve created at least one AI note summary. 3
+As a user, I want NoteLobster to have an “Expand on my notes” button so that I can add more information to my notes instead of creating a new one. S Given that I have already created and saved an AI note summary. 2
+As a user, I would like to be able to add links to my notes for more context so the AI is more accurate and I can look at them later. S Given that I have already provided the AI with my notes. 1
+As a user, I would like to apply multiple tags to my notes so that I can categorise them more easily. Given that I have the ability to create notes. When I create a note. Then the tags are applied. S 2
+As a user, I would like to search through my notes by tags so that I can locate them easily. Given that I have applied tags to my notes. When I look for my notes. Then I can find my notes by tag. S 2
+As a user, I would like to upload documents to the AI to assist in the creation of notes so that I can upload information in bulk. Given that the AI can create notes. When I summarise my notes. Then the AI uses the uploaded document to assist in my notes. S 1
+As a user, I would like to change the font size of my notes so that they are easier to read. Given I can create notes. When I edit my notes. Then I can change the font size. S 1
+As a user, I would like to ask my AI to clarify the given notes so that I can understand what I am learning. Given I can create notes. When I want to better understand my notes. Then I can get the AI to clarify my notes. S 2
+As a user, I would like to be able to delete my notes so when it’s no longer necessary, I can delete it. Given that I have created. When I press the delete button. The notes are deleted. S 1
+As a user, I would like to delete my account so I can delete it when I stop using the app. Given that I have created an account. When I press the delete button. Then my account is removed. S 1
+
+
+Could-Have:
+
+As a user I would like to add my own images to my notes during editing so I can see models and diagrams/graphs. Given that I have created a note. When importing an image. Then the image is imported into the note. C 1
+As a user I would like to add images to my prompts so it can be used as context for the ai. Given that the AI can can create notes. When I expand on the notes with the AI. Then the AI includes the image into the notes. C 2
+As a user, I would like a light and dark mode so I don't hurt my eyes at night. C 2 Given that I am using the application and click on the modeswitch, then the theme of the site will change between primary dark and primary light.
+As a user, I want to be able to scan my handwritten notes and materials so that I don’t have to write notes online. C Given that I have handwritten notes, when I upload them to the program it is able to recognise the text and turn it into digitized words. 1
+As a user, I want to be able to receive answer solutions for quizzes I create based on notes so that I can check my answers. C Given that I have created and attempted the quiz, so that I can validate my answers. 3 
+As a user I want an explanation of questions I’m confused about so that I can understand the solution. C Given that I am doing an exam and get a question wrong, When I mark the question as confusing, I then get an explanation on the question. 3 
+As a user I want my quizzes to be marked inside the app so that I know I was correct or incorrect. C Given that I have finished the quiz, when I finish the quiz Then I can get it marked and graded. 3
+As a user I want to be able to take my quizzes/practice exams inside the app so I don’t have to do it somewhere else. C. Given that I want an exam, when I ask for a practice quiz/exam I then am able to take it inside the program. 3
+As a user, I want to be able to create quizzes/practice exams based on my notes so that I can test my learning of the note contents. C Given that I have made some notes, when I ask for a practice quiz, then one is generated by the AI for me to go through 3
+As a user, I would like to be able to listen to a Text-To-Speech of my notes so I can revise on the fly. C Given that I have uploaded my notes, when I ask for TTS notes, the application will read out my notes for me. 2
+As a user, I would like my NoteLobster to be able to convert spoken audio into text. C Given that I have an accessible microphone, When I select dictation, then the notelobster will dictate for me.  2
+As a user I would like to be able to highlight my notes so I can make skimming them later easier. C Given I have notes I have made, when I use the topbar to highlight, the notes will be highlighted. 1
+
+
+
+Won’t-Have:
+As a user, I would like to be able to draw on my notes so I can draw diagrams or shapes. W Given that I have made notes, When I draw on them, shapes and lines can appear on the notes.  3
+As a user, I would like it to be able to translate sections of notes so I can use this for my language classes. Given that studying more than one language. When I want to translate a document. Then the document is fully translated correctly. W 2
