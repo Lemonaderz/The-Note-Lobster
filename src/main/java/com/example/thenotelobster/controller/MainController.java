@@ -38,6 +38,9 @@ public class MainController extends NavigationUI {
     private Slider ComplexitySlider;
     @FXML
     private ProgressIndicator LoadingIndicator;
+    @FXML
+    private TextField CustomLength;
+
     private Window file;
 
     @FXML
@@ -46,7 +49,8 @@ public class MainController extends NavigationUI {
         String summary = AddNotes.getText();
         AIManager aiManager = AIManager.getInstance();
         double complexity = ComplexitySlider.getValue();
-        String length = LengthOption.getSelectedToggle().getUserData().toString();
+
+        String length = checkLength();
 
 //        aiManager.fetchAsynchronousChatResponse(summary,length, complexity, new MainResponseListener());
 
@@ -86,6 +90,24 @@ public class MainController extends NavigationUI {
                 () -> String.format("%.2f", ComplexitySlider.getValue()),
                 ComplexitySlider.valueProperty()
         ));
+    }
+
+    public String checkLength() {
+        // If CustomLength is not null check if input is double
+        if (CustomLength != null && !CustomLength.getText().trim().isEmpty()) {
+            String input = CustomLength.getText();
+            try {
+                double value = Double.parseDouble(input);
+                String length = String.valueOf(value);
+                return length;
+            } catch (NumberFormatException exception) {
+                String length = LengthOption.getSelectedToggle().getUserData().toString();
+                return length;
+            }
+        } else { // Otherwise return length options from radio buttons
+            String length = LengthOption.getSelectedToggle().getUserData().toString();
+            return length;
+        }
     }
 
     @FXML

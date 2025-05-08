@@ -91,7 +91,10 @@
                 <RadioButton text="Medium" fx:id="MediumOption" toggleGroup="$LengthOption" userData="200"/>
                 <RadioButton text="Long" fx:id="LongOption" toggleGroup="$LengthOption" userData="300"/>
             </VBox>
-            <TextField promptText="Insert custom length here.."/>
+            <VBox spacing="5" alignment="CENTER">
+                <Label text="Custom Length (Optional)" style="-fx-font-size: 15px"/>
+                <TextField fx:id="CustomLength" promptText="Insert custom length here.."/>
+            </VBox>
             <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"/>
             <ProgressIndicator visible="false" fx:id="LoadingIndicator"/>
         </VBox>
