@@ -11,39 +11,18 @@ import java.sql.Statement;
 public class NoteSummaryDAO {
     private Connection connection;
 
-    String userEmail = UserAccount.getInstance().getEmail();
-
     public NoteSummaryDAO() {
         connection = DatabaseConnection.getInstance();
     }
 
-    public void createTable() throws SQLException {
-        try {
-            Statement statement = connection.createStatement();
-            String sql = "CREATE TABLE IF NOT EXISTS Notes (" +
-                    "noteId INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "name TEXT NOT NULL, " +
-                    "folderID INTEGER," +
-                    "text TEXT, " +
-                    "subject TEXT, " +
-                    "userEmail VARCHAR NOT NULL, " +
-                    "FOREIGN KEY (folderId) REFERENCES Folder (folderId), " +
-                    "FOREIGN KEY (userEmail) REFERENCES userAccounts )";
-            statement.executeUpdate(sql); } catch (SQLException exception) {
-            System.err.println(exception);
-        }
-
-    }
-
-    public void insertSummary(String subject, String title, String summary, String email){
+    public void insertSummary(String subject, String title, String summary, String email) {
         try {
 
-            NotePageDAO notePageDAO= new NotePageDAO();
+            NotePageDAO notePageDAO = new NotePageDAO();
 
             // We can consider making this block here in the notePageDAO class and making it either its own function or part of getFolderInt by default.
             int folderId = notePageDAO.getFolderId(subject, email);
-            if(folderId == -1)
-            {
+            if (folderId == -1) {
                 notePageDAO.insertFolder(subject, email);
                 folderId = notePageDAO.getFolderId(subject, email);
             }
@@ -76,9 +55,4 @@ public class NoteSummaryDAO {
             System.err.println(exception);
         }
     }
-
-    public void getSummary() {
-
-    }
-
 }

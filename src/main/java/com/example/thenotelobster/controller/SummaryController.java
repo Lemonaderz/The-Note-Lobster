@@ -92,8 +92,6 @@ public class SummaryController extends NavigationUI {
         stage.setScene(scene);
     }
 
-
-
     @FXML private void initialize() {
 //        AIManager aiManager = AIManager.getInstance();
 //        String summary = aiManager.singleMessage;

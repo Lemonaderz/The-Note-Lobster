@@ -1,5 +1,6 @@
 package com.example.thenotelobster.controller;
 
+import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -26,12 +27,10 @@ public class MainController extends NavigationUI {
     private RadioButton LongOption;
     @FXML
     private ToggleGroup LengthOption;
-
+    @FXML
+    private Label ComplexityValue;
     @FXML
     private Slider ComplexitySlider;
-
-    @FXML private Button QuizButton;
-
     @FXML
     private ProgressIndicator LoadingIndicator;
 
@@ -75,5 +74,11 @@ public class MainController extends NavigationUI {
         new Thread(fetchAsynchronousChatResponse).start();
     }
 
-
+    @FXML
+    private void initialize() {
+        ComplexityValue.textProperty().bind(Bindings.createStringBinding(
+                () -> String.format("%.2f", ComplexitySlider.getValue()),
+                ComplexitySlider.valueProperty()
+        ));
+    }
 }
