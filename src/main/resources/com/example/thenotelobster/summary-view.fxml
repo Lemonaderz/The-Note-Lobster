@@ -65,7 +65,7 @@
     <right>
         <VBox fx:id="secondary" prefWidth="150" spacing="20" alignment="CENTER">
             <padding>
-                <Insets top="85" bottom="10" left="10" right="10"/>
+                <Insets top="85" bottom="30" left="10" right="10"/>
             </padding>
             <TextArea fx:id="ResummarizeNotes" wrapText="true" prefHeight="300"
                       promptText='To add additional notes to the note summary, enter or paste notes/information here and press "Resummarize"'/>

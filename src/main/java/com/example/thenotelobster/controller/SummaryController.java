@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Popup;
+import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -92,6 +94,11 @@ public class SummaryController extends NavigationUI {
         stage.setScene(scene);
     }
 
+    @Override
+    protected void onMainClick() {
+
+    }
+
     @FXML private void initialize() {
 //        AIManager aiManager = AIManager.getInstance();
 //        String summary = aiManager.singleMessage;
@@ -105,7 +112,6 @@ public class SummaryController extends NavigationUI {
             //do stuff
 
         });
-
     }
 
 }

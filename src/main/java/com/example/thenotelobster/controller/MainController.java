@@ -4,8 +4,13 @@ import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
+
+import static java.awt.SystemColor.window;
 
 public class MainController extends NavigationUI {
 
@@ -33,6 +38,7 @@ public class MainController extends NavigationUI {
     private Slider ComplexitySlider;
     @FXML
     private ProgressIndicator LoadingIndicator;
+    private Window file;
 
     @FXML
     protected void onSummarizeClick() throws IOException {
@@ -80,5 +86,12 @@ public class MainController extends NavigationUI {
                 () -> String.format("%.2f", ComplexitySlider.getValue()),
                 ComplexitySlider.valueProperty()
         ));
+    }
+
+    @FXML
+    protected void onFilesClick() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Resource File");
+        fileChooser.showOpenDialog(file);
     }
 }
