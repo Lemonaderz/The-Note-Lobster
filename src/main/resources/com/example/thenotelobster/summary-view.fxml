@@ -44,7 +44,7 @@
     <center>
         <VBox spacing="5">
             <padding>
-                <Insets bottom="10" left="10" right="10"/>
+                <Insets bottom="30" left="10" right="10"/>
             </padding>
             <Label text="Summary" style="-fx-font-size: 30px"/>
 

@@ -72,7 +72,7 @@
                 <Insets left="5" right="5"/>
             </padding>
             <Label text="Complexity" style="-fx-font-size: 15px"/>
-            <VBox spacing="5" alignment="CENTER">
+            <VBox alignment="CENTER">
                 <Slider fx:id="ComplexitySlider" min="1" max="10" value="1"
                         showTickMarks="true" showTickLabels="true" minorTickCount="0" blockIncrement="1"/>
                 <Label fx:id="ComplexityValue"/>

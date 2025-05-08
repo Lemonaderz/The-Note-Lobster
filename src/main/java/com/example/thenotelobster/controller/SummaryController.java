@@ -10,11 +10,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Popup;
-import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class SummaryController extends NavigationUI {
 
@@ -30,6 +29,8 @@ public class SummaryController extends NavigationUI {
     @FXML private ProgressIndicator LoadingIndicator;
     @FXML private TextField SubjectText;
     @FXML private TextField TitleText;
+
+    SummaryAlert summaryAlert = new SummaryAlert();
 
     @FXML protected void onSaveClick() throws IOException {
         AIManager aiManager = AIManager.getInstance();
@@ -87,17 +88,77 @@ public class SummaryController extends NavigationUI {
     }
 
     @FXML protected void onBackClick() throws IOException {
-        Stage stage = (Stage) BackButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        scene.getStylesheets().add(checkCurrentMode());
-        stage.setScene(scene);
+        Optional<ButtonType> result = summaryAlert.alert.showAndWait();
+        if (result.orElse(summaryAlert.Cancel) == summaryAlert.Continue) {
+            // If Continue button is clicked then go to page
+            super.onMainClick(); // Send back to main
+        } else if (result.orElse(summaryAlert.Continue) == summaryAlert.Cancel) {
+            // Else if Cancel Button is clicked close alert
+            summaryAlert.alert.close();
+        }
     }
 
     @Override
-    protected void onMainClick() {
-
+    protected void onMainClick() throws IOException {
+        Optional<ButtonType> result = summaryAlert.alert.showAndWait();
+        if (result.orElse(summaryAlert.Cancel) == summaryAlert.Continue) {
+            // If Continue button is clicked then go to page
+            super.onMainClick();
+        } else if (result.orElse(summaryAlert.Continue) == summaryAlert.Cancel) {
+            // Else if Cancel Button is clicked close alert
+            summaryAlert.alert.close();
+        }
     }
+
+    @Override
+    protected void onNotesClick() throws IOException {
+        Optional<ButtonType> result = summaryAlert.alert.showAndWait();
+        if (result.orElse(summaryAlert.Cancel) == summaryAlert.Continue) {
+            // If Continue button is clicked then go to page
+            super.onNotesClick();
+        } else if (result.orElse(summaryAlert.Continue) == summaryAlert.Cancel) {
+            // Else if Cancel Button is clicked close alert
+            summaryAlert.alert.close();
+        }
+    }
+
+    @Override
+    protected void onAccountClick() throws IOException {
+        Optional<ButtonType> result = summaryAlert.alert.showAndWait();
+        if (result.orElse(summaryAlert.Cancel) == summaryAlert.Continue) {
+            // If Continue button is clicked then go to page
+            super.onAccountClick();
+        } else if (result.orElse(summaryAlert.Continue) == summaryAlert.Cancel) {
+            // Else if Cancel Button is clicked close alert
+            summaryAlert.alert.close();
+        }
+    }
+
+    @Override
+    protected void onSignOut() throws IOException {
+        Optional<ButtonType> result = summaryAlert.alert.showAndWait();
+        if (result.orElse(summaryAlert.Cancel) == summaryAlert.Continue) {
+            // If Continue button is clicked then go to page
+            super.onSignOut();
+        } else if (result.orElse(summaryAlert.Continue) == summaryAlert.Cancel) {
+            // Else if Cancel Button is clicked close alert
+            summaryAlert.alert.close();
+        }
+    }
+
+    @Override
+    protected void onQuizClick() throws IOException {
+        Optional<ButtonType> result = summaryAlert.alert.showAndWait();
+        if (result.orElse(summaryAlert.Cancel) == summaryAlert.Continue) {
+            // If Continue button is clicked then go to page
+            super.onQuizClick();
+        } else if (result.orElse(summaryAlert.Continue) == summaryAlert.Cancel) {
+            // Else if Cancel Button is clicked close alert
+            summaryAlert.alert.close();
+        }
+    }
+
+
 
     @FXML private void initialize() {
 //        AIManager aiManager = AIManager.getInstance();
