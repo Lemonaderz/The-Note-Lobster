@@ -67,6 +67,12 @@ public class TheNotePageController extends NavigationUI {
         buttonBox.setPadding(new Insets(10));
         centerVBox.setPadding(new Insets(10));
 
+
+        // This automatically saves the code everytime text is inserted into the textbox instead of having to click the save button everytime
+        notesContent.textProperty().addListener((observableValue, oldText, newText) -> {
+            saveNotes();
+        });
+
     }
 
 
@@ -126,7 +132,7 @@ public class TheNotePageController extends NavigationUI {
                     selected.getChildren().add(chat);
                     selected.setExpanded(true);
 
-                    //This will auto select and edi the brand new chat
+                    //This will auto select and edit the brand new chat
                     chatHistory.getSelectionModel().select(chat);
                     chatHistory.edit(chat);
 
@@ -186,17 +192,22 @@ public class TheNotePageController extends NavigationUI {
             updatedTextArea.setWrapText(true);
             selected.setGraphic(updatedTextArea);
 
+            /*
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Save Successfull");
             alert.setHeaderText(null);
             alert.setContentText("your note has been saved sucessfully");
             alert.showAndWait();
+
+
         }
         else if (parent == rootItem){
             System.out.println("The Selected item is a folder, not a note.");
 
         }
 
+            */
+        }
 
     }
 

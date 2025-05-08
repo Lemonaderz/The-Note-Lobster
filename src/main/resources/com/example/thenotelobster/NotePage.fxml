@@ -18,7 +18,7 @@
             <HBox fx:id="buttonBox" spacing="10">
                 <Button onAction="#createNewChat" text="Create New Chat" />
                 <Button onAction="#createNewFolder" text="Create Folder" />
-                <Button onAction="#saveNotes" text="Save" />
+                <!-- <Button onAction="#saveNotes" text="Save" /> -->
                 <Button onAction="#deleteSelectedItem" text="Delete Chat" />
                 <Button onAction="#expandNotes" fx:id='ExpandNotesButton' text="Expand on my notes" />
             </HBox>
