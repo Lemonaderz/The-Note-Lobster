@@ -71,30 +71,40 @@ public class TheNotePageController extends NavigationUI {
 
 
 
+    @FXML
     private void findMatchingNote(String keyword){
+        rootItem.getChildren().clear();
         if(keyword == null || keyword.isEmpty()){
-            notesContent.clear();
-            titleLabel.setText("");
+            loadFoldersAndNotes();
             return;
         }
-        for (TreeItem<String> folder: rootItem.getChildren()){
-            for (TreeItem<String> chat : folder.getChildren()){
-                String title = chat.getValue().toLowerCase();
-                String content = "";
-                if(chat.getGraphic()instanceof TextArea textArea) {
-                    content =textArea.getText().toLowerCase();
+        //make keyword lowercase for case insensitive search
+        keyword=keyword.toLowerCase();
 
-                }
-                if (title.contains(keyword) || content.contains(keyword)){
-                    chatHistory.getSelectionModel().select(chat);
-                    chatHistory.scrollTo(chatHistory.getRow(chat));
-                    return;
-                }
+        for (var folder : notePageDAO.getAllFolders(userEmail)){
+            TreeItem<String> folderItem = new TreeItem<>(folder.getName());
+            folderItem.setExpanded(true);
 
+            for(var note: notePageDAO.getNotesByFolder(folder.getFolderId())){
+                String title = note.getName().toLowerCase();
+                String content = note.getText().toLowerCase();
+
+                if (title.contains(keyword) || content.contains(keyword)) {
+                    TreeItem<String> noteItem = new TreeItem<>(note.getName());
+                    TextArea noteArea = new TextArea(note.getText());
+                    noteArea.setWrapText(true);
+                    noteItem.setGraphic(noteArea);
+                    folderItem.getChildren().add(noteItem);
+                }
+            }
+            if (!folderItem.getChildren().isEmpty()) {
+                rootItem.getChildren().add(folderItem);
             }
         }
 
     }
+
+
 
     @FXML
     private void createNewChat() {
