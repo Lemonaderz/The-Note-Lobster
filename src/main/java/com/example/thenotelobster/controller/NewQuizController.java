@@ -19,16 +19,30 @@ import java.io.IOException;
 
 public class NewQuizController extends NavigationUI {
 
+    /** Button that navigates the user back to the quiz view screen. */
     @FXML Button backButton;
 
+    /** Button that creates the quiz */
     @FXML Button createQuizButton;
 
+    /** TreeView that holds all the Notes */
     @FXML private TreeView<String> notesTreeView;
+
+    /** Indicator to show user that it is loading */
     @FXML private ProgressIndicator LoadingIndicator;
 
+    /** Data access object used to retrieve folders and notes for the current user. */
     private final NotePageDAO notePageDAO = new NotePageDAO();
+
+    /** Singleton that is used to get the email of the current user. */
     private final String userEmail = UserAccount.getInstance().getEmail();
 
+    /**
+     * Handles the back button click event.
+     * Loads the previous quiz view FXML and navigates the user back to the quiz menu.
+     *
+     * @throws IOException if the FXML file cannot be loaded.
+     */
     @FXML
     protected void onBackButtonClick() throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
@@ -39,6 +53,10 @@ public class NewQuizController extends NavigationUI {
 
     }
 
+    /**
+     * Initializes the TreeView with folders and their associated notes for the current user.
+     * Each folder and its notes are retrieved from the database and displayed hierarchically.
+     */
     @FXML
     public void initialize() {
         TreeItem<String> root = new TreeItem<>("My Notes");
@@ -61,7 +79,18 @@ public class NewQuizController extends NavigationUI {
         notesTreeView.setShowRoot(false);
     }
 
-
+    /**
+     * Handles the create quiz button click event.
+     * Validates the selected note from the TreeView, then performs the following:
+     * <ul>
+     *   <li>Retrieves the note's text</li>
+     *   <li>Generates a quiz via the AIManager</li>
+     *   <li>Saves the quiz to the database using QuizDAO</li>
+     *   <li>Displays a loading indicator while processing</li>
+     *   <li>Returns to the quiz menu upon success</li>
+     * </ul>
+     * This method executes the quiz generation asynchronously to avoid UI blocking.
+     */
     @FXML
     public void onCreateQuizButtonClick() {
         // 1) figure out what TreeItem is selected

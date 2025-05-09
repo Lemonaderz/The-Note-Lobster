@@ -21,23 +21,56 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Controller class for managing the quiz view interface.
+ *
+ * Inherits navigation functionality from {@link NavigationUI}.
+ */
 public class QuizController extends NavigationUI {
 
+    /** The container VBox that displays quiz questions and options dynamically. */
     @FXML private VBox quizBox;
+
+    /** A scrollable container box inside the quiz view (not directly used in logic). */
     @FXML private VBox scrollBox;
+
+    /** Button that navigates the user to the new quiz creation screen. */
     @FXML private Button newQuizButton;
+
+    /** Label that displays the description of the currently selected quiz. */
     @FXML private Label descriptionLabel;
+
+    /** Label that displays the title of the currently selected quiz. */
     @FXML private Label titleLabel;
+
+    /** ListView that displays all available quiz titles for the logged-in user. */
     @FXML private ListView<String> QuizMenu;
+
+    /** Button that deletes the selected quiz from the database and UI. */
     @FXML private Button deleteQuizButton;
+
+    /** Button that submits the user's quiz responses for grading. */
     @FXML private Button SubmitButton;
+
+    /** Button that allows the user to retry the selected quiz. */
     @FXML private Button RetryButton;
+
+    /** Label that displays the user's grade after submitting a quiz. */
     @FXML private Label gradeLabel;
+
+    /** ScrollPane that holds the main content and enables vertical scrolling of the quiz. */
     @FXML private ScrollPane ScrollBar;
+
+    /** Stores the currently selected quiz object being taken or viewed. */
     private QuizResponse selectedQuiz;
 
+    /** The email address of the currently logged-in user, retrieved from the singleton UserAccount. */
     private final String userEmail = UserAccount.getInstance().getEmail();
 
+    /**
+     * Handles navigation to the "Create New Quiz" view.
+     * @throws IOException if the FXML file fails to load.
+     */
     @FXML
     protected void onCreateNewQuizClick() throws IOException {
         Stage stage = (Stage) newQuizButton.getScene().getWindow();
@@ -48,6 +81,10 @@ public class QuizController extends NavigationUI {
 
     }
 
+    /**
+     * Initializes the quiz controller by loading a sample or saved quiz, populating the quiz menu,
+     * and setting up listeners for quiz selection.
+     */
     public void initialize() {
         QuizResponse quiz;
         try {
@@ -101,6 +138,10 @@ public class QuizController extends NavigationUI {
         descriptionLabel.setText("");
     }
 
+    /**
+     * Loads the specified quiz into the UI for display.
+     * @param quiz The quiz to load.
+     */
     private void loadQuiz(QuizResponse quiz) {
         // Clear old content
 
@@ -136,6 +177,9 @@ public class QuizController extends NavigationUI {
         selectedQuiz = quiz;
     }
 
+    /**
+     * Deletes the currently selected quiz from the database and updates the UI.
+     */
     @FXML
     protected void onDeleteQuizButton() {
         String title = QuizMenu.getSelectionModel().getSelectedItem();
@@ -167,6 +211,9 @@ public class QuizController extends NavigationUI {
         });
     }
 
+    /**
+     * Handles submission of quiz answers, calculates the score, displays feedback, and disables inputs.
+     */
     @FXML
     protected void onSubmitButtonClick()
     {
@@ -232,6 +279,9 @@ public class QuizController extends NavigationUI {
 
     }
 
+    /**
+     * Reloads the last selected quiz.
+     */
     @FXML
     protected void onRetryClick()
     {
