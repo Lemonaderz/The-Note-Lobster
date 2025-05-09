@@ -9,15 +9,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Data Access Object (DAO) class for managing quiz data including creation,
+ * retrieval, and deletion of quizzes and their questions from the database.
+ */
 public class QuizDAO {
     private final Connection conn;
     private final Gson gson = new Gson();
 
+    /**
+     * Constructs a new QuizDAO and establishes a database connection.
+     */
     public QuizDAO() {
         this.conn = DatabaseConnection.getInstance();
     }
 
-    /** Insert a new Quiz, return its generated ID */
+    /**
+     * Inserts a new quiz into the database.
+     *
+     * @param quiz              The quiz object to be inserted
+     * @param noteId            The note ID associated with the quiz
+     * @return                  The generated quiz ID, or -1 if the insertion fails
+     * @throws SQLException     If a database access error occurs
+     */
     public int insertQuiz(QuizResponse quiz, int noteId) throws SQLException {
         String sql = "INSERT INTO Quiz (noteId, name, description, email) VALUES (?,?,?,?)";
         try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -31,7 +45,13 @@ public class QuizDAO {
         }
     }
 
-    /** Insert all questions for a given quizId */
+    /**
+     * Inserts a list of multiple-choice questions for a specific quiz.
+     *
+     * @param quizId            The ID of the quiz to associate the questions with
+     * @param questions         The list of questions to insert
+     * @throws SQLException     If a database access error occurs
+     */
     public void insertQuestions(int quizId, List<QuizMultipleChoiceQuestion> questions) throws SQLException {
         String sql = "INSERT INTO Question (quizId, question, answer, choices) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -46,7 +66,14 @@ public class QuizDAO {
         }
     }
 
-    /** Full save: quiz + all its questions */
+    /**
+     * Saves a quiz and its associated questions as a transaction.
+     *
+     * @param quiz              The quiz object to save
+     * @param noteId            The note ID associated with the quiz
+     * @return                  The generated quiz ID if successful
+     * @throws SQLException     If a database access error occurs or rollback is triggered
+     */
     public int save(QuizResponse quiz, int noteId) throws SQLException {
         conn.setAutoCommit(false);
         try {
@@ -62,10 +89,16 @@ public class QuizDAO {
         }
     }
 
-    /** Load a quiz + its questions by quizId */
+    /**
+     * Loads a quiz and its associated questions by quiz ID.
+     *
+     * @param quizId            The ID of the quiz to load
+     * @return                  A populated QuizResponse object
+     * @throws SQLException     If a database access error occurs
+     */
     public QuizResponse loadQuiz(int quizId) throws SQLException {
         QuizResponse quiz = new QuizResponse();
-        // 1) Load quiz metadata
+        // Load quiz metadata
         String q1 = "SELECT name, description FROM Quiz WHERE quizId = ?";
         try (PreparedStatement ps = conn.prepareStatement(q1)) {
             ps.setInt(1, quizId);
@@ -75,7 +108,7 @@ public class QuizDAO {
                 quiz.description = rs.getString("description");
             }
         }
-        // 2) Load questions
+        // Load questions
         String q2 = "SELECT question, answer, choices FROM Question WHERE quizId = ?";
         try (PreparedStatement ps = conn.prepareStatement(q2)) {
             ps.setInt(1, quizId);
@@ -93,10 +126,16 @@ public class QuizDAO {
         return quiz;
     }
 
+    /**
+     * Retrieves all quizzes created by the currently logged-in user.
+     *
+     * @return                  A list of QuizResponse objects
+     * @throws SQLException     If a database access error occurs
+     */
     public List<QuizResponse> getAllQuizzesForCurrentUser() throws SQLException {
         List<QuizResponse> quizzes = new ArrayList<>();
 
-        // First load all quiz metadata
+        // load all quiz metadata
         String sql = "SELECT quizId, name, description FROM Quiz WHERE email = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setString(1, UserAccount.getInstance().getEmail());
@@ -108,7 +147,7 @@ public class QuizDAO {
             qr.description = rs.getString("description");
             int quizId = rs.getInt("quizId");
 
-            // Now load questions for this quiz
+            // load questions for this quiz
             String q2 = "SELECT question, answer, choices FROM Question WHERE quizId = ?";
             try (PreparedStatement ps2 = conn.prepareStatement(q2)) {
                 ps2.setInt(1, quizId);
@@ -132,9 +171,14 @@ public class QuizDAO {
         return quizzes;
     }
 
-
+    /**
+     * Retrieves a quiz by its title for the currently logged-in user.
+     *
+     * @param title             The title of the quiz
+     * @return                  A populated QuizResponse object, or null if not found
+     * @throws SQLException     If a database access error occurs
+     */
     public QuizResponse getQuizByTitle(String title) throws SQLException {
-        // Find the quizId and description row
         String q1 = "SELECT quizId, description FROM Quiz WHERE name = ? AND email = ?";
         try (PreparedStatement ps = conn.prepareStatement(q1);) {
             ps.setString(1, title);
@@ -167,6 +211,14 @@ public class QuizDAO {
         }
     }
 
+    /**
+     * Retrieves the quiz ID by title and user email.
+     *
+     * @param title             The quiz title
+     * @param userEmail         The email of the quiz owner
+     * @return                  The quiz ID, or -1 if not found
+     * @throws SQLException     If a database access error occurs
+     */
     public int getQuizIdByTitle(String title, String userEmail) throws SQLException {
         String sql = "SELECT quizId FROM Quiz WHERE name = ? AND email = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -177,8 +229,14 @@ public class QuizDAO {
         }
     }
 
+    /**
+     * Deletes a quiz and its associated questions from the database.
+     *
+     * @param quizId            The ID of the quiz to delete
+     * @throws SQLException     If a database access error occurs
+     */
     public void deleteQuiz(int quizId) throws SQLException {
-        // delete questions first
+        // delete questions
         try (PreparedStatement ps1 = conn.prepareStatement(
                 "DELETE FROM Question WHERE quizId = ?")) {
             ps1.setInt(1, quizId);

@@ -11,23 +11,38 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller class for handling user login and account creation navigation.
+ * Inherits navigation functionality from {@link NavigationUI}.
+ */
 public class LoginController extends NavigationUI {
 
+    /** Button that navigates to the account creation view. */
     @FXML
     private Button createAccButton;
 
+    /** Button that initiates the login process. */
     @FXML
     private Button loginButton;
 
+    /** Text field for inputting user's email. */
     @FXML
     private TextField emailText;
 
+    /** Password field for inputting user's password. */
     @FXML
     private PasswordField passwordText;
 
+    /** Label to display login error messages. */
     @FXML
     private Label errorLabel;
 
+    /**
+     * Handles the event when the "Create Account" button is clicked.
+     * Loads and displays the account creation screen.
+     *
+     * @throws IOException if the FXML file for the create account view fails to load
+     */
     @FXML
     protected void onCreateAccButtonClick() throws IOException {
         Stage stage = (Stage) createAccButton.getScene().getWindow();
@@ -37,6 +52,13 @@ public class LoginController extends NavigationUI {
         stage.setScene(scene);
     }
 
+    /**
+     * Handles the event when the "Login" button is clicked.
+     * Verifies the user's credentials, and if valid, loads the main application view.
+     * If invalid, displays an error message to the user.
+     *
+     * @throws IOException if the main view fails to load
+     */
     @FXML
     protected void onLoginButtonClick() throws IOException {
         UserAccountDAO userAccountDAO = new UserAccountDAO();
