@@ -15,23 +15,57 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Controller Class responsible for the summary view
+ */
 public class SummaryController extends NavigationUI {
 
-    @FXML private TextArea SummaryText;
-
-    @FXML private TextArea ResummarizeNotes;
-
-    @FXML private Button SaveButton;
-    @FXML private Button ResummarizeButton;
-    @FXML private Button BackButton;
-
-    @FXML private Button SummaryButton;
-    @FXML private ProgressIndicator LoadingIndicator;
-    @FXML private TextField SubjectText;
+    /**
+     * TextArea containing the AI summary output
+     */
+    @FXML
+    private TextArea SummaryText;
+    /**
+     * TextArea used to enter note contents for re-summarization
+     */
+    @FXML
+    private TextArea ResummarizeNotes;
+    /**
+     * Button attributed to saving note summary
+     */
+    @FXML
+    private Button SaveButton;
+    /**
+     * Button attributed to re-summarizing note summary
+     */
+    @FXML
+    private Button ResummarizeButton;
+    /**
+     * Button attributed to going back to the main view
+     */
+    @FXML
+    private Button BackButton;
+    /**
+     * ProgressIndicator used to show that the AI is currently working at generating a response
+     */
+    @FXML
+    private ProgressIndicator LoadingIndicator;
+    /**
+     * Text-field used to display the subject of the summary
+     */
+    @FXML
+    private TextField SubjectText;
+    /**
+     * Text-field used to display the title of the summary
+     */
     @FXML private TextField TitleText;
 
     SummaryAlert summaryAlert = new SummaryAlert();
 
+    /**
+     * Saves the AI Summary response when SaveButton is clicked
+     * @throws IOException
+     */
     @FXML protected void onSaveClick() throws IOException {
         AIManager aiManager = AIManager.getInstance();
         aiManager.clearChat();
@@ -87,6 +121,10 @@ public class SummaryController extends NavigationUI {
         SummaryText.setText(aiManager.singleSummary.getResponse());
     }
 
+    /**
+     * Shows alert and sends user back to Main View when Continue is clicked
+     * @throws IOException
+     */
     @FXML protected void onBackClick() throws IOException {
         Optional<ButtonType> result = summaryAlert.alert.showAndWait();
         if (result.orElse(summaryAlert.Cancel) == summaryAlert.Continue) {

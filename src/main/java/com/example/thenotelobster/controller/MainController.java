@@ -8,6 +8,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.io.File;
 import java.io.IOException;
 
 import static java.awt.SystemColor.window;
@@ -41,7 +42,7 @@ public class MainController extends NavigationUI {
     @FXML
     private TextField CustomLength;
 
-    private Window file;
+    private Window stage;
 
     @FXML
     protected void onSummarizeClick() throws IOException {
@@ -114,6 +115,11 @@ public class MainController extends NavigationUI {
     protected void onFilesClick() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Resource File");
-        fileChooser.showOpenDialog(file);
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null) {
+
+        }
+
     }
 }
