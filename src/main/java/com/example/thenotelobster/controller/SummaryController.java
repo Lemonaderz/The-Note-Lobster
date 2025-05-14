@@ -25,36 +25,43 @@ public class SummaryController extends NavigationUI {
      */
     @FXML
     private TextArea SummaryText;
+
     /**
      * TextArea used to enter note contents for re-summarization
      */
     @FXML
     private TextArea ResummarizeNotes;
+
     /**
      * Button attributed to saving note summary
      */
     @FXML
     private Button SaveButton;
+
     /**
      * Button attributed to re-summarizing note summary
      */
     @FXML
     private Button ResummarizeButton;
+
     /**
      * Button attributed to going back to the main view
      */
     @FXML
     private Button BackButton;
+
     /**
      * ProgressIndicator used to show that the AI is currently working at generating a response
      */
     @FXML
     private ProgressIndicator LoadingIndicator;
+
     /**
      * Text-field used to display the subject of the summary
      */
     @FXML
     private TextField SubjectText;
+
     /**
      * Text-field used to display the title of the summary
      */
@@ -79,6 +86,9 @@ public class SummaryController extends NavigationUI {
         onNotesClick();
     }
 
+    /**
+     * onAction for ResummarizeButton, creates instance of AIManager and returns summary
+     */
     @FXML protected void onResummarise()
     {
         //Modularize this when I can
@@ -113,6 +123,9 @@ public class SummaryController extends NavigationUI {
         new Thread(fetchAsynchronousChatResponse).start();
     }
 
+    /**
+     * Sets the summary details of the AI Summary inside SubjectText, TitleText, and SummaryText
+     */
     public void setSummaryDetails()
     {
         AIManager aiManager = AIManager.getInstance();
@@ -136,68 +149,79 @@ public class SummaryController extends NavigationUI {
         }
     }
 
+    /**
+     * Shows alert and sends user back to Main View when Continue is clicked
+     * @throws IOException
+     */
     @Override
     protected void onMainClick() throws IOException {
         Optional<ButtonType> result = summaryAlert.alert.showAndWait();
         if (result.orElse(summaryAlert.Cancel) == summaryAlert.Continue) {
-            // If Continue button is clicked then go to page
             super.onMainClick();
         } else if (result.orElse(summaryAlert.Continue) == summaryAlert.Cancel) {
-            // Else if Cancel Button is clicked close alert
             summaryAlert.alert.close();
         }
     }
 
+    /**
+     * Shows alert and sends user back to Notes View when Continue is clicked
+     * @throws IOException
+     */
     @Override
     protected void onNotesClick() throws IOException {
         Optional<ButtonType> result = summaryAlert.alert.showAndWait();
         if (result.orElse(summaryAlert.Cancel) == summaryAlert.Continue) {
-            // If Continue button is clicked then go to page
             super.onNotesClick();
         } else if (result.orElse(summaryAlert.Continue) == summaryAlert.Cancel) {
-            // Else if Cancel Button is clicked close alert
             summaryAlert.alert.close();
         }
     }
 
+    /**
+     * Shows alert and sends user back to Account View when Continue is clicked
+     * @throws IOException
+     */
     @Override
     protected void onAccountClick() throws IOException {
         Optional<ButtonType> result = summaryAlert.alert.showAndWait();
         if (result.orElse(summaryAlert.Cancel) == summaryAlert.Continue) {
-            // If Continue button is clicked then go to page
             super.onAccountClick();
         } else if (result.orElse(summaryAlert.Continue) == summaryAlert.Cancel) {
-            // Else if Cancel Button is clicked close alert
             summaryAlert.alert.close();
         }
     }
 
+    /**
+     * Shows alert and sends user back to Login View when Continue is clicked
+     * @throws IOException
+     */
     @Override
     protected void onSignOut() throws IOException {
         Optional<ButtonType> result = summaryAlert.alert.showAndWait();
         if (result.orElse(summaryAlert.Cancel) == summaryAlert.Continue) {
-            // If Continue button is clicked then go to page
             super.onSignOut();
         } else if (result.orElse(summaryAlert.Continue) == summaryAlert.Cancel) {
-            // Else if Cancel Button is clicked close alert
             summaryAlert.alert.close();
         }
     }
 
+    /**
+     * Shows alert and sends user back to Quiz View when Continue is clicked
+     * @throws IOException
+     */
     @Override
     protected void onQuizClick() throws IOException {
         Optional<ButtonType> result = summaryAlert.alert.showAndWait();
         if (result.orElse(summaryAlert.Cancel) == summaryAlert.Continue) {
-            // If Continue button is clicked then go to page
             super.onQuizClick();
         } else if (result.orElse(summaryAlert.Continue) == summaryAlert.Cancel) {
-            // Else if Cancel Button is clicked close alert
             summaryAlert.alert.close();
         }
     }
 
-
-
+    /**
+     * On initialize calls setSummaryDetails
+     */
     @FXML private void initialize() {
 //        AIManager aiManager = AIManager.getInstance();
 //        String summary = aiManager.singleMessage;
