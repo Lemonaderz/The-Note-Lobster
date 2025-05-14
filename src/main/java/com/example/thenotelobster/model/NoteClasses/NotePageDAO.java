@@ -6,13 +6,25 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Data Access Object is used for handling the CRUD operations on folders and notes.
+ */
 public class NotePageDAO {
     private final Connection conn;
 
+    /**
+     * Creates a NotePageDAo and creates a database connection
+     */
     public NotePageDAO(){
         conn = DatabaseConnection.getInstance();
     }
 
+    /**
+     * Inserts a new folder into the database for the user
+     * @param folderName name of the newly created folder
+     * @param userEmail email identifying the folder's owner
+     * @return will generate a folderId on success or -1 if the insertion has failed
+     */
     public int insertFolder(String folderName, String userEmail) {
         String sql = "INSERT INTO Folder (name, userEmail) VALUES (?, ?)";
         try (PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -26,6 +38,12 @@ public class NotePageDAO {
         } return -1;
     }
 
+    /**
+     * Retrieves the ID of a folder by its name and owner.
+     * @param folderName name of the folder
+     * @param userEmail email identifying the owner of the folder
+     * @return returns folderId if found or -1 if not found or error
+     */
     public int getFolderId(String folderName, String userEmail){
         String sql = "SELECT folderId from Folder WHERE name = ? AND userEmail = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -38,6 +56,13 @@ public class NotePageDAO {
         } return -1;
     }
 
+    /**
+     * Inserts a new note under the specified folder
+     * @param name title of the note
+     * @param folderId ID fo the folder which contains the note
+     * @param text content of the note
+     * @param subject Unused
+     */
     public void insertNote (String name, int folderId, String text, String subject){
         String sql = "INSERT INTO Notes (name, folderId, text) VALUES (?, ?, ?)";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -53,6 +78,12 @@ public class NotePageDAO {
 
     }
 
+    /**
+     * Collects the ID of note by its name and folder
+     * @param noteName title of the note
+     * @param folderId ID of the folder which contains the notes
+     * @return noteId if found or -1 if noteId is not found or error
+     */
     public int getNoteId(String noteName, int folderId){
         String sql = "SELECT noteId FROM Notes WHERE name = ? AND folderId = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -66,6 +97,11 @@ public class NotePageDAO {
         } return -1;
     }
 
+    /**
+     * Renames a note by its ID
+     * @param noteId ID of the note to rename
+     * @param newName new title for the note
+     */
     public void renameNote(int noteId, String newName){
         String sql ="UPDATE Notes SET name = ? WHERE noteId = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)){
@@ -77,6 +113,12 @@ public class NotePageDAO {
         }
     }
 
+    /**
+     * Renames the folder by its old name and owner
+     * @param oldName the current folder name
+     * @param newName the desired folder name
+     * @param userEmail the user's email identifying the folder's owner
+     */
     public void renameFolder(String oldName, String newName, String userEmail){
         String sql = "UPDATE Folder SET name = ? WHERE name = ? AND userEmail = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -90,6 +132,11 @@ public class NotePageDAO {
         }
     }
 
+    /**
+     * Updates the text content of the existing note.
+     * @param noteId ID of the note that is need to be updated
+     * @param newText new text content of the note
+     */
     public void updateNoteText(int noteId, String newText){
         String sql = "UPDATE Notes SET text = ? WHERE noteId = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -102,6 +149,10 @@ public class NotePageDAO {
         }
     }
 
+    /**
+     * Deletes a note by the ID
+     * @param noteId ID of the note that will be deleted
+     */
     public void deleteNote(int noteId){
         String sql = "DELETE FROM Notes WHERE noteId = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -113,6 +164,10 @@ public class NotePageDAO {
         }
     }
 
+    /**
+     * Deletes a folder by it's ID
+     * @param folderId ID of the folder that will be deleted.
+     */
     public void deleteFolder(int folderId){
         String sql = "DELETE FROM Folder WHERE folderId = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -124,7 +179,11 @@ public class NotePageDAO {
         }
     }
 
-
+    /**
+     * Retrieves all the folders belonging to the user
+     * @param userEmail the email which identify the owner
+     * @return list of folders for the user
+     */
     public List<Folder> getAllFolders(String userEmail){
         List<Folder> folders = new ArrayList<>();
         try(PreparedStatement statement = conn.prepareStatement(
@@ -141,6 +200,11 @@ public class NotePageDAO {
         return  folders;
     }
 
+    /**
+     * Retrieves all the notes contained
+     * @param folderId ID of the folder
+     * @return returns the list of Note objects which belong to the folder
+     */
     public List<Note> getNotesByFolder(int folderId) {
         List<Note> notes = new ArrayList<>();
         String sql =  "SELECT * FROM Notes WHERE folderId = ?";

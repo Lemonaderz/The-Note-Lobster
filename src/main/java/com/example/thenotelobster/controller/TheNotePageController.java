@@ -1,23 +1,18 @@
 package com.example.thenotelobster.controller;
 
-
 import com.example.thenotelobster.model.NoteClasses.NotePageDAO;
 import com.example.thenotelobster.model.SummaryResponse;
 import com.example.thenotelobster.model.UserClasses.UserAccount;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.geometry.Insets;
-
 import java.io.IOException;
 
-
+/**
+ * TheNotePageController controller manages the multiple functions such as the creating, deleting, and saving of notes.
+ * It is also responsible in prompting the AI based notes expansion
+ */
 public class TheNotePageController extends NavigationUI {
     @FXML private TreeView<String> chatHistory;
-    @FXML private VBox leftVBox;
-    @FXML private HBox buttonBox;
-    @FXML private VBox centerVBox;
     @FXML private TextArea notesContent;
     @FXML private TextField searchField;
     @FXML private Label titleLabel;
@@ -26,17 +21,27 @@ public class TheNotePageController extends NavigationUI {
     private final NotePageDAO notePageDAO = new NotePageDAO();
     private final String userEmail = UserAccount.getInstance().getEmail();
 
-
+    /**
+     * The initialize method activities the user-interface components by setting up the listeners and
+     * loading up data from the database.
+     */
     @FXML
     public void initialize() {
         rootItem= new TreeItem<>("Subjects");
         rootItem.setExpanded(true);
         chatHistory.setRoot(rootItem);
         chatHistory.setShowRoot(false);
+
+        //enable renaming of folders and chats on double-clicking.
         chatHistory.setCellFactory(tv -> new editcell());
+
+        // Listen for search queries in the search bar
         searchField.textProperty().addListener((observableValue, oldVal, newVal) -> findMatchingNote(newVal));
 
+        // load the chat history with folders and notes
         loadFoldersAndNotes();
+
+        // Update the folder title and content.
         chatHistory.getSelectionModel().selectedItemProperty().addListener((observableValue, oldVal, newVal) -> {
             if (newVal !=null){
                 TreeItem<String> selected = newVal;
@@ -63,28 +68,30 @@ public class TheNotePageController extends NavigationUI {
             }
         });
 
-        leftVBox.setPadding(new Insets(10));
-        buttonBox.setPadding(new Insets(10));
-        centerVBox.setPadding(new Insets(10));
-
-
-        // This automatically saves the code everytime text is inserted into the textbox instead of having to click the save button everytime
+        // This automatically saves the code everytime text is inserted into the textbox
+        // instead of having to click the save button everytime
         notesContent.textProperty().addListener((observableValue, oldText, newText) -> {
             saveNotes();
         });
 
     }
 
-
-
+    /**
+     * The findMatchingNote is used to filter notes in the chat history by the selected keyword while updating the
+     * tree view. The notes filtered is also case-insensitive.
+     * @param keyword the term used to search for the note's title and content.
+     */
     @FXML
     private void findMatchingNote(String keyword){
+        // clear current items.
         rootItem.getChildren().clear();
+
+        // Reload all chats if no keyword is in search bar.
         if(keyword == null || keyword.isEmpty()){
             loadFoldersAndNotes();
             return;
         }
-        //make keyword lowercase for case insensitive search
+        //make keyword lowercase for case-insensitive search
         keyword=keyword.toLowerCase();
 
         for (var folder : notePageDAO.getAllFolders(userEmail)){
@@ -103,6 +110,7 @@ public class TheNotePageController extends NavigationUI {
                     folderItem.getChildren().add(noteItem);
                 }
             }
+            // Only show folders which match the keyword
             if (!folderItem.getChildren().isEmpty()) {
                 rootItem.getChildren().add(folderItem);
             }
@@ -111,7 +119,10 @@ public class TheNotePageController extends NavigationUI {
     }
 
 
-
+    /**
+     * The createNewChat method prompts for a chat name and creates a new chat under the chosen folder.
+     * It will also save the new chat into the SQL database.
+     */
     @FXML
     private void createNewChat() {
         TreeItem<String> selected = chatHistory.getSelectionModel().getSelectedItem();
@@ -122,6 +133,7 @@ public class TheNotePageController extends NavigationUI {
             dialog.showAndWait().ifPresent(chatName ->{
                 int folderId = notePageDAO.getFolderId(selected.getValue(), userEmail);
                 if(folderId != -1){
+                    // Database insert
                     notePageDAO.insertNote(chatName,folderId,"", selected.getValue());
                     TreeItem<String> chat = new TreeItem<>(chatName);
 
@@ -141,12 +153,17 @@ public class TheNotePageController extends NavigationUI {
         }
     }
 
+    /**
+     * createNewFolder will prompt a folder name and creates a new folder in the chat history while
+     * saving the folder name into the SQL database.
+     */
     @FXML
     private void createNewFolder() {
         TextInputDialog dialog = new TextInputDialog("New Subject");
         dialog.setTitle("Create new Folder");
         dialog.setHeaderText("Enter a name for the new subject");
         dialog.showAndWait().ifPresent(name -> {
+            // Database insert
             int folderId = notePageDAO.insertFolder(name, userEmail);
             if (folderId !=-1){
                 TreeItem<String> folder = new TreeItem<>(name);
@@ -160,6 +177,9 @@ public class TheNotePageController extends NavigationUI {
         });
     }
 
+    /**
+     * Saves the currently edited notepage to the database.
+     */
     @FXML
     private void saveNotes(){
         TreeItem<String> selected = chatHistory.getSelectionModel().getSelectedItem();
@@ -180,7 +200,6 @@ public class TheNotePageController extends NavigationUI {
                 return;
             }
 
-
             int noteId = notePageDAO.getNoteId(chatName, folderId);
             if (noteId != -1) {
                 notePageDAO.updateNoteText(noteId, content); //if note already exists update
@@ -192,25 +211,15 @@ public class TheNotePageController extends NavigationUI {
             updatedTextArea.setWrapText(true);
             selected.setGraphic(updatedTextArea);
 
-            /*
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Save Successfull");
-            alert.setHeaderText(null);
-            alert.setContentText("your note has been saved sucessfully");
-            alert.showAndWait();
 
-
-        }
-        else if (parent == rootItem){
-            System.out.println("The Selected item is a folder, not a note.");
-
-        }
-
-            */
         }
 
     }
 
+    /**
+     * deleteSelectedItem deletes the selected folder or chat with user confirmation.
+     * It will also delete the selected folder or chat to the database
+     */
     @FXML
     private void deleteSelectedItem(){
         TreeItem<String> selected = chatHistory.getSelectionModel().getSelectedItem();
@@ -241,6 +250,7 @@ public class TheNotePageController extends NavigationUI {
                         }
                     }
                 }
+                // Remove chat from the user-interface
                 if(parent !=null) {
                     parent.getChildren().remove(selected);
                 } else {
@@ -248,15 +258,15 @@ public class TheNotePageController extends NavigationUI {
                 }
             }
         });
-
-
     }
 
 
-
-
+    /**
+     * This allows renaming folders and chats by double-clicking.
+     */
     private class editcell extends TreeCell<String>{
         public editcell(){
+            // double-click to rename
             setOnMouseClicked(mouseEvent ->{
                 if (mouseEvent.getClickCount() == 2 && !isEmpty()){
                     showEditPopup();
@@ -264,6 +274,10 @@ public class TheNotePageController extends NavigationUI {
             });
         }
 
+        /**
+         * When a user double-clicks on a selected folder or chat, it will show a dialog
+         * to rename the folder or chat and will update the database afterward.
+         */
         private void showEditPopup(){
             TreeItem<String> item = getTreeItem();
             if (item==null) return;
@@ -305,8 +319,10 @@ public class TheNotePageController extends NavigationUI {
 
     }
 
+    /**
+     * Loads all folders from the database with their associated notes into the chat history.
+     */
     private void loadFoldersAndNotes() {
-        try {
             for (var folder : notePageDAO.getAllFolders(userEmail)) {
                 TreeItem<String> folderItem = new TreeItem<>(folder.getName());
                 folderItem.setExpanded(true);
@@ -320,11 +336,13 @@ public class TheNotePageController extends NavigationUI {
                 }
                 rootItem.getChildren().add(folderItem);
             }
-        } catch (Exception error) {
-            error. printStackTrace();
-        }
     }
 
+    /**
+     * The expandNotes expands the current notes using the Ollama AI and navigates the user to teh summary
+     * page automatically.
+     * @throws IOException
+     */
     @FXML
     private void expandNotes() throws IOException {
         AIManager aiManager = AIManager.getInstance();
