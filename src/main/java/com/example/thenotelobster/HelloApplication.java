@@ -14,14 +14,24 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * The main application class, running main and starting the JavaFX thread
+ */
 public class HelloApplication extends Application {
-
+    /** The title of the javafx application*/
     public static final String TITLE = "The Note Lobster";
+    /** A rectangle, getting the screen size of the user*/
     static Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+    /** The width of the program, screensize reduced for window border width*/
     public static final int WIDTH = (int) screenSize.getWidth() - 10;
+    /** The width of the program, screensize reduced for window border width*/
     public static final int HEIGHT = (int) screenSize.getHeight() -10;
 
-
+    /**
+     * the JavaFX start method, loading the first scene
+     * @param stage the stage to load the scene into
+     * @throws IOException Throws an exception if the process is interrupted
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
@@ -33,6 +43,11 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+    /**
+     * Main method, runs at start and runs the javaFX program
+     * @param args potential arguments added to the main method.
+     * @throws SQLException Throws an exception if there are any SQL errros
+     */
     public static void main(String[] args) throws SQLException {
 
         AIManager manager = AIManager.getInstance();

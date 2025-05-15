@@ -5,7 +5,7 @@ import javafx.scene.control.TextArea;
 import java.io.*;
 
 /**
- * Class used to Manage uploading files for the
+ * Class used to Manage uploading files for the summarizing
  */
 public class FileManager {
 

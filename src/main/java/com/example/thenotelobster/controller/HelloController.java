@@ -9,22 +9,29 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * A controller for the welcome and terms and conditions screen
+ */
 public class HelloController {
+    /** The welcome text*/
     @FXML
     private Label welcomeText;
-
+    /** A checkbox to agree to conditions*/
     @FXML
     private CheckBox agreeCheckBox;
+    /** A button to continue to main screen*/
     @FXML
     private Button nextButton;
-
+    /** A button to cancel agreement*/
     @FXML
     private Button CancelButton;
-
+    /** The text area containing terms and conditions */
     @FXML
     private TextArea termsAndConditions;
 
-
+    /**
+     * A function running on scene start, setting the terms and conditions
+     */
     @FXML
     public void initialize() {
         termsAndConditions.setText("""
@@ -89,12 +96,19 @@ By using NoteLobster, you acknowledge that you have read, understood, and agreed
     }
 
 
-
+    /**
+     * Allows next after agreeing on checkbox
+     */
     @FXML
     protected void onAgreeCheckBoxClick() {
         boolean accepted = agreeCheckBox.isSelected();
         nextButton.setDisable(!accepted);
     }
+
+    /**
+     * Goes to Main screen when the next button is clicked
+     * @throws IOException When this is interrupted somehow, throws this exception
+     */
     @FXML
     protected void onNextButtonClick() throws IOException {
         Stage stage = (Stage) nextButton.getScene().getWindow();
@@ -105,6 +119,10 @@ By using NoteLobster, you acknowledge that you have read, understood, and agreed
         stage.setScene(scene);
     }
 
+    /**
+     * On clicking the cancel button closes the application.
+     * @throws IOException  When this is interrupted somehow, throws this exception
+     */
     @FXML
     protected void onCancelButtonClick() throws IOException {
         Stage stage = (Stage) CancelButton.getScene().getWindow();

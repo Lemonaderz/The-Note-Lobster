@@ -11,20 +11,27 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * the JavaFX controller for creating a new account
+ */
 public class CreateAccController extends NavigationUI {
-
+    /** Continue Button */
     @FXML
     private Button contuineButton;
-
+    /** text field for username */
     @FXML
     private TextField nameText;
-
+    /** text field for email */
     @FXML
     private TextField emailText;
-
+    /** password (hidden) field for password */
     @FXML
     private PasswordField passwordText;
 
+    /**
+     * When the continue button is clicked, create a new user and insert into database, before moving on to main view.
+     * @throws IOException If this process is interrupted throw an IOException
+     */
     @FXML
     protected void onContuineButtonClick() throws IOException {
         UserAccountDAO userAccountDAO = new UserAccountDAO();

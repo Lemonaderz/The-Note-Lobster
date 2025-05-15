@@ -94,8 +94,14 @@ public class MainController extends NavigationUI {
     private Window stage;
 
     /**
-     *
-     * @throws IOException
+     * Handles when the summary button is clicked
+     * Gets the title, subject and notes inside the Main screen and
+     * <ul>
+     *   <li>Begins generating a summary from the AIManager</li>
+     *   <li>Displays a loading indicator while processing</li>
+     *   <li>Moves to summary scene on success</li>
+     * </ul>
+     * This method executes asynchronously to prevent program freezing
      */
     @FXML
     protected void onSummarizeClick() throws IOException {
