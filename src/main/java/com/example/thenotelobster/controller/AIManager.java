@@ -9,29 +9,61 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+/**
+ * A singleton object used as a manager for all AI requests.
+ * <p>This class ensures that only one instance of a user is active in memory at a time,
+ *  using the Singleton design pattern. This is to allow data transfer between scenes.</p>
+ */
 public final class AIManager {
 
     // This is the url we are using, its local.
+    /** A client object, which is used to send and recieve requests*/
     private HttpClient client = HttpClient.newHttpClient();
+    /** The main url for using Ollama restAPI calls*/
     public String Url = "http://localhost:11434/api/generate";
+    /** A string containing a formatted history of messages, for use in chats */
     public String messageHistory = "\"messages\": [";
+    /** A boolean for if a chat is currently active or a new one is to be started*/
     public boolean chatActive = false;
+    /** A summary response which is the main data transferred between scenes*/
     public SummaryResponse singleSummary = new SummaryResponse();
+    /** The static AI Manager instance which is used for the singleton design pattern */
     private final static AIManager INSTANCE = new AIManager();
+    /** The quiz last created, the other data transferred between scenes*/
     public QuizResponse currentQuiz;
 
+    /**
+     * A private constructor for the singleton design pattern
+     */
     private AIManager()
     {
     }
 
+    /**
+     * A instance getter to allow for a single object
+     * @return The instance of the AIManager
+     */
     public static AIManager getInstance() {
         return INSTANCE;
     }
+
+    /**
+     * Fetches a single prompt response to the ai with the given message
+     * @param message The prompt to give to the AI
+     * @return A string of the AI response
+     */
     public String fetchPromptResponse(String message)
     {
 
         return fetchPromptResponse(message, Url);
     }
+
+    /**
+     * Fetches a prompt response from a specified url instead
+     * @param prompt Prompt to get response from
+     * @param url Url to use
+     * @return A string with the response
+     */
     public String fetchPromptResponse(String prompt, String url)
     {
         // This is the request here, pretty much building the template
@@ -61,6 +93,10 @@ public final class AIManager {
 
     }
 
+    /**
+     * Fetch a prompt response, using the history to get the response, and appending the response to the history afterwards
+     * @return A string with the AI response.
+     */
     public String fetchPromptResponseWithHistory()
     {
         String formattedMessage = messageHistory.substring(0,messageHistory.length()-1) +"]";
@@ -84,6 +120,13 @@ public final class AIManager {
 
     }
 
+    /**
+     * Fetch a chat response, from a message, length and complexity, integrating response into the message history for further chats
+     * @param message the prompt message to ask the AI
+     * @param length the preferred summary response length
+     * @param complexity the preferred summary response complexity
+     * @return Returns a string with the response
+     */
     public String fetchChatResponse(String message, String length, double complexity)
     {
 
@@ -112,13 +155,20 @@ public final class AIManager {
     }
 
 
-
+    /**
+     * Clears the message history and sets chatActive to false, to allow a new chat to start
+     */
     public void clearChat()
     {
         chatActive = false;
         messageHistory = "\"messages\": [";
     }
 
+    /**
+     * Fetch a QuizResponse object from a given summary
+     * @param summary a summary or notes to make a quiz out of
+     * @return A filled in QuizResponse object with the quiz questions and answers
+     */
     public QuizResponse fetchQuizResponse(String summary)
     {
 
@@ -174,6 +224,9 @@ public final class AIManager {
 //        System.out.println(stringResponse);
     }
 
+    /**
+     * A method for setting the AI to resummarize mode, for use when expanding on notes from notes page.
+     */
     public void setResummaryMode()
     {
         messageHistory += " { \"role\": \"assistant\", \"content\": \"" + singleSummary.getResponse().replace("\n"," ").replace("\"", "'") + "\" },";
