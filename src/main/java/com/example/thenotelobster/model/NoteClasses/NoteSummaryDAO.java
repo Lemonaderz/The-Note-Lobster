@@ -8,6 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Data Access Object Class used to save a Note Summary on the summary-view
+ */
 public class NoteSummaryDAO {
     private Connection connection;
 
@@ -15,6 +18,13 @@ public class NoteSummaryDAO {
         connection = DatabaseConnection.getInstance();
     }
 
+    /**
+     * Saves a note summary the notes database
+     * @param subject The subject title of the note summary
+     * @param title The title given to the note summary
+     * @param summary The text contents generated from the note summary
+     * @param email The email associated with the user saving the summary
+     */
     public void insertSummary(String subject, String title, String summary, String email) {
         try {
 
