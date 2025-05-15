@@ -54,11 +54,6 @@ public class HelloApplication extends Application {
         UserAccountDAO userAccountDAO = new UserAccountDAO();
         userAccountDAO.createTable();
 
-        NoteSummaryDAO noteSummaryDAO = new NoteSummaryDAO();
-        noteSummaryDAO.createTable();
-
-        noteSummaryDAO.deleteSummary(7);
-
 //        userAccountDAO.insert(new UserAccount("hudson@email.com", "Hudson", "Password1"));
 //        userAccountDAO.insert(new UserAccount("lucas@email.com", "Lucas", "Password2"));
 //        userAccountDAO.insert(new UserAccount("harrison@email.com", "Harrison", "Password3"));
