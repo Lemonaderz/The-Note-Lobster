@@ -1,0 +1,7 @@
+module:com.example.thenotelobster
+com.example.thenotelobster
+com.example.thenotelobster.controller
+com.example.thenotelobster.model
+com.example.thenotelobster.model.NoteClasses
+com.example.thenotelobster.model.QuizClasses
+com.example.thenotelobster.model.UserClasses
