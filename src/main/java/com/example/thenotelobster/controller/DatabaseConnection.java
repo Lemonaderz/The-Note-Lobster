@@ -19,7 +19,11 @@ public class DatabaseConnection {
             System.err.println(sqlEx);
         }
     }
-    /** Gets the connection, without creating multiple */
+
+    /**
+     * Get an instance of the current database connection
+     * @return an SQLite connection instance of the current database connection
+     */
     public static Connection getInstance() {
         if (instance == null) {
             new DatabaseConnection();

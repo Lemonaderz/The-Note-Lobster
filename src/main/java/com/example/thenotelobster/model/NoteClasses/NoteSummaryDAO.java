@@ -12,8 +12,9 @@ import java.sql.Statement;
  * Data Access Object Class used to save a Note Summary on the summary-view
  */
 public class NoteSummaryDAO {
+    /** A connection to the Database    */
     private Connection connection;
-
+    /** A default constructor, getting a connection instance from DatabaseConnection*/
     public NoteSummaryDAO() {
         connection = DatabaseConnection.getInstance();
     }
@@ -54,6 +55,10 @@ public class NoteSummaryDAO {
         }
     }
 
+    /**
+     * Deletes a note from an ID
+     * @param noteID the ID of the note
+     */
     public void deleteSummary(int noteID) {
         try {
             PreparedStatement delete = connection.prepareStatement(

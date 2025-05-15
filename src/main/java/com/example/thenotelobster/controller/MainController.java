@@ -94,6 +94,7 @@ public class MainController extends NavigationUI {
     private Window stage;
 
     /**
+     *
      * Handles when the summary button is clicked
      * Gets the title, subject and notes inside the Main screen and
      * <ul>
@@ -102,6 +103,7 @@ public class MainController extends NavigationUI {
      *   <li>Moves to summary scene on success</li>
      * </ul>
      * This method executes asynchronously to prevent program freezing
+     * @throws IOException if an I/O error occurs during the summarizing
      */
     @FXML
     protected void onSummarizeClick() throws IOException {

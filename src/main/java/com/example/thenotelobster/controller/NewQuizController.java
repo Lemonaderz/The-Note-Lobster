@@ -17,6 +17,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * JavaFX controller for creating new quiz page.
+ */
 public class NewQuizController extends NavigationUI {
 
     /** Button that navigates the user back to the quiz view screen. */

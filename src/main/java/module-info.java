@@ -1,3 +1,6 @@
+/**
+ * Module.Java file
+ */
 module com.example.thenotelobster {
     requires javafx.controls;
     requires javafx.fxml;

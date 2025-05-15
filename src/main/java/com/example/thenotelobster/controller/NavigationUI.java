@@ -88,7 +88,7 @@ public abstract class NavigationUI {
 
     /**
      * Function which sends the user to the NotePage view when they click the NotesButton
-      * @throws IOException
+      * @throws IOException Throws exception when input output processes interrupted or fail
      */
     @FXML
     protected void onNotesClick() throws IOException {
@@ -121,7 +121,7 @@ public abstract class NavigationUI {
 
     /**
      * Function which sends the user to the login view when they click the SignOutButton
-     * @throws IOException
+     * @throws IOException Throws exception when input output processes interrupted or fail
      */
     @FXML
     protected void onSignOut() throws IOException {
@@ -134,7 +134,7 @@ public abstract class NavigationUI {
 
     /**
      * Function which sends the user to the main view when they click the MainButton
-     * @throws IOException
+     * @throws IOException Throws exception when input output processes interrupted or fail
      */
     @FXML
     protected void onMainClick() throws IOException {
@@ -147,7 +147,7 @@ public abstract class NavigationUI {
 
     /**
      * Function which sends the user to the account view when they click the AccountButton
-     * @throws IOException
+     * @throws IOException Throws exception when input output processes interrupted or fail
      */
     @FXML
     protected void onAccountClick() throws IOException {
@@ -160,8 +160,8 @@ public abstract class NavigationUI {
 
     /**
      * Function which sends the user to the summary view once their summary has been generated
-     * @param button
-     * @throws IOException
+     * @param button The button clicked to go to the summary page.
+     * @throws IOException Throws exception when input output processes interrupted or fail
      */
     @FXML
     protected void goToSummaryPage(Button button) throws IOException {
@@ -176,7 +176,7 @@ public abstract class NavigationUI {
 
     /**
      * Function which sends the user to the quiz view when they click the QuizButton
-     * @throws IOException
+     * @throws IOException Throws exception when input output processes interrupted or fail
      */
     @FXML
     protected void onQuizClick() throws IOException {

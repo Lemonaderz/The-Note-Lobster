@@ -71,7 +71,7 @@ public class SummaryController extends NavigationUI {
 
     /**
      * Saves the AI Summary response when SaveButton is clicked
-     * @throws IOException
+     * @throws IOException Exception for when input output processes fail or are interrupted
      */
     @FXML protected void onSaveClick() throws IOException {
         AIManager aiManager = AIManager.getInstance();
@@ -136,7 +136,7 @@ public class SummaryController extends NavigationUI {
 
     /**
      * Shows alert and sends user back to Main View when Continue is clicked
-     * @throws IOException
+     * @throws IOException Exception for when input output processes fail or are interrupted
      */
     @FXML protected void onBackClick() throws IOException {
         Optional<ButtonType> result = summaryAlert.alert.showAndWait();
@@ -151,7 +151,7 @@ public class SummaryController extends NavigationUI {
 
     /**
      * Shows alert and sends user back to Main View when Continue is clicked
-     * @throws IOException
+     * @throws IOException Exception for when input output processes fail or are interrupted
      */
     @Override
     protected void onMainClick() throws IOException {
@@ -165,7 +165,7 @@ public class SummaryController extends NavigationUI {
 
     /**
      * Shows alert and sends user back to Notes View when Continue is clicked
-     * @throws IOException
+     * @throws IOException Exception for when input output processes fail or are interrupted
      */
     @Override
     protected void onNotesClick() throws IOException {
@@ -179,7 +179,7 @@ public class SummaryController extends NavigationUI {
 
     /**
      * Shows alert and sends user back to Account View when Continue is clicked
-     * @throws IOException
+     * @throws IOException Exception for when input output processes fail or are interrupted
      */
     @Override
     protected void onAccountClick() throws IOException {
@@ -193,7 +193,7 @@ public class SummaryController extends NavigationUI {
 
     /**
      * Shows alert and sends user back to Login View when Continue is clicked
-     * @throws IOException
+     * @throws IOException Exception for when input output processes fail or are interrupted
      */
     @Override
     protected void onSignOut() throws IOException {
@@ -207,7 +207,7 @@ public class SummaryController extends NavigationUI {
 
     /**
      * Shows alert and sends user back to Quiz View when Continue is clicked
-     * @throws IOException
+     * @throws IOException Exception for when input output processes fail or are interrupted
      */
     @Override
     protected void onQuizClick() throws IOException {
