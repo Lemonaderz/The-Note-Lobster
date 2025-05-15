@@ -44,7 +44,7 @@
     <center>
         <VBox spacing="10" alignment="CENTER">
             <padding>
-                <Insets top="10"  bottom="10" left="10" right="10"/>
+                <Insets top="10"  bottom="30" left="10" right="10"/>
             </padding>
             <HBox spacing="5">
                 <Label text="Subject:" style="-fx-font-size: 20px"/>
@@ -54,12 +54,15 @@
                 <TextField fx:id ="TitleText" prefWidth="150" promptText="Note title here.."/>
             </HBox>
 
-
-            <TextArea fx:id="AddNotes" wrapText="true" prefHeight="450" VBox.vgrow="ALWAYS"
+            <TextArea fx:id="AddNotes" wrapText="true"  VBox.vgrow="ALWAYS"
                       promptText='To create a note summary, enter or paste notes/information here and press "Summarize".'/>
 
-            <TextArea fx:id="SourceLinks" wrapText="true" prefHeight="50"
-                      promptText="Insert any additional source links here."/>
+            <TextArea fx:id="SourceLinks" wrapText="true" prefHeight="50" HBox.hgrow="ALWAYS"
+                          promptText="Insert any additional source links here."/>
+            <HBox spacing="10">
+                <Button fx:id="FileButton" text="Upload File" onAction="#onFilesClick" prefHeight="25"/>
+                <Button fx:id="ImageNotesButton" text="Upload Hand-Written Notes" prefHeight="25"/>
+            </HBox>
         </VBox>
     </center>
 
@@ -71,7 +74,11 @@
                 <Insets left="5" right="5"/>
             </padding>
             <Label text="Complexity" style="-fx-font-size: 15px"/>
-            <Slider fx:id="ComplexitySlider" min="1" max="10" value="1"/>
+            <VBox alignment="CENTER">
+                <Slider fx:id="ComplexitySlider" min="1" max="10" value="1"
+                        showTickMarks="true" showTickLabels="true" minorTickCount="0" blockIncrement="1"/>
+                <Label fx:id="ComplexityValue"/>
+            </VBox>
             <Label text="Length" style="-fx-font-size: 15px"/>
 
             <VBox spacing="20">
@@ -86,11 +93,12 @@
                 <RadioButton text="Medium" fx:id="MediumOption" toggleGroup="$LengthOption" userData="200"/>
                 <RadioButton text="Long" fx:id="LongOption" toggleGroup="$LengthOption" userData="300"/>
             </VBox>
-
-
+            <VBox spacing="5" alignment="CENTER">
+                <Label text="Custom Length (Optional)" style="-fx-font-size: 15px"/>
+                <TextField fx:id="CustomLength" promptText="Insert custom length here.."/>
+            </VBox>
             <Button onAction="#onSummarizeClick" text="Summarize" fx:id="SummarizeButton"/>
             <ProgressIndicator visible="false" fx:id="LoadingIndicator"/>
-
         </VBox>
     </right>
 
