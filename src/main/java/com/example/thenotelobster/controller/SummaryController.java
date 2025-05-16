@@ -83,7 +83,7 @@ public class SummaryController extends NavigationUI {
 
         NoteSummaryDAO noteSummaryDAO = new NoteSummaryDAO();
         noteSummaryDAO.insertSummary(subject,title, summary, email);
-        onNotesClick();
+        super.onNotesClick();
     }
 
     /**
