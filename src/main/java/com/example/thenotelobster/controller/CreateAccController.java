@@ -17,7 +17,10 @@ import java.io.IOException;
 public class CreateAccController extends NavigationUI {
     /** Continue Button */
     @FXML
-    private Button contuineButton;
+    private Button continueButton;
+    /** Cancel Button */
+    @FXML
+    private Button CancelButton;
     /** text field for username */
     @FXML
     private TextField nameText;
@@ -33,19 +36,32 @@ public class CreateAccController extends NavigationUI {
      * @throws IOException If this process is interrupted throw an IOException
      */
     @FXML
-    protected void onContuineButtonClick() throws IOException {
+    protected void onContinueButtonClick() throws IOException {
         UserAccountDAO userAccountDAO = new UserAccountDAO();
         if (emailText.getText() != "") {
             UserAccount currentUser = UserAccount.getInstance();
             currentUser.setUser(emailText.getText(), nameText.getText(), passwordText.getText());
             userAccountDAO.insert(currentUser);
 
-
-            Stage stage = (Stage) contuineButton.getScene().getWindow();
+            Stage stage = (Stage) continueButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
             scene.getStylesheets().add(checkCurrentMode());
             stage.setScene(scene);
         }
+    }
+
+    /**
+     * When CancelButton is clicked, return back to login-view
+     * @throws IOException
+     */
+    @FXML
+    protected void onCancelClick() throws IOException {
+        Stage stage = (Stage) CancelButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        scene.getStylesheets().add(checkCurrentMode());
+        stage.setScene(scene);
+
     }
 }
