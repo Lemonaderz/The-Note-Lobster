@@ -3,6 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
 <BorderPane fx:id="SceneTheme" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.thenotelobster.controller.TheNotePageController">
     <left>
@@ -32,12 +34,20 @@
     <!-- Top BorderPane, contains header with title and navigation bar -->
     <top>
         <VBox fx:id="header">
-            <Label text="Note Lobster" style="-fx-font-size: 40px"/>
+            <padding>
+                <Insets left="10" right="10"/>
+            </padding>
+            <HBox spacing="10">
+                <padding>
+                    <Insets bottom="10"/>
+                </padding>
+                <Label text="Note Lobster" style="-fx-font-size: 40px"/>
+                <ImageView fitWidth="60.0" fitHeight="60.0">
+                    <Image url="@images/logo.png"/>
+                </ImageView>
+            </HBox>
             <!-- ButtonBar contains navigation bar buttons -->
             <ButtonBar>
-                <padding>
-                    <Insets left="10" right="10"/>
-                </padding>
                 <buttons>
                     <Button text="Home" fx:id="MainButton" onAction="#onMainClick" ButtonBar.buttonData="LEFT"/>
                     <Button text="Notes" fx:id="NotesButton" onAction="#onNotesClick" ButtonBar.buttonData="LEFT"/>

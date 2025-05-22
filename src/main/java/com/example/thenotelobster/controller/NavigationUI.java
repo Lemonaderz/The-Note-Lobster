@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -108,12 +109,10 @@ public abstract class NavigationUI {
             if (mode == 0) {
                 SceneTheme.getStylesheets().add(darkmode);
                 SceneTheme.getStylesheets().remove(lightmode);
-//                ModeIcon.setImage(new Image(darkmodeIcon));
                 mode = 1;
             } else if (mode == 1) {
                 SceneTheme.getStylesheets().add(lightmode);
                 SceneTheme.getStylesheets().remove(darkmode);
-//                ModeIcon.setImage(new Image(lightmodeIcon));
                 mode = 0;
             }
         });

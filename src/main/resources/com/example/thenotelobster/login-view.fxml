@@ -6,6 +6,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
@@ -14,6 +16,13 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 <!--TITLE-->
+    <HBox alignment="CENTER">
+        <Label text="Note Lobster" style="-fx-font-size: 60px"/>
+        <ImageView fitWidth="120.0" fitHeight="120.0">
+            <Image url="@images/logo.png"/>
+        </ImageView>
+    </HBox>
+
     <Label text="Read to take notes? Log back in!"
            wrapText="true"/>
 
