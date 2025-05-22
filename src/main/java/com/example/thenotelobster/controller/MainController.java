@@ -7,8 +7,11 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.converter.IntegerStringConverter;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.function.UnaryOperator;
 
 /**
  * Controller Class responsible for the main view
@@ -155,6 +158,17 @@ public class MainController extends NavigationUI {
                 () -> String.format("%.2f", ComplexitySlider.getValue()),
                 ComplexitySlider.valueProperty()
         ));
+
+        // Ensure that CustomLength input is integer only
+        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
+            String input = change.getControlNewText();
+            if (input.matches("-?([1-9][0-9]*)?")) {
+                return change;
+            }
+            return null;
+        };
+        CustomLength.setTextFormatter(
+                new TextFormatter<Integer>(new IntegerStringConverter(), null, integerFilter));
     }
 
     /**
@@ -162,20 +176,11 @@ public class MainController extends NavigationUI {
      * @return the length option selected by user
      */
     public String checkLength() {
-        // If CustomLength is not null check if input is double
+        // If CustomLength is not null use CustomLength
         if (CustomLength != null && !CustomLength.getText().trim().isEmpty()) {
-            String input = CustomLength.getText();
-            try {
-                double value = Double.parseDouble(input);
-                String length = String.valueOf(value);
-                return length;
-            } catch (NumberFormatException exception) {
-                String length = LengthOption.getSelectedToggle().getUserData().toString();
-                return length;
-            }
+            return CustomLength.getText();
         } else { // Otherwise return length options from radio buttons
-            String length = LengthOption.getSelectedToggle().getUserData().toString();
-            return length;
+            return LengthOption.getSelectedToggle().getUserData().toString();
         }
     }
 
