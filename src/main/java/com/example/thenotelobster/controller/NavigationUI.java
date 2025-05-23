@@ -13,7 +13,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * An abstract class which handles the Navigation Bar functions for the Controller Classes
+ * An abstract class which handles the Navigation Bar
+ * functions for the Controller Classes which extend it
  */
 public abstract class NavigationUI {
     /**

@@ -8,7 +8,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.converter.IntegerStringConverter;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.function.UnaryOperator;
@@ -151,6 +150,7 @@ public class MainController extends NavigationUI {
 
     /**
      * On initialize, binds value of complexity sliders to complexity value label
+     * and ensures that custom length is an integer only
      */
     @FXML
     private void initialize() {
@@ -175,7 +175,7 @@ public class MainController extends NavigationUI {
      * Checks if user has set custom length or not
      * @return the length option selected by user
      */
-    public String checkLength() {
+    private String checkLength() {
         // If CustomLength is not null use CustomLength
         if (CustomLength != null && !CustomLength.getText().trim().isEmpty()) {
             return CustomLength.getText();

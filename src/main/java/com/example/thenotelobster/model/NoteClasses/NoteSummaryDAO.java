@@ -43,7 +43,6 @@ public class NoteSummaryDAO {
                     "INSERT INTO Notes (name, folderId, text) " +
                             "VALUES (?, ?, ?)"
             );
-//            insert.setInt(1, 2);
             insert.setString(1, title);
             insert.setInt(2, folderId);
             insert.setString(3, summary);
