@@ -163,3 +163,11 @@
     -fx-text-fill: #f2f2f2;
     -fx-tick-label-fill: #f2f2f2;
 }
+
+#modeButton {
+    -fx-background-image: url("file:src/main/resources/com/example/thenotelobster/images/darkmode_icon.png");
+    -fx-background-size: 35% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-text-fill: transparent;
+}

@@ -164,3 +164,12 @@
     -fx-text-fill: black;
     -fx-tick-label-fill: black;
 }
+
+#modeButton {
+    -fx-background-image: url("file:src/main/resources/com/example/thenotelobster/images/lightmode_icon.png");
+    -fx-background-size: 35% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-text-fill: transparent;
+}
+

@@ -36,7 +36,7 @@ public abstract class NavigationUI {
      * Button attributed to the mode button on the Navigation Bar
      */
     @FXML
-    private Button modeButton;
+    protected Button modeButton;
     /**
      * Button attributed to the notes button on the Navigation Bar
      */
@@ -63,9 +63,6 @@ public abstract class NavigationUI {
     @FXML
     private Button AccountButton;
 
-    @FXML
-    private ImageView ModeIcon;
-
     /**
      * String which gets the CSS file for light mode
      */
@@ -75,8 +72,6 @@ public abstract class NavigationUI {
      * String which gets the CSS file for dark mode
      */
     String darkmode = HelloApplication.class.getResource("style/dark_mode.css").toExternalForm();
-//    String darkmodeIcon = HelloApplication.class.getResource("images/darkmode_icon.png").toExternalForm();
-//    String lightmodeIcon = HelloApplication.class.getResource("images/lightmode_icon.png").toExternalForm();
 
     /**
      * Static double value used to determine which mode the application is in, e.g. 0 = light mode and 1 = dark mode
@@ -194,7 +189,7 @@ public abstract class NavigationUI {
     protected String checkCurrentMode() {
         if (mode == 0) { // IF LIGHT MODE:
             return HelloApplication.class.getResource("style/light_mode.css").toExternalForm();
-        } else if (mode == 1) { // IF DARK MODE:
+        } else if (mode == 1) { // IF DARK MODE
             return HelloApplication.class.getResource("style/dark_mode.css").toExternalForm();
         }
         return CurrentTheme;
