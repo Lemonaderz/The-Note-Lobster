@@ -160,7 +160,7 @@
     -fx-background-color: #8c8c8c;
 }
 
-.slider {
+.slider .axis {
     -fx-text-fill: black;
     -fx-tick-label-fill: black;
 }
